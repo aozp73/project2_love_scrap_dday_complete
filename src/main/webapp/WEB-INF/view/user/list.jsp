@@ -1,0 +1,240 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+    <%@ include file="../layout/header.jsp" %>
+
+      <div class="container my-3 py-3 px-3">
+            <div class="p-3">
+                  <h2 style="text-align: center;">인재 목록</h2>
+            </div>
+            <div class="d-flex justify-content-end mb-2">
+                  <select class="form-select" style="width: 123px;">
+                        <option>관련도순</option>
+                        <option> 연차순</option>
+                        <option> 날짜순</option>
+                  </select>
+            </div>
+            <div class="my-border-color-default p-3">
+                  <!-- 카드 들어갈 곳 -->
+                  <div class="row gx-3">
+                        <!-- 반복문 -->
+                        <div class="col-md-3 py-2">
+                              <div id="userImage1" onmouseenter="mouseEnterImages(this)"
+                                    onmouseleave="mouseLeaveImages(this)" class="card col-lg-12">
+                                    <a href="/user/1" class="no_under_line_link">
+                                          <img class="card-img-top" style="height: 100px;" src="/images/newjeans.jpg"
+                                                alt="Card image">
+                                          <div class="card-body">
+                                                <div class="my-text-ellipsis">
+                                                      <h5>김이름</h5>
+                                                </div>
+                                                <div class="my-text-ellipsis">
+                                                      IT직 경력 1년차
+                                                </div>
+                                                <div class="my-text-ellipsis">
+                                                      자기소개문
+                                                </div>
+                                          </div>
+                                    </a>
+                                    <div class="card-footer d-flex justify-content-between">
+                                          <div>2023.01.01</div>
+                                          <div><i id="heart" class="fa-regular fa-heart my-xl my-cursor fa-lg"></i>
+                                          </div>
+                                    </div>
+                              </div>
+                        </div>
+                        <!-- 반복문 종료 -->
+                        <div class="col-md-3 py-2">
+                              <div id="userImage2" onmouseenter="mouseEnterImages(this)"
+                                    onmouseleave="mouseLeaveImages(this)" class="card col-lg-12">
+                                    <a href="/user/1" class="no_under_line_link">
+                                          <img class="card-img-top" style="height: 100px;" src="/images/newjeans.jpg"
+                                                alt="Card image">
+                                          <div class="card-body">
+                                                <div class="my-text-ellipsis">
+                                                      <h5>김네임</h5>
+                                                </div>
+                                                <div class="my-text-ellipsis">
+                                                      IT직 신입
+                                                </div>
+                                                <div class="my-text-ellipsis">
+                                                      자기소개문
+                                                </div>
+                                          </div>
+                                    </a>
+                                    <div class="card-footer d-flex justify-content-between">
+                                          <div>2023.01.01</div>
+                                          <div><i id="heart" class="fa-regular fa-heart my-xl my-cursor fa-lg"></i>
+                                          </div>
+                                    </div>
+                              </div>
+                        </div>
+                        <div class="col-md-3 py-2">
+                              <div id="userImage3" onmouseenter="mouseEnterImages(this)"
+                                    onmouseleave="mouseLeaveImages(this)" class="card col-lg-12">
+                                    <a href="/user/1" class="no_under_line_link">
+                                          <img class="card-img-top" style="height: 100px;" src="/images/newjeans.jpg"
+                                                alt="Card image">
+                                          <div class="card-body">
+                                                <div class="my-text-ellipsis">
+                                                      <h5>이이름</h5>
+                                                </div>
+                                                <div class="my-text-ellipsis">
+                                                      IT직 경력 3년차
+                                                </div>
+                                                <div class="my-text-ellipsis">
+                                                      자기소개문
+                                                </div>
+                                          </div>
+                                    </a>
+                                    <div class="card-footer d-flex justify-content-between">
+                                          <div>2023.01.01</div>
+                                          <div><i id="heart" class="fa-regular fa-heart my-xl my-cursor fa-lg"></i>
+                                          </div>
+                                    </div>
+                              </div>
+                        </div>
+                        <div class="col-md-3 py-2">
+                              <div id="userImage4" onmouseenter="mouseEnterImages(this)"
+                                    onmouseleave="mouseLeaveImages(this)" class="card col-lg-12">
+                                    <a href="/user/1" class="no_under_line_link">
+                                          <img class="card-img-top" style="height: 100px;" src="/images/newjeans.jpg"
+                                                alt="Card image">
+                                          <div class="card-body">
+                                                <div class="my-text-ellipsis">
+                                                      <h5>이네임</h5>
+                                                </div>
+                                                <div class="my-text-ellipsis">
+                                                      IT직 신입
+                                                </div>
+                                                <div class="my-text-ellipsis">
+                                                      자기소개문
+                                                </div>
+                                          </div>
+                                    </a>
+                                    <div class="card-footer d-flex justify-content-between">
+                                          <div>2023.01.01</div>
+                                          <div><i id="heart" class="fa-regular fa-heart my-xl my-cursor fa-lg"></i>
+                                          </div>
+                                    </div>
+                              </div>
+                        </div>
+                  </div>
+            </div>
+            <div class="p-3">
+                  <div class="row">
+                        <div class="col-md-3 py-2">
+                              <div id="userImage5" onmouseenter="mouseEnterImages(this)"
+                                    onmouseleave="mouseLeaveImages(this)" class="card col-lg-12">
+                                    <a href="/user/1" class="no_under_line_link">
+                                          <img class="card-img-top" style="height: 100px;" src="/images/newjeans.jpg"
+                                                alt="Card image">
+                                          <div class="card-body">
+                                                <div class="my-text-ellipsis">
+                                                      <h5>박이름</h5>
+                                                </div>
+                                                <div class="my-text-ellipsis">
+                                                      IT직 경력 5년차
+                                                </div>
+                                                <div class="my-text-ellipsis">
+                                                      자기소개문
+                                                </div>
+                                          </div>
+                                    </a>
+                                    <div class="card-footer d-flex justify-content-between">
+                                          <div>2023.01.01</div>
+                                          <div><i id="heart" class="fa-regular fa-heart my-xl my-cursor fa-lg"></i>
+                                          </div>
+                                    </div>
+                              </div>
+                        </div>
+                        <div class="col-md-3 py-2">
+                              <div id="userImage6" onmouseenter="mouseEnterImages(this)"
+                                    onmouseleave="mouseLeaveImages(this)" class="card col-lg-12">
+                                    <a href="/user/1" class="no_under_line_link">
+                                          <img class="card-img-top" style="height: 100px;" src="/images/newjeans.jpg"
+                                                alt="Card image">
+                                          <div class="card-body">
+                                                <div class="my-text-ellipsis">
+                                                      <h5>박네임</h5>
+                                                </div>
+                                                <div class="my-text-ellipsis">
+                                                      IT직 신입
+                                                </div>
+                                                <div class="my-text-ellipsis">
+                                                      자기소개문
+                                                </div>
+                                          </div>
+                                    </a>
+                                    <div class="card-footer d-flex justify-content-between">
+                                          <div>2023.01.01</div>
+                                          <div><i id="heart" class="fa-regular fa-heart my-xl my-cursor fa-lg"></i>
+                                          </div>
+                                    </div>
+                              </div>
+                        </div>
+                        <div class="col-md-3 py-2">
+                              <div id="userImage7" onmouseenter="mouseEnterImages(this)"
+                                    onmouseleave="mouseLeaveImages(this)" class="card col-lg-12">
+                                    <a href="/user/1" class="no_under_line_link">
+                                          <img class="card-img-top" style="height: 100px;" src="/images/newjeans.jpg"
+                                                alt="Card image">
+                                          <div class="card-body">
+                                                <div class="my-text-ellipsis">
+                                                      <h5>최이름</h5>
+                                                </div>
+                                                <div class="my-text-ellipsis">
+                                                      IT직 경력 7년차
+                                                </div>
+                                                <div class="my-text-ellipsis">
+                                                      자기소개문
+                                                </div>
+                                          </div>
+                                    </a>
+                                    <div class="card-footer d-flex justify-content-between">
+                                          <div>2023.01.01</div>
+                                          <div><i id="heart" class="fa-regular fa-heart my-xl my-cursor fa-lg"></i>
+                                          </div>
+                                    </div>
+                              </div>
+                        </div>
+                        <div class="col-md-3 py-2">
+                              <div id="userImage8" onmouseenter="mouseEnterImages(this)"
+                                    onmouseleave="mouseLeaveImages(this)" class="card col-lg-12">
+                                    <a href="/user/1" class="no_under_line_link">
+                                          <img class="card-img-top" style="height: 100px;" src="/images/newjeans.jpg"
+                                                alt="Card image">
+                                          <div class="card-body">
+                                                <div class="my-text-ellipsis">
+                                                      <h5>최네임</h5>
+                                                </div>
+                                                <div class="my-text-ellipsis">
+                                                      IT직 신입
+                                                </div>
+                                                <div class="my-text-ellipsis">
+                                                      자기소개문
+                                                </div>
+                                          </div>
+                                    </a>
+                                    <div class="card-footer d-flex justify-content-between">
+                                          <div>2023.01.01</div>
+                                          <div><i id="heart" class="fa-regular fa-heart my-xl my-cursor fa-lg"></i>
+                                          </div>
+                                    </div>
+                              </div>
+                        </div>
+                  </div>
+            </div>
+      </div>
+      <script>
+            function mouseEnterImages(e) {
+                  let id = e.getAttribute('id');
+                  $("#" + id).addClass("border border-primary");
+            }
+
+            function mouseLeaveImages(e) {
+                  let id = e.getAttribute('id');
+                  $("#" + id).removeClass("border border-primary");
+            }
+      </script>
+
+ <%@ include file="../layout/footer.jsp" %>
