@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import shop.mtcoding.jobara.dto.board.BoardResp.BoardMainRespDto;
+import shop.mtcoding.jobara.model.Board;
 import shop.mtcoding.jobara.service.BoardService;
 
 @Controller

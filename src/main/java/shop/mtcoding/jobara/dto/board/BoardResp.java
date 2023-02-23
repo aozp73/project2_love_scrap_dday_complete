@@ -13,4 +13,16 @@ public class BoardResp {
         private Integer companyId;
     }
 
+    @Getter
+    @Setter
+    public static class BoardDetailRespDto {
+        private Integer id;
+        private String title;
+        private Integer career;
+        private Integer companyId;
+        private String companyName;
+        private String companyScale;
+        private String companyField;
+    }
+
 }
