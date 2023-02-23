@@ -2,8 +2,6 @@ package shop.mtcoding.jobara.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.List;
-
 import org.junit.jupiter.api.Test;
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import shop.mtcoding.jobara.dto.board.BoardResp.BoardDetailRespDto;
-import shop.mtcoding.jobara.dto.board.BoardResp.BoardMainRespDto;
 import shop.mtcoding.jobara.model.BoardRepository;
 
 @MybatisTest
@@ -28,9 +25,8 @@ public class UserRepositoryTest {
 
         // when
         BoardDetailRespDto boardDetailRespDto = boardRepository.findByIdWithCompany(boardId);
-        // JavaObject -> JSON
-        String responseBody = om.writeValueAsString(boardDetailRespDto);
-        System.out.println("테스트 : " + responseBody);
+        // String responseBody = om.writeValueAsString(boardDetailRespDto);
+        // System.out.println("테스트 : " + responseBody);
 
         // then
         assertThat(boardDetailRespDto.getCompanyScale()).isEqualTo("대기업");
