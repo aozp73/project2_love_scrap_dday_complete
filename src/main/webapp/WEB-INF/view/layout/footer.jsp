@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
     <!-- 푸터 경계선 -->
     <div class="mt-4 p-5 my-bg-color-default text-center text-white-50" style="margin-bottom: 0">
         <p>고객센터 : 055-234-2344 | Fax : 055-323-2312 | 이메일 : wewillgonnamad@gmail.com</p>
