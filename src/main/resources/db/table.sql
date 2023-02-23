@@ -8,7 +8,7 @@ create table company_tb(
     tel varchar,
     company_name varchar not null,
     company_scale varchar,
-    company_numb int not null,
+    company_numb bigint not null,
     company_field varchar,
     created_at timestamp not null
 );
@@ -18,7 +18,7 @@ create table user_tb(
     username varchar not null unique,
     password varchar not null,
     email varchar not null,
-    address varchar not null,
+    address varchar,
     detail_address varchar,
     tel varchar,
     real_name varchar,
