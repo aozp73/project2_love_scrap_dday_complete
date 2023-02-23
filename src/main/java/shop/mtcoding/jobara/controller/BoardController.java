@@ -1,11 +1,21 @@
 package shop.mtcoding.jobara.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import shop.mtcoding.jobara.model.Board;
+import shop.mtcoding.jobara.service.BoardService;
+
 @Controller
 public class BoardController {
+
+      @Autowired
+      private BoardService boardService;
 
       @GetMapping({ "/", "/home" })
       public String home() {
@@ -18,7 +28,10 @@ public class BoardController {
       }
 
       @GetMapping("/board/list")
-      public String list() {
+      public String list(Model model) {
+
+            List<Board> boardList = boardService.getList();
+            model.addAttribute("boardList", boardList);
             return "board/list";
       }
 
