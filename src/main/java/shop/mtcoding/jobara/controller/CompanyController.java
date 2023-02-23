@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import shop.mtcoding.jobara.dto.company.CompanyReq.CompanyLoginReqDto;
-import shop.mtcoding.jobara.ex.CustomException;
 import shop.mtcoding.jobara.model.Company;
 import shop.mtcoding.jobara.service.CompanyService;
 import shop.mtcoding.jobara.util.Verify;
