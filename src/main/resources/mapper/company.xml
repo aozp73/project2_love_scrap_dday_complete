@@ -13,6 +13,10 @@
         select * from company_tb where id = #{id}
     </select>    
 
+    <select id="findByUsernameAndPassword" resultType="shop.mtcoding.jobara.model.Company">
+        select * from company_tb where username = #{username} and password = #{password}
+    </select>    
+
     <insert id="insert">
         insert into company_tb (username, password, email, address, company_name, company_numb, created_at) 
         values(#{username}, #{password}, #{email}, #{address}, #{companyName}, #{companyNumb}, now())

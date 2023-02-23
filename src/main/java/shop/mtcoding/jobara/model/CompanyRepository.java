@@ -11,6 +11,8 @@ public interface CompanyRepository {
 
     public Company findById(int id);
 
+    public Company findByUsernameAndPassword(Company company);
+
     public int insert(Company company);
 
     public int updateById(Company company);
