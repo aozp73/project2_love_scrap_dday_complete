@@ -22,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import shop.mtcoding.jobara.dto.board.BoardResp.BoardDetailRespDto;
 import shop.mtcoding.jobara.dto.board.BoardResp.BoardMainRespDto;
 import shop.mtcoding.jobara.model.User;
 
@@ -48,6 +49,27 @@ public class BoardControllerTest {
 
         mockSession = new MockHttpSession();
         mockSession.setAttribute("principal", user);
+    }
+
+    @Test
+    public void boardDetail_test() throws Exception {
+        // given
+        int id = 1;
+
+        // when
+        ResultActions resultActions = mvc.perform(
+                get("/board/" + id));
+
+        Map<String, Object> map = resultActions.andReturn().getModelAndView().getModel();
+        BoardDetailRespDto board = (BoardDetailRespDto) map.get("board");
+
+        String model = om.writeValueAsString(board);
+        System.out.println("테스트 : " + model);
+
+        // then
+        resultActions.andExpect(status().isOk());
+        assertThat(board.getCompanyScale()).isEqualTo("대기업");
+        assertThat(board.getCompanyField()).isEqualTo(" IT업");
     }
 
     @Test
