@@ -18,6 +18,7 @@ public class BoardResp {
     public static class BoardDetailRespDto {
         private Integer id;
         private String title;
+        private String content;
         private Integer career;
         private Integer companyId;
         private String companyName;

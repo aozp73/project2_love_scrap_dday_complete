@@ -63,8 +63,8 @@ public class BoardControllerTest {
         Map<String, Object> map = resultActions.andReturn().getModelAndView().getModel();
         BoardDetailRespDto board = (BoardDetailRespDto) map.get("board");
 
-        String model = om.writeValueAsString(board);
-        System.out.println("테스트 : " + model);
+        // String model = om.writeValueAsString(board);
+        // System.out.println("테스트 : " + model);
 
         // then
         resultActions.andExpect(status().isOk());
