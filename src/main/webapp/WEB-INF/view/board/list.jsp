@@ -16,18 +16,20 @@
             <!-- 카드 시작 -->
             <div class="p-3">
                 <div class="row gx-3">
+
+                <c:forEach items="${boardList}" var="board">
                     <div class="col-md-3 py-2">
-                        <a href="/board/1" class="no_under_line_link">
-                            <div id="boardImage1" class="card col-lg-12" onclick="location.href='http://naver.com'"
+                        <a href="/board/${board.id}" class="no_under_line_link">
+                            <div id="boardImage-${board.id}" class="card col-lg-12"
                                 onmouseenter="mouseEnterImages(this)" onmouseleave="mouseLeaveImages(this)">
                                 <img class="card-img-top" style="height: 100px;" src="/images/newjeans.jpg"
                                     alt="Card image">
                                 <div class="card-body">
                                     <div class="my-text-ellipsis">
-                                        <h5>(주)엘지</h5>
+                                        <h5>${board.companyName}</h5>
                                     </div>
                                     <div class="my-text-ellipsis">
-                                        2023년 IT직 경력/신입
+                                        ${board.title}
                                     </div>
                                     <div class="my-text-ellipsis">
                                         채용
@@ -40,169 +42,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3 py-2">
-                    <a href="/board/1" class="no_under_line_link">
-                        <div id="boardImage2" class="card col-lg-12" onmouseenter="mouseEnterImages(this)"
-                            onmouseleave="mouseLeaveImages(this)">
-                            <img class="card-img-top" style="height: 100px;" src="/images/newjeans.jpg"
-                                alt="Card image">
-                            <div class="card-body">
-                                <div class="my-text-ellipsis">
-                                    <h5>(주)엘지</h5>
-                                </div>
-                                <div class="my-text-ellipsis">
-                                    2023년 IT직 경력/신입
-                                </div>
-                                <div class="my-text-ellipsis">
-                                    채용
-                                </div>
-                            </div>
-                    </a>
-                    <div class="card-footer d-flex justify-content-between">
-                        <div>(D-1)</div>
-                        <div><i id="heart" class="fa-regular fa-heart my-xl my-cursor fa-lg"></i></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 py-2">
-                <a href="/board/1" class="no_under_line_link">
-                    <div id="boardImage3" class="card col-lg-12" onmouseenter="mouseEnterImages(this)"
-                        onmouseleave="mouseLeaveImages(this)">
-                        <img class="card-img-top" style="height: 100px;" src="/images/newjeans.jpg" alt="Card image">
-                        <div class="card-body">
-                            <div class="my-text-ellipsis">
-                                <h5>(주)엘지</h5>
-                            </div>
-                            <div class="my-text-ellipsis">
-                                2023년 IT직 경력/신입
-                            </div>
-                            <div class="my-text-ellipsis">
-                                채용
-                            </div>
-                        </div>
-                </a>
-                <div class="card-footer d-flex justify-content-between">
-                    <div>(D-1)</div>
-                    <div><i id="heart" class="fa-regular fa-heart my-xl my-cursor fa-lg"></i></div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 py-2">
-            <a href="/board/1" class="no_under_line_link">
-                <div id="boardImage4" class="card col-lg-12" onmouseenter="mouseEnterImages(this)"
-                    onmouseleave="mouseLeaveImages(this)">
-                    <img class="card-img-top" style="height: 100px;" src="/images/newjeans.jpg" alt="Card image">
-                    <div class="card-body">
-                        <div class="my-text-ellipsis">
-                            <h5>(주)엘지</h5>
-                        </div>
-                        <div class="my-text-ellipsis">
-                            2023년 IT직 경력/신입
-                        </div>
-                        <div class="my-text-ellipsis">
-                            채용
-                        </div>
-                    </div>
-            </a>
-            <div class="card-footer d-flex justify-content-between">
-                <div>(D-1)</div>
-                <div><i id="heart" class="fa-regular fa-heart my-xl my-cursor fa-lg"></i></div>
-            </div>
-        </div>
-        </div>
-        <div class="col-md-3 py-2">
-            <a href="/board/1" class="no_under_line_link">
-                <div id="boardImage5" class="card col-lg-12" onmouseenter="mouseEnterImages(this)"
-                    onmouseleave="mouseLeaveImages(this)">
-                    <img class="card-img-top" style="height: 100px;" src="/images/newjeans.jpg" alt="Card image">
-                    <div class="card-body">
-                        <div class="my-text-ellipsis">
-                            <h5>(주)엘지</h5>
-                        </div>
-                        <div class="my-text-ellipsis">
-                            2023년 IT직 경력/신입
-                        </div>
-                        <div class="my-text-ellipsis">
-                            채용
-                        </div>
-                    </div>
-            </a>
-            <div class="card-footer d-flex justify-content-between">
-                <div>(D-1)</div>
-                <div><i id="heart" class="fa-regular fa-heart my-xl my-cursor fa-lg"></i></div>
-            </div>
-        </div>
-        </div>
-        <div class="col-md-3 py-2">
-            <a href="/board/1" class="no_under_line_link">
-                <div id="boardImage6" class="card col-lg-12" onmouseenter="mouseEnterImages(this)"
-                    onmouseleave="mouseLeaveImages(this)">
-                    <img class="card-img-top" style="height: 100px;" src="/images/newjeans.jpg" alt="Card image">
-                    <div class="card-body">
-                        <div class="my-text-ellipsis">
-                            <h5>(주)엘지</h5>
-                        </div>
-                        <div class="my-text-ellipsis">
-                            2023년 IT직 경력/신입
-                        </div>
-                        <div class="my-text-ellipsis">
-                            채용
-                        </div>
-                    </div>
-            </a>
-            <div class="card-footer d-flex justify-content-between">
-                <div>(D-1)</div>
-                <div><i id="heart" class="fa-regular fa-heart my-xl my-cursor fa-lg"></i></div>
-            </div>
-        </div>
-        </div>
-        <div class="col-md-3 py-2">
-            <a href="/board/1" class="no_under_line_link">
-                <div id="boardImage7" class="card col-lg-12" onmouseenter="mouseEnterImages(this)"
-                    onmouseleave="mouseLeaveImages(this)">
-                    <img class="card-img-top" style="height: 100px;" src="/images/newjeans.jpg" alt="Card image">
-                    <div class="card-body">
-                        <div class="my-text-ellipsis">
-                            <h5>(주)엘지</h5>
-                        </div>
-                        <div class="my-text-ellipsis">
-                            2023년 IT직 경력/신입
-                        </div>
-                        <div class="my-text-ellipsis">
-                            채용
-                        </div>
-                    </div>
-            </a>
-            <div class="card-footer d-flex justify-content-between">
-                <div>(D-1)</div>
-                <div><i id="heart" class="fa-regular fa-heart my-xl my-cursor fa-lg"></i></div>
-            </div>
-        </div>
-        </div>
-        <div class="col-md-3 py-2">
-            <a href="/board/1" class="no_under_line_link">
-                <div id="boardImage8" class="card col-lg-12" onmouseenter="mouseEnterImages(this)"
-                    onmouseleave="mouseLeaveImages(this)">
-                    <img class="card-img-top" style="height: 100px;" src="/images/newjeans.jpg" alt="Card image">
-                    <div class="card-body">
-                        <div class="my-text-ellipsis">
-                            <h5>(주)엘지</h5>
-                        </div>
-                        <div class="my-text-ellipsis">
-                            2023년 IT직 경력/신입
-                        </div>
-                        <div class="my-text-ellipsis">
-                            채용
-                        </div>
-                    </div>
-            </a>
-            <div class="card-footer d-flex justify-content-between">
-                <div>(D-1)</div>
-                <div><i id="heart" class="fa-regular fa-heart my-xl my-cursor fa-lg"></i></div>
-            </div>
-        </div>
-        </div>
-        </div>
+                </c:forEach>
+
         </div>
         </div>
 
