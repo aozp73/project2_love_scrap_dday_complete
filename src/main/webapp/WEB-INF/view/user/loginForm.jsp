@@ -22,12 +22,12 @@
         </div>
         <div class="justify-content-center d-flex">
             <div class="my-border-color-default px-3 py-3" style="width: 50%; ">
-                <form>
+                <form action="/user/login" method="post">
                     <div class="my-4">
-                        <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Username">
+                        <input name="username" type="text" class="form-control" aria-describedby="emailHelp" placeholder="Username">
                     </div>
                     <div class="my-4">
-                        <input type="password" class="form-control" placeholder="Password">
+                        <input name="password" type="password" class="form-control" placeholder="Password">
                     </div>
                     <div class="mb-3 form-check">
                         <input type="checkbox" class="form-check-input">
