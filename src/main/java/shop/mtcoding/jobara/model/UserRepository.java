@@ -11,6 +11,8 @@ public interface UserRepository {
 
     public User findById(int id);
 
+    public User findByUsernameAndPassword(User user);
+
     public int insert(User user);
 
     public int updateById(User user);
