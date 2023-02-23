@@ -16,6 +16,8 @@
             <!-- 카드 시작 -->
             <div class="p-3">
                 <div class="row gx-3">
+
+
                     <div class="col-md-3 py-2">
                         <a href="/board/1" class="no_under_line_link">
                             <div id="boardImage1" class="card col-lg-12" onclick="location.href='http://naver.com'"
@@ -40,6 +42,8 @@
                         </div>
                     </div>
                 </div>
+
+
                 <div class="col-md-3 py-2">
                     <a href="/board/1" class="no_under_line_link">
                         <div id="boardImage2" class="card col-lg-12" onmouseenter="mouseEnterImages(this)"
@@ -62,8 +66,10 @@
                         <div>(D-1)</div>
                         <div><i id="heart" class="fa-regular fa-heart my-xl my-cursor fa-lg"></i></div>
                     </div>
+
                 </div>
             </div>
+
             <div class="col-md-3 py-2">
                 <a href="/board/1" class="no_under_line_link">
                     <div id="boardImage3" class="card col-lg-12" onmouseenter="mouseEnterImages(this)"

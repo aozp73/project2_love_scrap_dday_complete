@@ -22,7 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import shop.mtcoding.jobara.model.Board;
+import shop.mtcoding.jobara.dto.board.BoardResp.BoardMainRespDto;
 import shop.mtcoding.jobara.model.User;
 
 @Transactional
@@ -59,7 +59,7 @@ public class BoardControllerTest {
                 get("/board/list"));
 
         Map<String, Object> map = resultActions.andReturn().getModelAndView().getModel();
-        List<Board> boardList = (List<Board>) map.get("boardList");
+        List<BoardMainRespDto> boardList = (List<BoardMainRespDto>) map.get("boardList");
 
         // String model = om.writeValueAsString(boardList);
         // System.out.println("테스트 : " + model);

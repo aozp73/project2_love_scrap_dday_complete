@@ -9,6 +9,12 @@
         select * from board_tb
     </select>
 
+    <select id="findAllWithCompany" resultType="shop.mtcoding.jobara.dto.board.BoardResp$BoardMainRespDto">
+        SELECT bt.id, bt.title, ct.company_name, ct.id company_id FROM BOARD_TB bt
+        inner join company_tb ct
+        on bt.company_id = ct.id
+    </select>
+
     <select id="findById" resultType="shop.mtcoding.jobara.model.Board">
         select * from board_tb where id = #{id}
     </select>    
