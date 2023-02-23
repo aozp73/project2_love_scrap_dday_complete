@@ -18,6 +18,6 @@ public class Company {
     private String companyName;
     private String companyScale;
     private Integer companyNumb;
-    private String company_field;
+    private String companyField;
     private Timestamp createdAt;
 }
