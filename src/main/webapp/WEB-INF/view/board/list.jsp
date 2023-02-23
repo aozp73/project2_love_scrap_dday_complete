@@ -19,7 +19,7 @@
 
                 <c:forEach items="${boardList}" var="board">
                     <div class="col-md-3 py-2">
-                        <a href="/board/1" class="no_under_line_link">
+                        <a href="/board/${board.id}" class="no_under_line_link">
                             <div id="boardImage-${board.id}" class="card col-lg-12"
                                 onmouseenter="mouseEnterImages(this)" onmouseleave="mouseLeaveImages(this)">
                                 <img class="card-img-top" style="height: 100px;" src="/images/newjeans.jpg"
