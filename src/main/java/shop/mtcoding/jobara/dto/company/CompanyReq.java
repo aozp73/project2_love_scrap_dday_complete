@@ -23,4 +23,17 @@ public class CompanyReq {
         private String address;
         private String detailAddress;
     }
+
+    @Getter
+    @Setter
+    public static class CompanyUpdateReqDto {
+        private String password;
+        private String email;
+        private String companyName;
+        private String address;
+        private String detailAddress;
+        private String companyScale;
+        private String companyField;
+        private String tel;
+    }
 }

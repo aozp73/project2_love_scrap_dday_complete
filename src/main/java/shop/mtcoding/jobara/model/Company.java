@@ -38,4 +38,17 @@ public class Company {
         this.companyNumb = companyNumb;
         this.companyName = companyName;
     }
+    
+    public Company(Integer id, String password, String email, String address, String detailAddress,
+             String companyName,  String companyScale, String companyField, String tel) {
+        this.id = id;
+        this.password = password;
+        this.email = email;
+        this.address = address;
+        this.detailAddress = detailAddress;
+        this.companyName = companyName;
+        this.tel = tel;
+        this.companyScale = companyScale;
+        this.companyField = companyField;
+    }
 }
