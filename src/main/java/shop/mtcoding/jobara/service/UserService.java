@@ -7,6 +7,7 @@ import shop.mtcoding.jobara.dto.user.UserReq.UserLoginReqDto;
 import shop.mtcoding.jobara.ex.CustomException;
 import shop.mtcoding.jobara.model.User;
 import shop.mtcoding.jobara.model.UserRepository;
+import shop.mtcoding.jobara.util.Verify;
 
 @Service
 public class UserService {
@@ -15,11 +16,9 @@ public class UserService {
       private UserRepository userRepository;
 
       public User login(UserLoginReqDto userLoginReqDto) {
-            User usPrincipal = userRepository.findByUsernameAndPassword(
+            User userPS = userRepository.findByUsernameAndPassword(
                         new User(userLoginReqDto.getUsername(), userLoginReqDto.getPassword()));
-            if (usPrincipal == null) {
-                  throw new CustomException("username이나 password가 잘못되었습니다.");
-            }
-            return usPrincipal;
+            Verify.validateObject(userPS, "유저네임이나 암호를 확인해주세요.");
+            return userPS;
       }
 }

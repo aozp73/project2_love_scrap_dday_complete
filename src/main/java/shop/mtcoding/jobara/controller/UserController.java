@@ -12,6 +12,7 @@ import shop.mtcoding.jobara.dto.user.UserReq.UserLoginReqDto;
 import shop.mtcoding.jobara.ex.CustomException;
 import shop.mtcoding.jobara.model.User;
 import shop.mtcoding.jobara.service.UserService;
+import shop.mtcoding.jobara.util.Verify;
 
 @Controller
 public class UserController {
@@ -44,14 +45,10 @@ public class UserController {
 
       @PostMapping("/user/login")
       public String login(UserLoginReqDto userLoginReqDto) {
-            if (userLoginReqDto.getUsername() == null || userLoginReqDto.getUsername().isEmpty()) {
-                  throw new CustomException("username을 입력해 주세요.");
-            }
-            if (userLoginReqDto.getPassword() == null || userLoginReqDto.getPassword().isEmpty()) {
-                  throw new CustomException("password를 입력해 주세요.");
-            }
-            User usPrincipal = userService.login(userLoginReqDto);
-            session.setAttribute("usPrincipal", usPrincipal);
+            Verify.validateStiring(userLoginReqDto.getUsername(), "유저네임을 입력하세요.");
+            Verify.validateStiring(userLoginReqDto.getPassword(), "암호를 입력하세요.");
+            User userPS = userService.login(userLoginReqDto);
+            session.setAttribute("usPrincipal", userPS);
             return "redirect:/";
       }
 
