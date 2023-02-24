@@ -16,6 +16,7 @@ import shop.mtcoding.jobara.dto.board.BoardReq.BoardInsertReqDto;
 import shop.mtcoding.jobara.dto.board.BoardResp.BoardDetailRespDto;
 import shop.mtcoding.jobara.dto.board.BoardResp.BoardListRespDto;
 import shop.mtcoding.jobara.dto.board.BoardResp.BoardMainRespDto;
+import shop.mtcoding.jobara.dto.board.BoardResp.BoardUpdateRespDto;
 import shop.mtcoding.jobara.ex.CustomException;
 import shop.mtcoding.jobara.model.Company;
 import shop.mtcoding.jobara.model.CompanyRepository;
@@ -66,6 +67,22 @@ public class BoardController {
             Verify.validateObject(coPrincipal, "로그인이 필요한 페이지입니다", HttpStatus.BAD_REQUEST, "/company/loginForm");
 
             return "board/saveForm";
+      }
+
+      @GetMapping("/board/updateForm/{id}")
+      public String updateForm(Model model, @PathVariable int id) {
+            // Mock
+            Company mockCompanyUser = companyRepository.findById(1);
+            session.setAttribute("coPrincipal", mockCompanyUser);
+            Company coPrincipal = (Company) session.getAttribute("coPrincipal");
+
+            // 인증체크
+            Verify.validateObject(coPrincipal, "로그인이 필요한 페이지입니다", HttpStatus.BAD_REQUEST, "/company/loginForm");
+
+            BoardUpdateRespDto boardDetailPS = boardService.getDetailForUpdate(id, coPrincipal.getId());
+            model.addAttribute("boardDetail", boardDetailPS);
+
+            return "board/updateForm";
       }
 
       @PostMapping("/board/save")

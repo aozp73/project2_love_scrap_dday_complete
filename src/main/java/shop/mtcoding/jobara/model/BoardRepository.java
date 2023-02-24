@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import shop.mtcoding.jobara.dto.board.BoardResp.BoardDetailRespDto;
 import shop.mtcoding.jobara.dto.board.BoardResp.BoardListRespDto;
 import shop.mtcoding.jobara.dto.board.BoardResp.BoardMainRespDto;
+import shop.mtcoding.jobara.dto.board.BoardResp.BoardUpdateRespDto;
 
 @Mapper
 public interface BoardRepository {
@@ -20,6 +21,8 @@ public interface BoardRepository {
     public BoardDetailRespDto findByIdWithCompany(int boardId);
 
     public Board findById(int id);
+
+    public BoardUpdateRespDto findByIdForUpdate(int id);
 
     public int insert(Board board);
 

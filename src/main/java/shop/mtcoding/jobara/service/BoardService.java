@@ -2,7 +2,6 @@ package shop.mtcoding.jobara.service;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Case;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -12,6 +11,7 @@ import shop.mtcoding.jobara.dto.board.BoardReq.BoardInsertReqDto;
 import shop.mtcoding.jobara.dto.board.BoardResp.BoardDetailRespDto;
 import shop.mtcoding.jobara.dto.board.BoardResp.BoardListRespDto;
 import shop.mtcoding.jobara.dto.board.BoardResp.BoardMainRespDto;
+import shop.mtcoding.jobara.dto.board.BoardResp.BoardUpdateRespDto;
 import shop.mtcoding.jobara.ex.CustomException;
 import shop.mtcoding.jobara.model.Board;
 import shop.mtcoding.jobara.model.BoardRepository;
@@ -24,6 +24,7 @@ public class BoardService {
     @Autowired
     private BoardRepository boardRepository;
 
+    @Transactional
     public void insertBoard(BoardInsertReqDto boardInsertReqDto, int companyId) {
 
         // career : String -> int parsing
@@ -50,6 +51,25 @@ public class BoardService {
         }
 
         return boardListPS;
+    }
+
+    public BoardUpdateRespDto getDetailForUpdate(int id, int coPrincipalId) {
+        BoardUpdateRespDto boardDetailPS;
+
+        try {
+            boardDetailPS = boardRepository.findByIdForUpdate(id);
+        } catch (Exception e) {
+            throw new CustomException("없는 게시물을 수정할 수 없습니다", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        if (boardDetailPS.getCompanyId() != coPrincipalId) {
+            throw new CustomException("수정 권한이 없습니다", HttpStatus.BAD_REQUEST);
+        }
+
+        String career = Parse.careerToString(boardDetailPS.getCareer());
+        boardDetailPS.setCareerString(career);
+
+        return boardDetailPS;
     }
 
     public BoardDetailRespDto getDetail(int id) {

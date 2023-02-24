@@ -24,6 +24,17 @@ public class BoardResp {
 
     @Getter
     @Setter
+    public static class BoardUpdateRespDto {
+        private Integer id;
+        private String title;
+        private String content;
+        private Integer career;
+        private String careerString;
+        private Integer companyId;
+    }
+
+    @Getter
+    @Setter
     public static class BoardDetailRespDto {
         private Integer id;
         private String title;
