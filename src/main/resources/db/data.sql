@@ -5,5 +5,6 @@ insert into company_tb(username, password, email, address, detail_address, tel, 
 insert into board_tb(company_id, title, content, career, created_at) values(1, '공고제목1','공고내용1', 1, now());
 insert into board_tb(company_id, title, content, career, created_at) values(1, '공고제목2','공고내용2', 2, now());
 insert into board_tb(company_id, title, content, career, created_at) values(1, '공고제목3','공고내용3', 4, now());
+insert into board_tb(company_id, title, content, career, created_at) values(1, '공고제목4','공고내용4', 3, now());
 
 commit; 
