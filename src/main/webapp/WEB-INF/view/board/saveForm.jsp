@@ -36,6 +36,7 @@
                                             <option>1년이상 ~ 3년미만</option>
                                             <option>3년이상 ~ 5년미만</option>
                                             <option>6년이상</option>
+                                            <option>경력무관</option>
                                         </select>
                                     </div>
                                     <div class="mb-3">

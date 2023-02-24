@@ -87,7 +87,7 @@ public class BoardController {
                   throw new CustomException("경력을 선택하세요");
             }
 
-            boardService.insertBoard();
+            boardService.insertBoard(boardInsertReqDto, coPrincipal.getId());
 
             return "redirect:/board/list";
       }
