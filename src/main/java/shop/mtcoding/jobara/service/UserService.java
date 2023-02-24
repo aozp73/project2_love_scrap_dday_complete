@@ -27,6 +27,13 @@ public class UserService {
             return userPS;
       }
 
+      @Transactional(readOnly = true)
+      public User getUser(int id) {
+            User userPS = userRepository.findById(id);
+            Verify.validateObject(userPS, "서버에 일시적인 문제가 생겼습니다", HttpStatus.INTERNAL_SERVER_ERROR);
+            return userPS;
+      }
+
       @Transactional
       public void insertUser(UserJoinReqDto userJoinReqDto) {
             int result = userRepository.insert(new User(userJoinReqDto.getUsername(),
@@ -38,7 +45,7 @@ public class UserService {
       }
 
       @Transactional
-      public void updateUser(UserUpdateReqDto userUpdateReqDto, Integer id) {
+      public User updateUser(UserUpdateReqDto userUpdateReqDto, Integer id) {
             int result = userRepository.updateById(new User(
                         id,
                         userUpdateReqDto.getUsername(),
@@ -51,6 +58,7 @@ public class UserService {
             if (result != 1) {
                   throw new CustomException("서버에 일시적인 문제가 생겼습니다", HttpStatus.INTERNAL_SERVER_ERROR);
             }
-
+            User userPS = userRepository.findById(id);
+            return userPS;
       }
 }

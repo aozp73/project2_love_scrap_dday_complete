@@ -4,30 +4,21 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import shop.mtcoding.jobara.dto.ResponseDto;
 import shop.mtcoding.jobara.dto.user.UserReq.UserJoinReqDto;
 import shop.mtcoding.jobara.dto.user.UserReq.UserLoginReqDto;
 import shop.mtcoding.jobara.dto.user.UserReq.UserUpdateReqDto;
-import shop.mtcoding.jobara.ex.CustomException;
 import shop.mtcoding.jobara.model.User;
-import shop.mtcoding.jobara.model.UserRepository;
 import shop.mtcoding.jobara.service.UserService;
 import shop.mtcoding.jobara.util.Verify;
 
 @Controller
 public class UserController {
-
-      @Autowired
-      private UserRepository userRepository;
 
       @Autowired
       private UserService userService;
@@ -77,7 +68,8 @@ public class UserController {
       public String updateForm(Model model) {
             User usPrincipal = (User) session.getAttribute("usPrincipal");
             Verify.validateObject(usPrincipal, "로그인이 필요합니다.");
-            User userPS = userRepository.findById(usPrincipal.getId());
+
+            User userPS = userService.getUser(usPrincipal.getId());
             model.addAttribute("user", userPS);
             return "user/updateForm";
       }
@@ -88,9 +80,10 @@ public class UserController {
             Verify.validateObject(usPrincipal, "로그인이 필요합니다.");
             Verify.validateStiring(userUpdateReqDto.getPassword(), "암호를 입력하세요.");
             Verify.validateStiring(userUpdateReqDto.getEmail(), "이메일을 입력하세요.");
-            userService.updateUser(userUpdateReqDto, usPrincipal.getId());
+
+            User userPS = userService.updateUser(userUpdateReqDto, usPrincipal.getId());
+
             session.removeAttribute("usPrincipal");
-            User userPS = userRepository.findById(usPrincipal.getId());
             Verify.validateObject(userPS, "유저 정보를 갱신하는데 일시적인 문제가 생겼습니다", HttpStatus.INTERNAL_SERVER_ERROR);
             session.setAttribute("usPrincipal", userPS);
             return "redirect:/";
