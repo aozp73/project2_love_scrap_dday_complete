@@ -20,4 +20,16 @@ public class UserReq {
             private String email;
       }
 
+      @Getter
+      @Setter
+      public static class UserUpdateReqDto {
+            private String username;
+            private String password;
+            private String email;
+            private String address;
+            private String detailAddress;
+            private String tel;
+            private Integer career;
+      }
+
 }
