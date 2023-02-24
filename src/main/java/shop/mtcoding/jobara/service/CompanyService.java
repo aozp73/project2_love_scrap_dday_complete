@@ -33,17 +33,26 @@ public class CompanyService {
                 companyJoinReqDto.getEmail(), companyJoinReqDto.getAddress(), companyJoinReqDto.getDetailAddress(),
                 companyJoinReqDto.getCompanyNumb(), companyJoinReqDto.getCompanyName());
         try {
-        companyRepository.insert(companyTemp);
+            companyRepository.insert(companyTemp);
         } catch (Exception e) {
-        throw new CustomException("회원 가입 실패", HttpStatus.INTERNAL_SERVER_ERROR);
+            throw new CustomException("회원 가입 실패", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    public Company updateCompany(CompanyUpdateReqDto companyUpdateReqDto) {
-        Company companyTemp = new Company(companyUpdateReqDto.getPassword(), companyUpdateReqDto.getEmail(), companyUpdateReqDto.getAddress(), companyUpdateReqDto.getDetailAddress(), 
-                companyUpdateReqDto.getCompanyName(), companyUpdateReqDto.getCompanyScale(), companyUpdateReqDto.getCompanyField(), 
+    @Transactional
+    public Company updateCompany(CompanyUpdateReqDto companyUpdateReqDto, Integer coPrincipalId) {
+        Company companyTemp = new Company(
+                coPrincipalId, companyUpdateReqDto.getPassword(), companyUpdateReqDto.getEmail(),
+                companyUpdateReqDto.getAddress(), companyUpdateReqDto.getDetailAddress(),
+                companyUpdateReqDto.getCompanyName(), companyUpdateReqDto.getCompanyScale(),
+                companyUpdateReqDto.getCompanyField(),
                 companyUpdateReqDto.getTel());
-        return companyTemp;
+        try {
+            companyRepository.updateById(companyTemp);
+        } catch (Exception e) {
+            throw new CustomException("회원 수정 실패", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return companyRepository.findById(coPrincipalId);
     }
 
 }

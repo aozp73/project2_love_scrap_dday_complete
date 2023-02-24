@@ -41,7 +41,7 @@ public class CompanyController {
       @GetMapping("/company/updateForm")
       public String updateForm(Model model) {
             Company coPrincipal = (Company) session.getAttribute("coPrincipal");
-            Verify.validateObject(coPrincipal, "로그인이 필요합니다.", HttpStatus.UNAUTHORIZED, "/loginForm");
+            Verify.validateObject(coPrincipal, "로그인이 필요합니다.", HttpStatus.UNAUTHORIZED, "/company/loginForm");
             model.addAttribute("coPrincipal", coPrincipal);
             return "company/updateForm";
       }
@@ -71,7 +71,7 @@ public class CompanyController {
       @PostMapping("/company/update")
       public String update(CompanyUpdateReqDto companyUpdateReqDto) {
             Company coPrincipal = (Company) session.getAttribute("coPrincipal");
-            Verify.validateObject(coPrincipal, "로그인이 필요합니다.", HttpStatus.UNAUTHORIZED, "/loginForm");
+            Verify.validateObject(coPrincipal, "로그인이 필요합니다.", HttpStatus.UNAUTHORIZED, "/company/loginForm");
             Verify.validateStiring(companyUpdateReqDto.getAddress(), "주소를 입력하세요.");
             Verify.validateStiring(companyUpdateReqDto.getDetailAddress(), "상세 주소를 입력하세요.");
             Verify.validateStiring(companyUpdateReqDto.getCompanyScale(), "회사 규모란을 선택하세요.");
@@ -80,7 +80,7 @@ public class CompanyController {
             Verify.validateStiring(companyUpdateReqDto.getEmail(), "이메일을 입력하세요.");
             Verify.validateStiring(companyUpdateReqDto.getCompanyName(), "회사 이름을 입력하세요.");
             Verify.validateStiring(companyUpdateReqDto.getTel(), "전화번호를 입력하세요.");
-            Company companyPS = companyService.updateCompany(companyUpdateReqDto);
+            Company companyPS = companyService.updateCompany(companyUpdateReqDto, coPrincipal.getId());
             session.removeAttribute("coPrincipal");
             session.setAttribute("coPrincipal", companyPS);
             return "redirect:/";

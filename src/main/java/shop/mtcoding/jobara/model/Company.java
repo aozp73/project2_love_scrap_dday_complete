@@ -39,8 +39,9 @@ public class Company {
         this.companyName = companyName;
     }
     
-    public Company(String password, String email, String address, String detailAddress,
+    public Company(Integer id, String password, String email, String address, String detailAddress,
              String companyName,  String companyScale, String companyField, String tel) {
+        this.id = id;
         this.password = password;
         this.email = email;
         this.address = address;
