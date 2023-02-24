@@ -20,6 +20,10 @@ public class BoardService {
     @Autowired
     private BoardRepository boardRepository;
 
+    public void insertBoard() {
+        //
+    }
+
     public List<BoardMainRespDto> getListToMain() {
 
         List<BoardMainRespDto> boardListPS;
