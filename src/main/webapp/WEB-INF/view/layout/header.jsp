@@ -43,12 +43,33 @@
                                 style="width: 20px; height: 23px;"></button>
                         <input class="form-control my-button-no-round text-center" type="text" placeholder="기업 검색">
                     </form>
+                
+                <c:choose>
+                    <c:when test="${coPrincipal != null}">
+                    <li class="nav-item fs-4 text-center">
+                        <a class="nav-link" href="/company/updateForm">정보수정</a>
+                    </li>
+                    <li class="nav-item fs-4 text-center">
+                        <a class="nav-link" href="/logout">로그아웃</a>
+                    </li>
+                    </c:when>
+                    <c:when test="${usPrincipal != null}">
+                    <li class="nav-item fs-4 text-center">
+                        <a class="nav-link" href="/user/updateForm">정보수정</a>
+                    </li>
+                    <li class="nav-item fs-4 text-center">
+                        <a class="nav-link" href="/logout">로그아웃</a>
+                    </li>
+                    </c:when>
+                   <c:otherwise>
                     <li class="nav-item fs-4 text-center">
                         <a class="nav-link" href="/user/loginForm">로그인</a>
                     </li>
                     <li class="nav-item fs-4 text-center">
                         <a class="nav-link" href="/user/joinForm">회원가입</a>
                     </li>
+                   </c:otherwise>
+                </c:choose>
                 </ul>
             </div>
         </div>
