@@ -50,8 +50,8 @@ public class UserController {
             if (userLoginReqDto.getPassword() == null || userLoginReqDto.getPassword().isEmpty()) {
                   throw new CustomException("password를 입력해 주세요.");
             }
-            User usPrincipal = userService.login(userLoginReqDto);
-            session.setAttribute("usPrincipal", usPrincipal);
+            User userPS = userService.login(userLoginReqDto);
+            session.setAttribute("usPrincipal", userPS);
             return "redirect:/";
       }
 

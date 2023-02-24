@@ -25,15 +25,15 @@ public class BoardController {
 
       @GetMapping("/board/{id}")
       public String detail(@PathVariable int id, Model model) {
-            BoardDetailRespDto board = boardService.getDetail(id);
-            model.addAttribute("board", board);
+            BoardDetailRespDto boardPS = boardService.getDetail(id);
+            model.addAttribute("board", boardPS);
             return "board/detail";
       }
 
       @GetMapping("/board/list")
       public String list(Model model) {
-            List<BoardMainRespDto> boardList = boardService.getList();
-            model.addAttribute("boardList", boardList);
+            List<BoardMainRespDto> boardListPS = boardService.getList();
+            model.addAttribute("boardList", boardListPS);
             return "board/list";
       }
 

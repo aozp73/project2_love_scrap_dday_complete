@@ -15,11 +15,11 @@ public class UserService {
       private UserRepository userRepository;
 
       public User login(UserLoginReqDto userLoginReqDto) {
-            User usPrincipal = userRepository.findByUsernameAndPassword(
+            User userPS = userRepository.findByUsernameAndPassword(
                         new User(userLoginReqDto.getUsername(), userLoginReqDto.getPassword()));
-            if (usPrincipal == null) {
+            if (userPS == null) {
                   throw new CustomException("username이나 password가 잘못되었습니다.");
             }
-            return usPrincipal;
+            return userPS;
       }
 }
