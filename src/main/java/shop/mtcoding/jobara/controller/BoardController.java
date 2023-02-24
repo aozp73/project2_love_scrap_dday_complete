@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import shop.mtcoding.jobara.dto.board.BoardResp.BoardDetailRespDto;
 import shop.mtcoding.jobara.dto.board.BoardResp.BoardMainRespDto;
 import shop.mtcoding.jobara.service.BoardService;
 
@@ -23,7 +24,9 @@ public class BoardController {
       }
 
       @GetMapping("/board/{id}")
-      public String detail(@PathVariable int id) {
+      public String detail(@PathVariable int id, Model model) {
+            BoardDetailRespDto board = boardService.getDetail(id);
+            model.addAttribute("board", board);
             return "board/detail";
       }
 

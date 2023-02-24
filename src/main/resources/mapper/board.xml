@@ -15,6 +15,13 @@
         on bt.company_id = ct.id
     </select>
 
+    <select id="findByIdWithCompany" resultType="shop.mtcoding.jobara.dto.board.BoardResp$BoardDetailRespDto">
+        SELECT bt.id, bt.title, bt.content, bt.career, ct.id company_id, ct.company_name, ct. company_scale, ct.company_field FROM BOARD_TB bt 
+        inner join company_tb ct
+        on bt.company_id = ct.id
+        where bt.id = #{boardId}
+    </select>
+
     <select id="findById" resultType="shop.mtcoding.jobara.model.Board">
         select * from board_tb where id = #{id}
     </select>    
