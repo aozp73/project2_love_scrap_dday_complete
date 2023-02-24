@@ -93,8 +93,13 @@ public class BoardController {
             session.setAttribute("coPrincipal", mockCompanyUser);
             Company coPrincipal = (Company) session.getAttribute("coPrincipal");
 
-            // 인증체크
+            // 인증
             Verify.validateObject(coPrincipal, "로그인이 필요한 페이지입니다", HttpStatus.BAD_REQUEST, "/company/loginForm");
+
+            // 유효성
+            Verify.validateStiring(boardUpdateReqDto.getTitle(), "제목을 입력하세요");
+            Verify.validateStiring(boardUpdateReqDto.getContent(), "내용을 입력하세요");
+            Verify.validateStiring(boardUpdateReqDto.getCareerString(), "경력을 입력하세요");
 
             boardService.updateBoard(boardUpdateReqDto, coPrincipal.getId());
 

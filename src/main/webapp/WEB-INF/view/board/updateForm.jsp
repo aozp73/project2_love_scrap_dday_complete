@@ -31,7 +31,6 @@
                                     <div class="mb-3">
                                         <select id="career" name="careerString" class="career my-border-color-default"
                                             style="width: 50%;" value="${boardDetail.careerString}">
-                                            <option>경력선택</option>
                                             <option>신입</option>
                                             <option>1년이상 ~ 3년미만</option>
                                             <option>3년이상 ~ 5년미만</option>
