@@ -1,11 +1,14 @@
 package shop.mtcoding.jobara.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -86,6 +89,22 @@ public class UserControllerTest {
             // then
             resultActions.andExpect(status().is3xxRedirection());
             resultActions2.andExpect(status().is4xxClientError());
+
+      }
+
+      @Test
+      public void list_test() throws Exception {
+            // given
+
+            // when
+            ResultActions resultActions = mvc.perform(get("/user/list"));
+            Map<String, Object> map = resultActions.andReturn().getModelAndView().getModel();
+
+            // then
+            List<User> user = (List<User>) map.get("userList");
+            assertThat(user.size()).isEqualTo(4);
+            assertThat(user.get(0).getRealName()).isEqualTo("김살");
+            resultActions.andExpect(status().is2xxSuccessful());
 
       }
 }

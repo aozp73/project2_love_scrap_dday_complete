@@ -16,7 +16,7 @@
             <div class="my-border-color-default p-3">
                   <!-- 카드 들어갈 곳 -->
                   <div class="row gx-3">
-                        <c:forEach items="${user}" var="user">
+                        <c:forEach items="${userList}" var="user">
                         <div class="col-md-3 py-2">
                               <div id="user${user.id}" onmouseenter="mouseEnterImages(this)"
                                     onmouseleave="mouseLeaveImages(this)" class="card col-lg-12">
