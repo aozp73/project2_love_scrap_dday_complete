@@ -69,7 +69,7 @@ public class BoardControllerTest {
                         .content(requestBody)
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED_VALUE));
 
-        // then
+        // then service test
         resultActions.andExpect(status().is3xxRedirection());
     }
 
