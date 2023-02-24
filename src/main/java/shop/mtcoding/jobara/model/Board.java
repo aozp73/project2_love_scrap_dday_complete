@@ -16,4 +16,11 @@ public class Board {
     private String content;
     private Integer career;
     private Timestamp createdAt;
+
+    public Board(Integer companyId, String title, String content, Integer career) {
+        this.companyId = companyId;
+        this.title = title;
+        this.content = content;
+        this.career = career;
+    }
 }

@@ -38,7 +38,7 @@
                             </div>
                             <div style="width: 80%; color:#2D65F2;">
                                 <div class="my-text-ellipsis">
-                                    ${board.career}
+                                    ${board.careerString}
                                 </div>
                                 <div class="my-text-ellipsis">
                                     대졸이상 (졸업예정자 가능)
@@ -84,10 +84,10 @@
             <div>
                 <div class="container px-5 pt-5 pb-4 my-borderDetail-color-top">
                     <div>
-                        <div class="d-flex justify-content-center mb-5">
+                        <%-- <div class="d-flex justify-content-center mb-5">
                             <img class="img-fluid" style="height: 100%; width: auto;" src=""
                                 alt="Card image">
-                        </div>
+                        </div> --%>
                         <div>
                             ${board.content}
                             <br>
