@@ -29,6 +29,7 @@ public class BoardResp {
         private String title;
         private String content;
         private Integer career;
+        private String careerString;
         private Integer companyId;
         private String companyName;
         private String companyScale;

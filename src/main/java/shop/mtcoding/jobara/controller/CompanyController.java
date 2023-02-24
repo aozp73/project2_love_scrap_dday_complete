@@ -37,7 +37,7 @@ public class CompanyController {
       }
 
       @PostMapping("/company/login")
-      public String login(CompanyLoginReqDto companyLoginReqDto) {
+      public String login(CompanyLoginReqDto companyLoginReqDto){
             Verify.validateStiring(companyLoginReqDto.getUsername(), "유저네임을 입력하세요.");
             Verify.validateStiring(companyLoginReqDto.getPassword(), "암호를 입력하세요.");
             Company companyPS = companyService.getCompany(companyLoginReqDto);

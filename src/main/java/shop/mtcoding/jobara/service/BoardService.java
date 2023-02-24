@@ -27,7 +27,7 @@ public class BoardService {
     public void insertBoard(BoardInsertReqDto boardInsertReqDto, int companyId) {
 
         // career : String -> int parsing
-        Integer career = Parse.careerToInt(boardInsertReqDto.getCareer());
+        int career = Parse.careerToInt(boardInsertReqDto.getCareer());
         Board board = new Board(companyId, boardInsertReqDto.getTitle(), boardInsertReqDto.getContent(),
                 career);
 
@@ -60,6 +60,9 @@ public class BoardService {
         } catch (Exception e) {
             throw new CustomException("서버에 일시적인 문제가 생겼습니다", HttpStatus.INTERNAL_SERVER_ERROR);
         }
+
+        String career = Parse.careerToString(boardDetailPS.getCareer());
+        boardDetailPS.setCareerString(career);
 
         return boardDetailPS;
     }

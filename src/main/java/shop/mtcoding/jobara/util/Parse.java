@@ -25,4 +25,28 @@ public class Parse {
 
         return parseCareer;
     }
+
+    public static String careerToString(int career) {
+        String parseCareer = "";
+
+        switch (career) {
+            case 0:
+                parseCareer = "신입";
+                break;
+            case 1:
+                parseCareer = "1년이상 ~ 3년미만";
+                break;
+            case 3:
+                parseCareer = "3년이상 ~ 5년미만";
+                break;
+            case 6:
+                parseCareer = "6년이상";
+                break;
+            case -1:
+                parseCareer = "경력무관";
+                break;
+        }
+
+        return parseCareer;
+    }
 }
