@@ -43,7 +43,7 @@
                                           </div>
                                     </a>
                                     <div class="card-footer d-flex justify-content-between">
-                                          <div>${user.createdAt}</div>
+                                          <div>${user.createdAtToString}</div>
                                           <div><i id="heart" class="fa-regular fa-heart my-xl my-cursor fa-lg"></i>
                                           </div>
                                     </div>

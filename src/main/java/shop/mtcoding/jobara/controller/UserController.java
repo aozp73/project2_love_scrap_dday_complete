@@ -49,7 +49,7 @@ public class UserController {
 
       @GetMapping("/user/list")
       public String list(Model model) {
-            List<User> userPS = userService.getUser().subList(0, 4);
+            List<User> userPS = userService.getUser().subList(0, 4); // 임시로 4개까지만 추출
             model.addAttribute("user", userPS);
             return "user/list";
       }

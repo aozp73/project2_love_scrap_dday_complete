@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import shop.mtcoding.jobara.util.DateParse;
 
 @Getter
 @Setter
@@ -44,5 +45,9 @@ public class User {
         this.detailAddress = detailAddress;
         this.tel = tel;
         this.career = career;
+    }
+
+    public String getCreatedAtToString() {
+        return DateParse.format(createdAt);
     }
 }
