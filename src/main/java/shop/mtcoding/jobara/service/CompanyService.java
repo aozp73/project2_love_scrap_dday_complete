@@ -20,21 +20,22 @@ public class CompanyService {
 
     @Transactional(readOnly = true)
     public Company getCompany(CompanyLoginReqDto companyLoginReqDto) {
-        Company companyPS = companyRepository.findByUsernameAndPassword(new Company(companyLoginReqDto.getUsername(), companyLoginReqDto.getPassword()));
+        Company companyPS = companyRepository.findByUsernameAndPassword(
+                new Company(companyLoginReqDto.getUsername(), companyLoginReqDto.getPassword()));
         Verify.validateObject(companyPS, "유저네임이나 암호를 확인해주세요.");
         return companyPS;
     }
 
     @Transactional
     public void insertCompany(CompanyJoinReqDto companyJoinReqDto) {
-        Company companyTemp = new Company(companyJoinReqDto.getUsername(), companyJoinReqDto.getPassword(), 
-                companyJoinReqDto.getEmail(), companyJoinReqDto.getAddress(), companyJoinReqDto.getDetailAddress(), 
+        Company companyTemp = new Company(companyJoinReqDto.getUsername(), companyJoinReqDto.getPassword(),
+                companyJoinReqDto.getEmail(), companyJoinReqDto.getAddress(), companyJoinReqDto.getDetailAddress(),
                 companyJoinReqDto.getCompanyNumb(), companyJoinReqDto.getCompanyName());
         try {
-            companyRepository.insert(companyTemp);
+        companyRepository.insert(companyTemp);
         } catch (Exception e) {
-            throw new CustomException("회원 가입 실패", HttpStatus.INTERNAL_SERVER_ERROR);
+        throw new CustomException("회원 가입 실패", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    
+
 }
