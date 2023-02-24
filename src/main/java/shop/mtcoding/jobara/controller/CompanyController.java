@@ -55,7 +55,7 @@ public class CompanyController {
           Verify.validateStiring(companyJoinReqDto.getCompanyName(), "사업자 등록번호를 입력하세요.");
           Verify.validateStiring(companyJoinReqDto.getAddress(), "주소를 입력하세요.");
           Verify.validateStiring(companyJoinReqDto.getDetailAddress(), "상세주소를 입력하세요.");
-      //     companyService.insertCompany(companyJoinReqDto);
+          companyService.insertCompany(companyJoinReqDto);
           return "redirect:/login";
       }
 }

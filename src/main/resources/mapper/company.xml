@@ -18,8 +18,8 @@
     </select>    
 
     <insert id="insert">
-        insert into company_tb (username, password, email, address, company_name, company_numb, created_at) 
-        values(#{username}, #{password}, #{email}, #{address}, #{companyName}, #{companyNumb}, now())
+        insert into company_tb (username, password, email, address, detail_address, company_name, company_numb, created_at) 
+        values(#{username}, #{password}, #{email}, #{address}, #{detailAddress}, #{companyName}, #{companyNumb}, now())
     </insert>    
 
     <delete id="deleteById">
