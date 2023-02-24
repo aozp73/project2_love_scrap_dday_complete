@@ -3,7 +3,9 @@ package shop.mtcoding.jobara.controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -33,7 +35,10 @@ public class CompanyController {
       }
 
       @GetMapping("/company/updateForm")
-      public String updateForm() {
+      public String updateForm(Model model) {
+            Company coPrincipal = (Company) session.getAttribute("coPrincipal");
+            Verify.validateObject(coPrincipal, "로그인이 필요합니다.", HttpStatus.UNAUTHORIZED, "/loginForm");
+            model.addAttribute("coPrincipal", coPrincipal);
             return "company/updateForm";
       }
 
