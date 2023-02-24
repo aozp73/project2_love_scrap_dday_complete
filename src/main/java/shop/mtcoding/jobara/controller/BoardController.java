@@ -81,14 +81,15 @@ public class BoardController {
             // 유효성
             Verify.validateStiring(boardInsertReqDto.getTitle(), "제목을 입력하세요");
             Verify.validateStiring(boardInsertReqDto.getContent(), "내용을 입력하세요");
+            Verify.validateStiring(boardInsertReqDto.getCareer(), "경력을 입력하세요");
 
             if (boardInsertReqDto.getCareer().equals("경력선택")) {
-                  throw new CustomException("지원자의 신입/경력을 선택하세요");
+                  throw new CustomException("경력을 선택하세요");
             }
 
             boardService.insertBoard();
 
-            return "redirect:/";
+            return "redirect:/board/list";
       }
 
       @GetMapping("/company/{id}/board")

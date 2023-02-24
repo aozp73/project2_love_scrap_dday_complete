@@ -2,6 +2,7 @@ package shop.mtcoding.jobara.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.sql.Timestamp;
@@ -17,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
@@ -24,6 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import shop.mtcoding.jobara.dto.board.BoardReq.BoardInsertReqDto;
 import shop.mtcoding.jobara.dto.board.BoardResp.BoardDetailRespDto;
 import shop.mtcoding.jobara.dto.board.BoardResp.BoardListRespDto;
 import shop.mtcoding.jobara.dto.board.BoardResp.BoardMainRespDto;
@@ -53,6 +56,21 @@ public class BoardControllerTest {
 
         mockSession = new MockHttpSession();
         mockSession.setAttribute("principal", user);
+    }
+
+    @Test
+    public void save_test() throws Exception {
+        // given
+        String requestBody = "title=테스트제목&content=테스트내용&career=1년이상 ~ 3년미만";
+
+        // when
+        ResultActions resultActions = mvc.perform(
+                post("/board/save")
+                        .content(requestBody)
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED_VALUE));
+
+        // then
+        resultActions.andExpect(status().is3xxRedirection());
     }
 
     @Test
