@@ -5,10 +5,11 @@ insert into user_tb(username, password, email, address, detail_address, tel, rea
 insert into user_tb(username, password, email, address, detail_address, tel, real_name, career, resume_title, resume_content, created_at) values('noew', '1234', 'noew@nate.com', '부산시 상상구 모동','15길','01066666666','상냥이',6,'이력서제목5','이력서내용5', now());
 
 insert into company_tb(username, password, email, address, detail_address, tel, company_name, company_scale, company_numb, company_field, created_at) values('cos', '1234','cos@nate.com', '부산시 빡구 동동', '71길', '01012341234', '(주)미친회사', '대기업', 333322221111,' IT업', now());
+insert into company_tb(username, password, email, address, detail_address, tel, company_name, company_scale, company_numb, company_field, created_at) values('kit', '1234','kit@nate.com', '부산시 봉구 원동', '72길', '01032113211', '(주)친친회사', '중견기업', 122322421111,' IT업', now());
 
 insert into board_tb(company_id, title, content, career, created_at) values(1, '공고제목1','공고내용1', 1, now());
 insert into board_tb(company_id, title, content, career, created_at) values(1, '공고제목2','공고내용2', 3, now());
-insert into board_tb(company_id, title, content, career, created_at) values(1, '공고제목3','공고내용3', 6, now());
-insert into board_tb(company_id, title, content, career, created_at) values(1, '공고제목4','공고내용4', -1, now());
+insert into board_tb(company_id, title, content, career, created_at) values(2, '공고제목3','공고내용3', 6, now());
+insert into board_tb(company_id, title, content, career, created_at) values(2, '공고제목4','공고내용4', -1, now());
 
 commit; 
