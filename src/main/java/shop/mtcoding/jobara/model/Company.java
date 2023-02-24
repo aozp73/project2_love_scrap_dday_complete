@@ -27,4 +27,15 @@ public class Company {
         this.username = username;
         this.password = password;
     }
+    
+    public Company(String username, String password, String email, String address, String detailAddress, 
+            Long companyNumb, String companyName) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.address = address;
+        this.detailAddress = detailAddress;
+        this.companyNumb = companyNumb;
+        this.companyName = companyName;
+    }
 }

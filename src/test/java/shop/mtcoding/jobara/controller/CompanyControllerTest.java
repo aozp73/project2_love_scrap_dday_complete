@@ -22,7 +22,7 @@ import shop.mtcoding.jobara.model.Company;
 @AutoConfigureMockMvc
 @SpringBootTest(webEnvironment = WebEnvironment.MOCK)
 public class CompanyControllerTest {
-    
+
     @Autowired
     private MockMvc mvc;
 
@@ -48,5 +48,41 @@ public class CompanyControllerTest {
         // verify
         resultActions.andExpect(status().is3xxRedirection());
         assertThat(coPrincipal.getUsername()).isEqualTo("cos");
+    }
+
+    @Test
+    public void join_test() throws Exception {
+        // given
+        String usernameVal = "love";
+        String passwordVal = "1234";
+        String emailVal = "love@naver.com";
+        String companyNumbVal = "1234123333";
+        String companyNameVal = "(주)야호";
+        String addressVal = "부산광역시 야구 김동";
+        String detailAddressVal = "석진2길";
+        StringBuffer sb = new StringBuffer();
+        sb.append("username=");
+        sb.append(usernameVal);
+        sb.append("&password=");
+        sb.append(passwordVal);
+        sb.append("&email=");
+        sb.append(emailVal);
+        sb.append("&companyNumb=");
+        sb.append(companyNumbVal);
+        sb.append("&companyName=");
+        sb.append(companyNameVal);
+        sb.append("&address=");
+        sb.append(addressVal);
+        sb.append("&detailAddress=");
+        sb.append(detailAddressVal);
+        String requestBody = sb.toString();
+
+        // when
+        ResultActions resultActions = mvc.perform(post("/company/join")
+                .content(requestBody)
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED_VALUE));
+
+        // verify
+        resultActions.andExpect(status().is3xxRedirection());
     }
 }
