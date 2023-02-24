@@ -8,10 +8,10 @@
         </div>
         <div class="justify-content-center d-flex">
             <div class="my-border-color-default px-3 py-3" style="width: 50%; ">
-                <form>
+                <form action="/user/update" method="post">
                     <div class="mb-3">
                         <label class="form-label">변경 비밀번호</label>
-                        <input type="password" class="form-control" placeholder="Password">
+                        <input name="password" type="password" class="form-control" placeholder="Password">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">비밀번호 확인</label>
@@ -19,23 +19,23 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">이메일</label>
-                        <input type="email" class="form-control" placeholder="Email">
+                        <input name="email" type="email" class="form-control" placeholder="Email" value="${user.email}">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">주소</label>
-                        <input type="text" class="form-control" placeholder="Address">
+                        <input name="address" type="text" class="form-control" placeholder="Address" value="${user.address}">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">상세주소</label>
-                        <input type="text" class="form-control" placeholder="Detail Address">
+                        <input name="detailAddress" type="text" class="form-control" placeholder="Detail Address" value="${user.detailAddress}">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">연락처</label>
-                        <input type="text" class="form-control" placeholder="Tel">
+                        <input name="tel" type="text" class="form-control" placeholder="Tel" value="${user.tel}">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">경력 연차</label>
-                        <input type="number" class="form-control" placeholder="Career Year">
+                        <input name="career" type="number" class="form-control" placeholder="Career Year" min="0" value="${user.career}">
                     </div>
                     <label class="form-label">관심분야</label>
                     <div class="mb-5" style="display: grid;
