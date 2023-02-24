@@ -9,6 +9,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import shop.mtcoding.jobara.dto.board.BoardResp.BoardDetailRespDto;
 import shop.mtcoding.jobara.dto.board.BoardResp.BoardListRespDto;
 import shop.mtcoding.jobara.dto.board.BoardResp.BoardMainRespDto;
+import shop.mtcoding.jobara.model.Company;
 import shop.mtcoding.jobara.model.User;
 
 @Transactional
@@ -50,6 +53,22 @@ public class BoardControllerTest {
 
         mockSession = new MockHttpSession();
         mockSession.setAttribute("principal", user);
+    }
+
+    @Test
+    public void saveForm_test() throws Exception {
+        // given
+
+        // when
+        ResultActions resultActions = mvc.perform(
+                get("/board/saveForm"));
+
+        HttpSession session = resultActions.andReturn().getRequest().getSession();
+        Company coPrincipal = (Company) session.getAttribute("coPrincipal");
+
+        // then
+        assertThat(coPrincipal.getUsername()).isEqualTo("cos");
+        resultActions.andExpect(status().isOk());
     }
 
     @Test
