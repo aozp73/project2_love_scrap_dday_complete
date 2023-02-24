@@ -4,14 +4,11 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 
-import shop.mtcoding.jobara.dto.ResponseDto;
 import shop.mtcoding.jobara.dto.company.CompanyReq.CompanyJoinReqDto;
 import shop.mtcoding.jobara.dto.company.CompanyReq.CompanyLoginReqDto;
 import shop.mtcoding.jobara.dto.company.CompanyReq.CompanyUpdateReqDto;
@@ -44,6 +41,12 @@ public class CompanyController {
             Verify.validateObject(coPrincipal, "로그인이 필요합니다.", HttpStatus.UNAUTHORIZED, "/company/loginForm");
             model.addAttribute("coPrincipal", coPrincipal);
             return "company/updateForm";
+      }
+
+      @GetMapping("/logout")
+      public String logout() {
+            session.invalidate();
+            return "redirect:/";
       }
 
       @PostMapping("/company/login")
