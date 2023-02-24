@@ -23,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import shop.mtcoding.jobara.dto.board.BoardResp.BoardDetailRespDto;
+import shop.mtcoding.jobara.dto.board.BoardResp.BoardListRespDto;
 import shop.mtcoding.jobara.dto.board.BoardResp.BoardMainRespDto;
 import shop.mtcoding.jobara.model.User;
 
@@ -81,7 +82,27 @@ public class BoardControllerTest {
                 get("/board/list"));
 
         Map<String, Object> map = resultActions.andReturn().getModelAndView().getModel();
-        List<BoardMainRespDto> boardList = (List<BoardMainRespDto>) map.get("boardList");
+        List<BoardListRespDto> boardList = (List<BoardListRespDto>) map.get("boardList");
+
+        // String model = om.writeValueAsString(boardList);
+        // System.out.println("테스트 : " + model);
+
+        // then
+        resultActions.andExpect(status().isOk());
+        assertThat(boardList.get(1).getTitle()).isEqualTo("공고제목2");
+        assertThat(boardList.get(2).getTitle()).isEqualTo("공고제목3");
+    }
+
+    @Test
+    public void boardMainList_test() throws Exception {
+        // given
+
+        // when
+        ResultActions resultActions = mvc.perform(
+                get("/"));
+
+        Map<String, Object> map = resultActions.andReturn().getModelAndView().getModel();
+        List<BoardMainRespDto> boardList = (List<BoardMainRespDto>) map.get("boardMainList");
 
         // String model = om.writeValueAsString(boardList);
         // System.out.println("테스트 : " + model);

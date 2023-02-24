@@ -6,6 +6,15 @@ import lombok.Setter;
 public class BoardResp {
     @Getter
     @Setter
+    public static class BoardListRespDto {
+        private Integer id;
+        private String title;
+        private String companyName;
+        private Integer companyId;
+    }
+
+    @Getter
+    @Setter
     public static class BoardMainRespDto {
         private Integer id;
         private String title;

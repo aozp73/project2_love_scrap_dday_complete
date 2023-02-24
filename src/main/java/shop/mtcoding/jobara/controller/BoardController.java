@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import shop.mtcoding.jobara.dto.board.BoardResp.BoardDetailRespDto;
+import shop.mtcoding.jobara.dto.board.BoardResp.BoardListRespDto;
 import shop.mtcoding.jobara.dto.board.BoardResp.BoardMainRespDto;
 import shop.mtcoding.jobara.service.BoardService;
 
@@ -19,7 +20,9 @@ public class BoardController {
       private BoardService boardService;
 
       @GetMapping({ "/", "/home" })
-      public String home() {
+      public String home(Model model) {
+            List<BoardMainRespDto> boardListPS = boardService.getListToMain();
+            model.addAttribute("boardMainList", boardListPS);
             return "board/home";
       }
 
@@ -32,7 +35,7 @@ public class BoardController {
 
       @GetMapping("/board/list")
       public String list(Model model) {
-            List<BoardMainRespDto> boardListPS = boardService.getList();
+            List<BoardListRespDto> boardListPS = boardService.getList();
             model.addAttribute("boardList", boardListPS);
             return "board/list";
       }
