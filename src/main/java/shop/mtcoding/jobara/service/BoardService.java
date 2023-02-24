@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import shop.mtcoding.jobara.dto.board.BoardReq.BoardInsertReqDto;
+import shop.mtcoding.jobara.dto.board.BoardReq.BoardUpdateReqDto;
 import shop.mtcoding.jobara.dto.board.BoardResp.BoardDetailRespDto;
 import shop.mtcoding.jobara.dto.board.BoardResp.BoardListRespDto;
 import shop.mtcoding.jobara.dto.board.BoardResp.BoardMainRespDto;
@@ -34,6 +35,33 @@ public class BoardService {
 
         try {
             boardRepository.insert(board);
+        } catch (Exception e) {
+            throw new CustomException("서버에 일시적인 문제가 생겼습니다", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @Transactional
+    public void updateBoard(BoardUpdateReqDto boardUpdateReqDto, int coPrincipalId) {
+
+        Board boardPS;
+
+        try {
+            boardPS = boardRepository.findById(boardUpdateReqDto.getId());
+        } catch (Exception e) {
+            throw new CustomException("없는 게시물을 수정할 수 없습니다", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        if (boardPS.getCompanyId() != coPrincipalId) {
+            throw new CustomException("수정 권한이 없습니다", HttpStatus.BAD_REQUEST);
+        }
+
+        // career : String -> int parsing
+        int career = Parse.careerToInt(boardUpdateReqDto.getCareerString());
+        Board board = new Board(boardUpdateReqDto.getTitle(), boardUpdateReqDto.getContent(),
+                career, boardUpdateReqDto.getId());
+
+        try {
+            boardRepository.updateById(board);
         } catch (Exception e) {
             throw new CustomException("서버에 일시적인 문제가 생겼습니다", HttpStatus.INTERNAL_SERVER_ERROR);
         }

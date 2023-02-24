@@ -3,7 +3,7 @@
     <%@ include file="../layout/header.jsp" %>
 
 
-        <form action="/board/save" method="post">
+        <form action="/board/update/${boardDetail.id}" method="post">
 
             <div class="container py-3 px-3">
                 <div class="justify-content-center d-flex my-3 py-3">
@@ -29,7 +29,7 @@
                                 </div>
                                 <div>
                                     <div class="mb-3">
-                                        <select id="career" name="career" class="career my-border-color-default"
+                                        <select id="career" name="careerString" class="career my-border-color-default"
                                             style="width: 50%;" value="${boardDetail.careerString}">
                                             <option>경력선택</option>
                                             <option>신입</option>
