@@ -1,5 +1,7 @@
 package shop.mtcoding.jobara.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +48,9 @@ public class UserController {
       }
 
       @GetMapping("/user/list")
-      public String list() {
+      public String list(Model model) {
+            List<User> userListPS = userService.getUser().subList(0, 4); // 임시로 4개까지만 추출
+            model.addAttribute("userList", userListPS);
             return "user/list";
       }
 
