@@ -1,7 +1,5 @@
 package shop.mtcoding.jobara.service;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -20,9 +18,6 @@ public class UserService {
 
       @Autowired
       private UserRepository userRepository;
-
-      @Autowired
-      private HttpSession session;
 
       @Transactional(readOnly = true)
       public User getUser(UserLoginReqDto userLoginReqDto) {
@@ -56,11 +51,6 @@ public class UserService {
             if (result != 1) {
                   throw new CustomException("서버에 일시적인 문제가 생겼습니다", HttpStatus.INTERNAL_SERVER_ERROR);
             }
-            session.invalidate();
-            User userPS = userRepository.findById(id);
-            if (userPS == null) {
-                  throw new CustomException("유저 정보를 갱신하는데 일시적인 문제가 생겼습니다", HttpStatus.INTERNAL_SERVER_ERROR);
-            }
-            session.setAttribute("usPrincipal", userPS);
+
       }
 }

@@ -76,9 +76,7 @@ public class UserController {
       @GetMapping("/user/updateForm")
       public String updateForm(Model model) {
             User usPrincipal = (User) session.getAttribute("usPrincipal");
-            if (usPrincipal == null) {
-                  throw new CustomException("로그인이 필요합니다.", HttpStatus.BAD_REQUEST, "/user/loginForm");
-            }
+            Verify.validateObject(usPrincipal, "로그인이 필요합니다.");
             User userPS = userRepository.findById(usPrincipal.getId());
             model.addAttribute("user", userPS);
             return "user/updateForm";
@@ -87,12 +85,14 @@ public class UserController {
       @PostMapping("/user/update")
       public String update(UserUpdateReqDto userUpdateReqDto) {
             User usPrincipal = (User) session.getAttribute("usPrincipal");
-            if (usPrincipal == null) {
-                  throw new CustomException("로그인이 필요합니다.", HttpStatus.BAD_REQUEST, "/user/loginForm");
-            }
+            Verify.validateObject(usPrincipal, "로그인이 필요합니다.");
             Verify.validateStiring(userUpdateReqDto.getPassword(), "암호를 입력하세요.");
             Verify.validateStiring(userUpdateReqDto.getEmail(), "이메일을 입력하세요.");
             userService.updateUser(userUpdateReqDto, usPrincipal.getId());
+            session.removeAttribute("usPrincipal");
+            User userPS = userRepository.findById(usPrincipal.getId());
+            Verify.validateObject(userPS, "유저 정보를 갱신하는데 일시적인 문제가 생겼습니다", HttpStatus.INTERNAL_SERVER_ERROR);
+            session.setAttribute("usPrincipal", userPS);
             return "redirect:/";
       }
 
