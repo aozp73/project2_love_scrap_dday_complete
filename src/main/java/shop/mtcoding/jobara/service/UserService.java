@@ -1,5 +1,7 @@
 package shop.mtcoding.jobara.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,12 @@ public class UserService {
 
       @Autowired
       private UserRepository userRepository;
+
+      @Transactional(readOnly = true)
+      public List<User> getUser() {
+            List<User> userPS = userRepository.findAll();
+            return userPS;
+      }
 
       @Transactional(readOnly = true)
       public User getUser(UserLoginReqDto userLoginReqDto) {

@@ -16,108 +16,41 @@
             <div class="my-border-color-default p-3">
                   <!-- 카드 들어갈 곳 -->
                   <div class="row gx-3">
-                        <!-- 반복문 -->
+                        <c:forEach items="${user}" var="user">
                         <div class="col-md-3 py-2">
-                              <div id="userImage1" onmouseenter="mouseEnterImages(this)"
+                              <div id="user${user.id}" onmouseenter="mouseEnterImages(this)"
                                     onmouseleave="mouseLeaveImages(this)" class="card col-lg-12">
-                                    <a href="/user/1" class="no_under_line_link">
+                                    <a href="/user/${user.id}" class="no_under_line_link">
                                           <img class="card-img-top" style="height: 100px;" src="/images/newjeans.jpg"
                                                 alt="Card image">
                                           <div class="card-body">
                                                 <div class="my-text-ellipsis">
-                                                      <h5>김이름</h5>
+                                                      <h5>${user.realName}</h5>
                                                 </div>
                                                 <div class="my-text-ellipsis">
-                                                      IT직 경력 1년차
+                                                      <c:choose>
+                                                      <c:when test="${user.career == 0}">
+                                                      신입
+                                                      </c:when>
+                                                      <c:otherwise>
+                                                      ${user.career}
+                                                      </c:otherwise>
+                                                      </c:choose>
                                                 </div>
                                                 <div class="my-text-ellipsis">
-                                                      자기소개문
+                                                      ${user.resumeTitle}
                                                 </div>
                                           </div>
                                     </a>
                                     <div class="card-footer d-flex justify-content-between">
-                                          <div>2023.01.01</div>
+                                          <div>${user.createdAt}</div>
                                           <div><i id="heart" class="fa-regular fa-heart my-xl my-cursor fa-lg"></i>
                                           </div>
                                     </div>
                               </div>
                         </div>
+                        </c:forEach>
                         <!-- 반복문 종료 -->
-                        <div class="col-md-3 py-2">
-                              <div id="userImage2" onmouseenter="mouseEnterImages(this)"
-                                    onmouseleave="mouseLeaveImages(this)" class="card col-lg-12">
-                                    <a href="/user/1" class="no_under_line_link">
-                                          <img class="card-img-top" style="height: 100px;" src="/images/newjeans.jpg"
-                                                alt="Card image">
-                                          <div class="card-body">
-                                                <div class="my-text-ellipsis">
-                                                      <h5>김네임</h5>
-                                                </div>
-                                                <div class="my-text-ellipsis">
-                                                      IT직 신입
-                                                </div>
-                                                <div class="my-text-ellipsis">
-                                                      자기소개문
-                                                </div>
-                                          </div>
-                                    </a>
-                                    <div class="card-footer d-flex justify-content-between">
-                                          <div>2023.01.01</div>
-                                          <div><i id="heart" class="fa-regular fa-heart my-xl my-cursor fa-lg"></i>
-                                          </div>
-                                    </div>
-                              </div>
-                        </div>
-                        <div class="col-md-3 py-2">
-                              <div id="userImage3" onmouseenter="mouseEnterImages(this)"
-                                    onmouseleave="mouseLeaveImages(this)" class="card col-lg-12">
-                                    <a href="/user/1" class="no_under_line_link">
-                                          <img class="card-img-top" style="height: 100px;" src="/images/newjeans.jpg"
-                                                alt="Card image">
-                                          <div class="card-body">
-                                                <div class="my-text-ellipsis">
-                                                      <h5>이이름</h5>
-                                                </div>
-                                                <div class="my-text-ellipsis">
-                                                      IT직 경력 3년차
-                                                </div>
-                                                <div class="my-text-ellipsis">
-                                                      자기소개문
-                                                </div>
-                                          </div>
-                                    </a>
-                                    <div class="card-footer d-flex justify-content-between">
-                                          <div>2023.01.01</div>
-                                          <div><i id="heart" class="fa-regular fa-heart my-xl my-cursor fa-lg"></i>
-                                          </div>
-                                    </div>
-                              </div>
-                        </div>
-                        <div class="col-md-3 py-2">
-                              <div id="userImage4" onmouseenter="mouseEnterImages(this)"
-                                    onmouseleave="mouseLeaveImages(this)" class="card col-lg-12">
-                                    <a href="/user/1" class="no_under_line_link">
-                                          <img class="card-img-top" style="height: 100px;" src="/images/newjeans.jpg"
-                                                alt="Card image">
-                                          <div class="card-body">
-                                                <div class="my-text-ellipsis">
-                                                      <h5>이네임</h5>
-                                                </div>
-                                                <div class="my-text-ellipsis">
-                                                      IT직 신입
-                                                </div>
-                                                <div class="my-text-ellipsis">
-                                                      자기소개문
-                                                </div>
-                                          </div>
-                                    </a>
-                                    <div class="card-footer d-flex justify-content-between">
-                                          <div>2023.01.01</div>
-                                          <div><i id="heart" class="fa-regular fa-heart my-xl my-cursor fa-lg"></i>
-                                          </div>
-                                    </div>
-                              </div>
-                        </div>
                   </div>
             </div>
             <div class="p-3">
