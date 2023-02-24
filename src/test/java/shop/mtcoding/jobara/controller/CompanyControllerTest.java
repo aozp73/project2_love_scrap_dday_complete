@@ -85,4 +85,46 @@ public class CompanyControllerTest {
         // verify
         resultActions.andExpect(status().is3xxRedirection());
     }
+
+    @Test
+    public void update_test() throws Exception {
+        // given
+        String passwordVal = "1234";
+        String emailVal = "love@naver.com";
+        String companyNameVal = "(주)야호";
+        String addressVal = "부산광역시 야구 김동";
+        String detailAddressVal = "석진2길";
+        String companyScaleVal = "대기업";
+        String companyFieldVal = "SW 개발";
+        String telVal = "01020340234";
+        StringBuffer sb = new StringBuffer();
+        sb.append("password=");
+        sb.append(passwordVal);
+        sb.append("&email=");
+        sb.append(emailVal);
+        sb.append("&companyName=");
+        sb.append(companyNameVal);
+        sb.append("&address=");
+        sb.append(addressVal);
+        sb.append("&detailAddress=");
+        sb.append(detailAddressVal);
+        sb.append("&companyScale=");
+        sb.append(companyScaleVal);
+        sb.append("&companyField=");
+        sb.append(companyFieldVal);
+        sb.append("&tel=");
+        sb.append(telVal);
+        String requestBody = sb.toString();
+
+        // when
+        ResultActions resultActions = mvc.perform(post("/company/update")
+                .content(requestBody)
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED_VALUE));
+        HttpSession session = resultActions.andReturn().getRequest().getSession();
+        Company coPrincipal = (Company) session.getAttribute("coPrincipal");
+
+        // verify
+        resultActions.andExpect(status().is3xxRedirection());
+        assertThat(coPrincipal.getPassword()).isEqualTo(passwordVal);
+    }
 }

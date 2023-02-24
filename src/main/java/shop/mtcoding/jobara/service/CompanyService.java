@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import shop.mtcoding.jobara.dto.company.CompanyReq.CompanyJoinReqDto;
 import shop.mtcoding.jobara.dto.company.CompanyReq.CompanyLoginReqDto;
+import shop.mtcoding.jobara.dto.company.CompanyReq.CompanyUpdateReqDto;
 import shop.mtcoding.jobara.ex.CustomException;
 import shop.mtcoding.jobara.model.Company;
 import shop.mtcoding.jobara.model.CompanyRepository;
@@ -36,6 +37,13 @@ public class CompanyService {
         } catch (Exception e) {
         throw new CustomException("회원 가입 실패", HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    public Company updateCompany(CompanyUpdateReqDto companyUpdateReqDto) {
+        Company companyTemp = new Company(companyUpdateReqDto.getPassword(), companyUpdateReqDto.getEmail(), companyUpdateReqDto.getAddress(), companyUpdateReqDto.getDetailAddress(), 
+                companyUpdateReqDto.getCompanyName(), companyUpdateReqDto.getCompanyScale(), companyUpdateReqDto.getCompanyField(), 
+                companyUpdateReqDto.getTel());
+        return companyTemp;
     }
 
 }
