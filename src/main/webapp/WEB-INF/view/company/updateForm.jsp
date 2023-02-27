@@ -8,11 +8,28 @@
             </div>
             <div class="justify-content-center d-flex mb-3">
                 <div class="my-border-color-default px-3 py-3" style="width: 50%; ">
-                    <form method="post" action="/company/update">
+                    <form method="post" action="/company/update" onsubmit="return valid()">
+                        <div class="mb-3">
+                            <label for="exampleInputPassword" class="form-label">변경 비밀번호</label>
+                            <input type="password" name="password" id="password" class="form-control"
+                                value="${coPrincipal.password}" placeholder="Password" onchange="checkSamePassword()">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">비밀번호확인</label>
+                            <input type="password" class="form-control" id="passwordCheck"
+                                placeholder="Confirm Password" onchange="checkSamePassword()">
+                        </div>
+                        <div id="passwordCheckAlert">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail" class="form-label">이메일</label>
+                            <input type="email" name="email" class="form-control" value="${coPrincipal.email}"
+                                placeholder="Email">
+                        </div>
                         <div class="mb-3">
                             <label for="exampleInputCompanyName" class="form-label">회사명</label>
-                            <input type="text" name="companyName" class="form-control" value="${coPrincipal.companyName}"
-                                placeholder="Company Name">
+                            <input type="text" name="companyName" class="form-control"
+                                value="${coPrincipal.companyName}" placeholder="Company Name">
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputCompanyAddress" class="form-label">회사주소</label>
@@ -21,12 +38,12 @@
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputCompanyAddress" class="form-label">상세주소</label>
-                            <input type="text" name="detailAddress" class="form-control" value="${coPrincipal.detailAddress}"
-                                placeholder="Company Address">
+                            <input type="text" name="detailAddress" class="form-control"
+                                value="${coPrincipal.detailAddress}" placeholder="Company Address">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">회사규모</label>
-                            <select class="form-select"  name="companyScale">
+                            <select class="form-select" name="companyScale">
                                 <option value="대기업">대기업</option>
                                 <option value="중견기업">중견기업</option>
                                 <option value="중소기업">중소기업</option>
@@ -48,15 +65,6 @@
                                 placeholder="하이픈(-) 없이 입력해주세요"
                                 oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                         </div>
-                        <div class="mb-3">
-                            <label for="exampleInputPassword" class="form-label">비밀번호</label>
-                            <input type="password" name="password" class="form-control" value="${coPrincipal.password}"
-                                placeholder="Password">
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleInputEmail" class="form-label">이메일</label>
-                            <input type="email" name="email" class="form-control" value="${coPrincipal.email}" placeholder="Email">
-                        </div>
                         <div class="d-flex justify-content-center">
                             <button type="submit" class="btn btn-primary my-button-color-default">수정완료</button>
                         </div>
@@ -64,5 +72,35 @@
                 </div>
             </div>
         </div>
+
+        <script>
+            let checkPassword = false;
+            function valid() {
+                if (checkPassword == false) {
+                    alert("비밀번호 확인란을 확인해주세요");
+                    return false;
+                }
+                return true;
+            }
+            function checkSamePassword() {
+                let password = $("#password").val();
+                let passwordCheck = $("#passwordCheck").val();
+                if (password == passwordCheck) {
+                    checkPassword = true;
+                    $("#passwordCheckAlert").empty();
+                    let el = `<div class="alert alert-success" id="passwordCheckAlert">
+                              <strong>비밀번호 확인 완료!</strong>
+                              </div>`;
+                    $("#passwordCheckAlert").append(el);
+                } else {
+                    checkPassword = false;
+                    $("#passwordCheckAlert").empty();
+                    let el = `<div class="alert alert-danger">
+                              <strong>비밀번호가 다릅니다!</strong>
+                              </div>`;
+                    $("#passwordCheckAlert").append(el);
+                }
+            }
+        </script>
 
         <%@ include file="../layout/footer.jsp" %>
