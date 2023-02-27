@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import shop.mtcoding.jobara.common.dto.ResponseDto;
-import shop.mtcoding.jobara.common.ex.CustomApiException;
 import shop.mtcoding.jobara.common.util.Verify;
 import shop.mtcoding.jobara.company.dto.CompanyReq.CompanyJoinReqDto;
 import shop.mtcoding.jobara.company.dto.CompanyReq.CompanyLoginReqDto;
@@ -93,17 +93,15 @@ public class CompanyController {
       }
 
       @GetMapping("/company/usernameSameCheck")
-      public @ResponseBody ResponseDto<?> check(String username) {
+      public @ResponseBody ResponseEntity<?> check(String username) {
             // 유효성 검사
-            System.out.print("테스트 : " + username);
-            Verify.validateStiring(username, "username 쿼리스트링을 전달해주세요");
+            Verify.validateStiring(username, "유저네임을 입력하세요.");
 
-            companyService.findByGetUsername(username);
-
-            if (username.equals("ssar2")) {
-                  return new ResponseDto<>(1, "동일한 아이디가 존재합니다", false);
+            if (companyService.getUsername(username) == null) {
+                  return new ResponseEntity<>(new ResponseDto<>(1, "사용가능한 유저네임 입니다.", true), HttpStatus.OK);
             } else {
-                  return new ResponseDto<>(1, "해당 아아디로 회원가입 할 수 있습니다", true);
+                  return new ResponseEntity<>(new ResponseDto<>(-1, "이미 존재하는 유저네임 입니다.", false), HttpStatus.OK);
             }
+
       }
 }

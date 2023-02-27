@@ -43,17 +43,10 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label">아이디</label>
-                            <div style="display: grid; grid-template-columns: 8fr 2fr">
-                                <div>
-                                    <input id="username" type="text" name="username" class="form-control"
-                                        placeholder="Username">
-                                </div>
-                                <div class="ms-4">
-                                    <button type="button" class="btn btn-primary my-button-color-default"
-                                        onclick="checkSameUsername()">중복확인</button>
-                                </div>
-                            </div>
+                            <input id="username" type="text" name="username" class="form-control" placeholder="Username"
+                                onchange="checkUsername()">
                         </div>
+                        <div id="usernameCheck"></div>
                         <div class="mb-3">
                             <label class="form-label">비밀번호</label>
                             <input type="password" name="password" id="password" class="form-control"
@@ -103,9 +96,9 @@ Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reprehenderit laudanti
         <script>
 
             // 아이디 중복확인 
-            let submitCheck = false;
+            let checkUser = false;
 
-            function checkSameUsername() {
+            function checkUsername() {
                 let username = $("#username").val();
 
                 $.ajax({
@@ -113,46 +106,44 @@ Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reprehenderit laudanti
                     url: "/company/usernameSameCheck?username=" + username,
                 }).done((res) => {
                     if (res.data == true) {
-                        alert(res.msg);
-                        submitCheck = true;
+                        $("#usernameCheck").empty();
+                        let el = `<div class="alert alert-success" id="usernameCheck">
+                                  <strong>`+ res.msg + `</strong>
+                                  </div>`;
+                        $("#usernameCheck").append(el);
+                        checkUser = true;
                     } else {
-                        alert(res.msg);
-                        submitCheck = false;
+                        $("#usernameCheck").empty();
+                        let el = `<div class="alert alert-danger" id="usernameCheck">
+                                  <strong>`+ res.msg + `</strong>
+                                  </div>`;
+                        $("#usernameCheck").append(el);
+                        checkUser = false;
                     }
                 }).fail((err) => {
 
                 });
             }
-
-            $("#username").keydown(() => {
-                if (submitCheck == true) {
-                    alert("중복체크를 다시 하셔야 합니다");
-                    submitCheck = false;
-                }
-            });
-
-            function valid() {
-                if (submitCheck) {
-                    return true;
-                } else {
-                    alert("유저네임 중복체크를 해주세요")
-                    return false;
-                }
-            }
-
-
             // ~ 아이디 중복확인  
 
 
             // 비밀번호 확인 체크
             let checkPassword = false;
+
             function valid() {
+                if (checkUser == false) {
+                    alert("유저네임을 확인해주세요")
+                    return false;
+                }
+
                 if (checkPassword == false) {
                     alert("비밀번호 확인란을 확인해주세요");
                     return false;
                 }
+
                 return true;
             }
+
             function checkSamePassword() {
                 let password = $("#password").val();
                 let passwordCheck = $("#passwordCheck").val();
