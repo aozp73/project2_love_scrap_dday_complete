@@ -11,13 +11,13 @@ public class Tech {
     private Integer id;
     private Integer userId;
     private Integer boardId;
-    private Integer java;
-    private Integer cLang;
-    private Integer python;
-    private Integer php;
-    private Integer jsc;
-    private Integer ruby;
-    private Integer assemblyLang;
-    private Integer sqlLang;
+    private String java;
+    private String cLang;
+    private String python;
+    private String php;
+    private String jsc;
+    private String ruby;
+    private String assemblyLang;
+    private String sqlLang;
     private Timestamp createdAt;
 }

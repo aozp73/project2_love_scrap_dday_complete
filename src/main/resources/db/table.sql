@@ -53,14 +53,14 @@ create table tech_tb(
     id int auto_increment primary key,
     user_id int,
     board_id int,
-    java tinyint,
-    c_lang tinyint,
-    python tinyint,
-    php tinyint,
-    jsc tinyint,
-    ruby tinyint,
-    assembly_lang tinyint,
-    sql_lang tinyint,
+    java varchar,
+    c_lang varchar,
+    python varchar,
+    php varchar,
+    jsc varchar,
+    ruby varchar,
+    assembly_lang varchar,
+    sql_lang varchar,
     created_at timestamp not null
 );
 
