@@ -28,7 +28,10 @@ public class UserController {
       private HttpSession session;
 
       @GetMapping("/user/{id}")
-      public String detail(@PathVariable int id) {
+      public String detail(@PathVariable int id, Model model) {
+            User userPS = userService.getUser(id);
+            model.addAttribute("user", userPS);
+            
             return "user/detail";
       }
 

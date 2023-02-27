@@ -10,7 +10,14 @@
                         <div class="col-12 p-3">
                             <div class="row">
                                 <div class="col-sm-5 m-3">
-                                    <h3>김실명</h3>
+                                    <h3><c:choose>
+                                            <c:when test="${user.realName == null}">
+                                                비공개
+                                            </c:when>
+                                            <c:otherwise>
+                                                ${user.realName}
+                                            </c:otherwise>
+                                        </c:choose></h3>
                                 </div>
                                 <div class="col-sm-5">
                                     <img src="/images/newjeans.jpg" class="rounded-circle"
@@ -31,11 +38,25 @@
                                 <li class="nav-item">
                                     <div class="row">
                                         <div class="col-3 ps-3 pe-0">
-                                            주소 :
+                                            주소 : 
                                         </div>
                                         <div class="col-9 ps-0">
-                                            부산광역시 부산진구 <br>
-                                            xxx동 yyy구 zzz번지
+                                            <c:choose>
+                                                <c:when test="${user.address == null}">
+                                                    비공개
+                                                </c:when>
+                                                <c:otherwise>
+                                                    ${user.realName}
+                                                </c:otherwise>
+                                            </c:choose><br>
+                                            <c:choose>
+                                                <c:when test="${user.detailAddress == null}">
+                                                    비공개
+                                                </c:when>
+                                                <c:otherwise>
+                                                    ${user.detailAddress}
+                                                </c:otherwise>
+                                            </c:choose>
                                         </div>
                                     </div>
                                 </li>
@@ -56,7 +77,14 @@
                                             경력 :
                                         </div>
                                         <div class="col-9 ps-0">
-                                            n년차
+                                            <c:choose>
+                                                <c:when test="${user.career == 0}">
+                                                    신입
+                                                </c:when>
+                                                <c:otherwise>
+                                                    ${user.career} 년차
+                                                </c:otherwise>
+                                            </c:choose>
                                         </div>
                                     </div>
                                 </li>
@@ -72,7 +100,14 @@
                                             전화번호 :
                                         </div>
                                         <div class="col-8">
-                                            01012345678
+                                            <c:choose>
+                                                <c:when test="${user.tel == null}">
+                                                    비공개
+                                                </c:when>
+                                                <c:otherwise>
+                                                    ${user.tel}
+                                                </c:otherwise>
+                                            </c:choose> 
                                         </div>
                                     </div>
                                 </li>
@@ -82,7 +117,14 @@
                                             email :
                                         </div>
                                         <div class="col-8">
-                                            이메일@이메일.이메일
+                                            <c:choose>
+                                                <c:when test="${user.email == null}">
+                                                    비공개
+                                                </c:when>
+                                                <c:otherwise>
+                                                    ${user.email}
+                                                </c:otherwise>
+                                            </c:choose>
                                             <!-- 이메일이 길어질경우 후에 간격 수정가능 -->
                                         </div>
                                     </div>
@@ -98,24 +140,24 @@
                     <div class="p-3 m-3 my-border-color-default rounded-1">
                         <h2 class="p-3"><b>지원자 자기 소개</b></h2>
                         <hr>
-                        <h5>자신감이 넘치는 사람</h5>
+                        <h5><c:choose>
+                                <c:when test="${user.resumeTitle == null}">
+                                    비공개
+                                </c:when>
+                                <c:otherwise>
+                                    ${user.resumeTitle}
+                                </c:otherwise>
+                            </c:choose></h5>
 
-                        <p>저는 몇남몇녀의 몇남으로 태어나 .... mollit anim id est laborum consectetur adipiscing
-                            elit,
-                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                            veniam, quis nostrud exercitation ullamco. Sunt in culpa qui officia deserunt mollit
-                            anim
-                            id est laborum consectetur adipiscing elit,
-                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                            veniam, quis nostrud exercitation ullamco.</p>
-                        <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing
-                            elit,
-                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                            veniam, quis nostrud exercitation ullamco. Sunt in culpa qui officia deserunt mollit
-                            anim
-                            id est laborum consectetur adipiscing elit,
-                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                            veniam, quis nostrud exercitation ullamco.</p>
+                        <p><c:choose>
+                                <c:when test="${user.resumeContent == null}">
+                                    비공개
+                                </c:when>
+                                <c:otherwise>
+                                    ${user.resumeContent}
+                                </c:otherwise>
+                            </c:choose></p>
+                        
                     </div>
                     <div class="p-3 m-3 my-border-color-default rounded-1">
                         <h2 class="p-3"><b>경력 사항</b></h2>
