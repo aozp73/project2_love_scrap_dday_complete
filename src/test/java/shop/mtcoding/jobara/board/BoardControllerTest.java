@@ -61,7 +61,7 @@ public class BoardControllerTest {
     @Test
     public void update_test() throws Exception {
         // given
-        // int id = 3; 수정권한 없음 체크완료
+        // int id = 2; 수정권한 없음 체크완료
         int id = 1;
         String requestBody = "title=테스트제목&content=테스트내용&careerString=1년이상 ~ 3년미만";
 
