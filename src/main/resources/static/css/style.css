@@ -46,3 +46,15 @@
     text-decoration: none;
     color: black;
 }
+
+.my-text-ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.my-thumbnail-color-default {
+    border: 1px solid;
+    border-radius: 5px;
+    border-color: #CED4DA;
+}

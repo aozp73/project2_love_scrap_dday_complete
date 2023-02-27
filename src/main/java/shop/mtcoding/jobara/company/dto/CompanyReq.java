@@ -4,10 +4,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 public class CompanyReq {
-    
+
     @Getter
     @Setter
-    public static class CompanyLoginReqDto{
+    public static class CompanyLoginReqDto {
         private String username;
         private String password;
     }
