@@ -25,7 +25,7 @@ public class CompanyService {
     private CompanyRepository companyRepository;
 
     @Transactional(readOnly = true)
-    public Company getUsername(String username) {
+    public Company checkUsername(String username) {
         Company companyPS = companyRepository.findByUsername(username);
         return companyPS;
     }

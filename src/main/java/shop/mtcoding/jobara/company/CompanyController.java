@@ -93,11 +93,11 @@ public class CompanyController {
       }
 
       @GetMapping("/company/usernameSameCheck")
-      public @ResponseBody ResponseEntity<?> check(String username) {
+      public @ResponseBody ResponseEntity<?> usernameSameCheck(String username) {
             // 유효성 검사
             Verify.validateStiring(username, "유저네임을 입력하세요.");
 
-            if (companyService.getUsername(username) == null) {
+            if (companyService.checkUsername(username) == null) {
                   return new ResponseEntity<>(new ResponseDto<>(1, "사용가능한 유저네임 입니다.", true), HttpStatus.OK);
             } else {
                   return new ResponseEntity<>(new ResponseDto<>(-1, "이미 존재하는 유저네임 입니다.", false), HttpStatus.OK);
