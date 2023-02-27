@@ -107,4 +107,18 @@ public class UserControllerTest {
             resultActions.andExpect(status().is2xxSuccessful());
 
       }
+
+      @Test
+      public void detail_test() throws Exception {
+            // given
+            int id = 1;
+            // when
+            ResultActions resultActions = mvc.perform(get("/user/1"));
+            Map<String, Object> map = resultActions.andReturn().getModelAndView().getModel();
+            User user = (User) map.get("user");
+            // then
+            assertThat(user.getRealName()).isEqualTo("김살");
+            resultActions.andExpect(status().is2xxSuccessful());
+
+      }
 }
