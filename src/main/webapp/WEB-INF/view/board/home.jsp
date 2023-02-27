@@ -22,35 +22,38 @@
                 <div class="row">
 
                     <c:forEach items="${boardMainList}" var="board">
-                    <div class="col-md-3 py-2">
-                        <a href="/board/${board.id}" class="no_under_line_link">
-                            <div id="boardImage-${board.id}" class="card col-lg-12"
-                                onmouseenter="boardEnterImages(this)" onmouseleave="boardLeaveImages(this)">
-                                <img class="card-img-top" style="height: 100px;" src="/images/newjeans.jpg"
-                                    alt="Card image">
-                                <div class="card-body">
-                                    <div class="my-text-ellipsis">
-                                        <h5>${board.companyName}</h5>
+                        <div class="col-md-3 py-2">
+                            <a href="/board/${board.id}" class="no_under_line_link">
+                                <div id="boardImage-${board.id}" class="card col-lg-12"
+                                    onmouseenter="boardEnterImages(this)" onmouseleave="boardLeaveImages(this)">
+                                    <div class="d-flex justify-content-center">
+                                        <img class="card-img-top" style="height: 100px; max-width: 200px;"
+                                            src="${board.profile == null ? " /images/defaultProfile.png" :
+                                            board.profile}" alt="Card image">
                                     </div>
-                                    <div class="my-text-ellipsis">
-                                        ${board.title}
+                                    <div class="card-body">
+                                        <div class="my-text-ellipsis">
+                                            <h5>${board.companyName}</h5>
+                                        </div>
+                                        <div class="my-text-ellipsis">
+                                            ${board.title}
+                                        </div>
+                                        <div class="my-text-ellipsis">
+                                            채용
+                                        </div>
                                     </div>
-                                    <div class="my-text-ellipsis">
-                                        채용
-                                    </div>
-                                </div>
-                        </a>
-                        <div class="card-footer d-flex justify-content-between">
-                            <div>(D-1)</div>
-                            <div><i id="heart" class="fa-regular fa-heart my-xl my-cursor fa-lg"></i></div>
+                            </a>
+                            <div class="card-footer d-flex justify-content-between">
+                                <div>(D-1)</div>
+                                <div><i id="heart" class="fa-regular fa-heart my-xl my-cursor fa-lg"></i></div>
+                            </div>
                         </div>
-                    </div>
-                    </div>
-                    </c:forEach>
-
-                  
                 </div>
+                </c:forEach>
+
+
             </div>
+        </div>
         </div>
 
         <script>

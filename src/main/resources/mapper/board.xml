@@ -10,7 +10,7 @@
     </select>
 
     <select id="findAllWithCompanyToMain" resultType="shop.mtcoding.jobara.board.dto.BoardResp$BoardMainRespDto">
-        SELECT bt.id, bt.title, ct.company_name, ct.id company_id FROM BOARD_TB bt
+        SELECT bt.id, bt.title, ct.company_name, ct.id company_id, ct.profile FROM BOARD_TB bt
         inner join company_tb ct
         on bt.company_id = ct.id
         limit 4

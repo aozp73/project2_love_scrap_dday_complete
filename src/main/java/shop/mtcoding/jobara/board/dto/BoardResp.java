@@ -29,6 +29,7 @@ public class BoardResp {
         private String title;
         private String companyName;
         private Integer companyId;
+        private String profile;
     }
 
     @Getter
