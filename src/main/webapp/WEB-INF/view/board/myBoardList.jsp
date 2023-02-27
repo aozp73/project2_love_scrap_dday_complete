@@ -17,8 +17,11 @@
                             <a href="/board/${board.id}" class="no_under_line_link">
                                 <div id="boardImage-${board.id}" class="card col-lg-12"
                                     onmouseenter="mouseEnterImages(this)" onmouseleave="mouseLeaveImages(this)">
-                                    <img class="card-img-top" style="height: 100px;" src="/images/newjeans.jpg"
+                                    <div class="d-flex justify-content-center">
+                                    <img class="card-img-top" style="height: 100px; max-width: 200px;" src="${board.profile == null ? " /images/defaultProfile.png" :
+                                            board.profile}"
                                         alt="Card image">
+                                        </div>
                                     <div class="card-body">
                                         <div class="my-text-ellipsis">
                                             <h5>${board.companyName}</h5>
