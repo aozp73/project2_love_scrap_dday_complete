@@ -6,6 +6,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Map;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,6 +22,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import shop.mtcoding.jobara.apply.dto.ApplyResp.ListRespDto;
+import shop.mtcoding.jobara.company.model.Company;
 import shop.mtcoding.jobara.user.model.User;
 
 @Transactional
@@ -46,6 +50,16 @@ public class ApplyControllerTest {
 
         mockSession = new MockHttpSession();
         mockSession.setAttribute("usPrincipal", user);
+
+        Company company = new Company();
+        company.setId(1);
+        company.setUsername("ssar");
+        company.setPassword("1234");
+        company.setEmail("ssar@nate.com");
+        company.setCreatedAt(Timestamp.valueOf(LocalDateTime.now()));
+
+        mockSession = new MockHttpSession();
+        mockSession.setAttribute("coPrincipal", company);
     }
 
     @Test
@@ -74,5 +88,22 @@ public class ApplyControllerTest {
         System.out.println("테스트 : " + responseBody);
         // verify
         resultActions.andExpect(status().is4xxClientError());
+    }
+
+    @Test
+    public void applyList_success_test() throws Exception {
+        // given
+        int id = 3;
+        // when
+        ResultActions resultActions = mvc.perform(
+                get("/company/" + id).session(mockSession));
+        Map<String, Object> map = resultActions.andReturn().getModelAndView().getModel();
+        List<ListRespDto> applyListDto = (List<ListRespDto>) map.get("applyList");
+        String response = om.writeValueAsString(applyListDto);
+        System.out.println("테스트 : " + response);
+        // verify
+        resultActions.andExpect(status().isOk());
+        // resultActions.andExpect(jsonPath("$.code").value(1));
+        // resultActions.andExpect(jsonPath("$.msg").value("지원 성공"));
     }
 }

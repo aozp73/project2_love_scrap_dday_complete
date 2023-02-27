@@ -1,10 +1,13 @@
 package shop.mtcoding.jobara.apply;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import shop.mtcoding.jobara.apply.dto.ApplyResp.ListRespDto;
 import shop.mtcoding.jobara.apply.model.Apply;
 import shop.mtcoding.jobara.apply.model.ApplyRepository;
 import shop.mtcoding.jobara.board.model.BoardRepository;
@@ -30,6 +33,10 @@ public class ApplyService {
         } catch (Exception e) {
             throw new CustomApiException("서버 오류로 인한 지원 실패",HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    public List<ListRespDto> getApplyList(Integer id) {
+        return null;
     }
     
 }
