@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import shop.mtcoding.jobara.apply.dto.ApplyResp.ListRespDto;
+
 @Mapper
 public interface ApplyRepository {
     
@@ -18,4 +20,6 @@ public interface ApplyRepository {
     public int deleteById(int id);
 
     public Apply findByUserIdAndBoardId(Apply apply);
+
+    public List<ListRespDto> findByCompanyIdWithBoardAndUser(int companyId);
 }
