@@ -54,6 +54,7 @@ public class BoardResp {
         private String companyName;
         private String companyScale;
         private String companyField;
+        private String profile;
     }
 
 }

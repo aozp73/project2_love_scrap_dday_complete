@@ -52,6 +52,7 @@ public class CompanyService {
                 companyUpdateReqDto.getCompanyName(), companyUpdateReqDto.getCompanyScale(),
                 companyUpdateReqDto.getCompanyField(),
                 companyUpdateReqDto.getTel(), uuidImageName);
+
         try {
             companyRepository.updateById(companyTemp);
         } catch (Exception e) {
