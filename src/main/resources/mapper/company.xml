@@ -3,17 +3,17 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="shop.mtcoding.jobara.model.CompanyRepository">
+<mapper namespace="shop.mtcoding.jobara.company.model.CompanyRepository">
 
-    <select id="findAll" resultType="shop.mtcoding.jobara.model.Company">
+    <select id="findAll" resultType="shop.mtcoding.jobara.company.model.Company">
         select * from company_tb
     </select>
 
-    <select id="findById" resultType="shop.mtcoding.jobara.model.Company">
+    <select id="findById" resultType="shop.mtcoding.jobara.company.model.Company">
         select * from company_tb where id = #{id}
     </select>    
 
-    <select id="findByUsernameAndPassword" resultType="shop.mtcoding.jobara.model.Company">
+    <select id="findByUsernameAndPassword" resultType="shop.mtcoding.jobara.company.model.Company">
         select * from company_tb where username = #{username} and password = #{password}
     </select>    
 
