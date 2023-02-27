@@ -18,6 +18,7 @@ import shop.mtcoding.jobara.board.dto.BoardResp.BoardDetailRespDto;
 import shop.mtcoding.jobara.board.dto.BoardResp.BoardListRespDto;
 import shop.mtcoding.jobara.board.dto.BoardResp.BoardMainRespDto;
 import shop.mtcoding.jobara.board.dto.BoardResp.BoardUpdateRespDto;
+import shop.mtcoding.jobara.board.dto.BoardResp.MyBoardListRespDto;
 import shop.mtcoding.jobara.common.ex.CustomException;
 import shop.mtcoding.jobara.common.util.Verify;
 import shop.mtcoding.jobara.company.model.Company;
@@ -110,11 +111,20 @@ public class BoardController {
 
             boardService.insertBoard(boardInsertReqDto, coPrincipal.getId());
 
-            return "redirect:/board/list";
+            return "redirect:/board/boardList/" + coPrincipal.getId();
       }
 
-      @GetMapping("/company/{id}/board")
-      public String myBoardList(@PathVariable int id) {
+      @GetMapping("/board/boardList/{id}")
+      public String myBoardList(@PathVariable int id, Model model) {
+
+            Company coPrincipal = (Company) session.getAttribute("coPrincipal");
+
+            // 인증
+            Verify.validateObject(coPrincipal, "로그인이 필요한 페이지입니다", HttpStatus.BAD_REQUEST, "/company/loginForm");
+
+            List<MyBoardListRespDto> myBoardListPS = boardService.getMyBoard(coPrincipal.getId(), id);
+            model.addAttribute("myBoardList", myBoardListPS);
+
             return "board/myBoardList";
       }
 

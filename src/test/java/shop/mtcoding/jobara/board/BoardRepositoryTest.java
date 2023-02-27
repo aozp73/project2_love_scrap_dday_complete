@@ -2,6 +2,8 @@ package shop.mtcoding.jobara.board;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import shop.mtcoding.jobara.board.dto.BoardResp.BoardDetailRespDto;
+import shop.mtcoding.jobara.board.dto.BoardResp.MyBoardListRespDto;
 import shop.mtcoding.jobara.board.model.BoardRepository;
 
 @MybatisTest
@@ -30,5 +33,20 @@ public class BoardRepositoryTest {
 
         // then
         assertThat(boardDetailRespDto.getCompanyScale()).isEqualTo("대기업");
+    }
+
+    @Test
+    public void findAllByIdWithCompany_test() throws Exception {
+        // given
+        ObjectMapper om = new ObjectMapper();
+        int companyId = 1;
+
+        // when
+        List<MyBoardListRespDto> myBoardListRespDto = boardRepository.findAllByIdWithCompany(companyId);
+        // String responseBody = om.writeValueAsString(myBoardListRespDto);
+        // System.out.println("테스트 : " + responseBody);
+
+        // then
+        assertThat(myBoardListRespDto.get(1).getTitle()).isEqualTo("공고제목2");
     }
 }

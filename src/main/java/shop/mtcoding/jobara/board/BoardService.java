@@ -13,6 +13,7 @@ import shop.mtcoding.jobara.board.dto.BoardResp.BoardDetailRespDto;
 import shop.mtcoding.jobara.board.dto.BoardResp.BoardListRespDto;
 import shop.mtcoding.jobara.board.dto.BoardResp.BoardMainRespDto;
 import shop.mtcoding.jobara.board.dto.BoardResp.BoardUpdateRespDto;
+import shop.mtcoding.jobara.board.dto.BoardResp.MyBoardListRespDto;
 import shop.mtcoding.jobara.board.model.Board;
 import shop.mtcoding.jobara.board.model.BoardRepository;
 import shop.mtcoding.jobara.common.ex.CustomException;
@@ -23,6 +24,23 @@ public class BoardService {
 
     @Autowired
     private BoardRepository boardRepository;
+
+    @Transactional(readOnly = true)
+    public List<MyBoardListRespDto> getMyBoard(int coPrincipalId, int companyId) {
+        // 권한 체크
+        if (coPrincipalId != companyId) {
+            throw new CustomException("공고 리스트 열람 권한이 없습니다.");
+        }
+
+        List<MyBoardListRespDto> myBoardListPS;
+        try {
+            myBoardListPS = boardRepository.findAllByIdWithCompany(coPrincipalId);
+        } catch (Exception e) {
+            throw new CustomException("서버에 일시적인 문제가 생겼습니다", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        return myBoardListPS;
+    }
 
     @Transactional
     public void insertBoard(BoardInsertReqDto boardInsertReqDto, int companyId) {
@@ -128,6 +146,9 @@ public class BoardService {
         }
 
         return boardListPS;
+    }
+
+    public void getMyBoard(Integer id) {
     }
 
 }
