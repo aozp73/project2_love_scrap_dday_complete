@@ -3,6 +3,7 @@ package shop.mtcoding.jobara.user;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.sql.Timestamp;
@@ -14,7 +15,6 @@ import javax.servlet.http.HttpSession;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -23,6 +23,9 @@ import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import shop.mtcoding.jobara.user.dto.UserReq.UserResumeFormReqDto;
 import shop.mtcoding.jobara.user.model.User;
 
 @SpringBootTest
@@ -34,6 +37,9 @@ public class UserControllerTest {
 
       @Autowired
       private MockHttpSession session;
+
+      @Autowired
+      ObjectMapper om;
 
       @BeforeEach
       public void setUp() {
@@ -121,6 +127,28 @@ public class UserControllerTest {
             // then
             assertThat(user.getRealName()).isEqualTo("김살");
             resultActions.andExpect(status().is2xxSuccessful());
+
+      }
+
+      @Test
+      public void resume_test() throws Exception {
+            // given
+            int id = 1;
+            UserResumeFormReqDto resumeForm = new UserResumeFormReqDto();
+            resumeForm.setResumeTitle("이력서 이름 1");
+            resumeForm.setResumeContent("이력서 내용 1");
+
+            String reqBody = om.writeValueAsString(resumeForm);
+
+            // when
+            ResultActions resultActions = mvc.perform(post("/user/" + id + "/resume").content(reqBody)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE).session(session));
+
+            User user = (User) session.getAttribute("usPrincipal");
+
+            // then
+            resultActions.andExpect(jsonPath("$.code").value(1));
+            assertThat(user.getResumeTitle()).isEqualTo("이력서 이름 1");
 
       }
 

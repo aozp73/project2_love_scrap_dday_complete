@@ -109,12 +109,13 @@ public class UserController {
             return "user/resumeForm";
       }
 
-      @PostMapping("/user/resume")
-      public @ResponseBody ResponseEntity<?> resume(@RequestBody UserResumeFormReqDto userResumeFormReqDto) {
+      @PostMapping("/user/{id}/resume")
+      public @ResponseBody ResponseEntity<?> resume(@RequestBody UserResumeFormReqDto userResumeFormReqDto,
+                  @PathVariable int id) {
             User usPrincipal = (User) session.getAttribute("usPrincipal");
             Verify.validateObject(usPrincipal, "로그인이 필요합니다.");
 
-            User userPS = userService.updateUser(userResumeFormReqDto, usPrincipal.getId());
+            User userPS = userService.updateUser(userResumeFormReqDto, id);
 
             session.removeAttribute("usPrincipal");
             Verify.validateObject(userPS, "이력서 정보를 갱신하는데 일시적인 문제가 생겼습니다", HttpStatus.INTERNAL_SERVER_ERROR);
