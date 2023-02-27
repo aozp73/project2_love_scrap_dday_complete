@@ -22,7 +22,7 @@
             </div>
             <div class="justify-content-center d-flex mb-3">
                 <div class="my-border-color-default px-3 py-3" style="width: 50%; ">
-                    <form method="post" action="/company/join">
+                    <form method="post" action="/company/join" onsubmit="return valid()">
                         <div class="mb-3">
                             <label class="form-label">사업자 등록번호</label>
                             <input type="text" name="companyNumb" class="form-control"
@@ -47,11 +47,15 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label">비밀번호</label>
-                            <input type="password" name="password" class="form-control" placeholder="Password">
+                            <input type="password" name="password" id="password" class="form-control"
+                                placeholder="Password" onchange="checkSamePassword()">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">비밀번호확인</label>
-                            <input type="password" class="form-control" placeholder="Confirm Password">
+                            <input type="password" class="form-control" id="passwordCheck"
+                                placeholder="Confirm Password" onchange="checkSamePassword()">
+                        </div>
+                        <div id="passwordCheckAlert">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">이메일</label>
@@ -86,5 +90,35 @@ Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reprehenderit laudanti
                 </div>
             </div>
         </div>
+
+        <script>
+            let checkPassword = false;
+            function valid() {
+                if (checkPassword == false) {
+                    alert("비밀번호 확인란을 확인해주세요");
+                    return false;
+                }
+                return true;
+            }
+            function checkSamePassword() {
+                let password = $("#password").val();
+                let passwordCheck = $("#passwordCheck").val();
+                if (password == passwordCheck) {
+                    checkPassword = true;
+                    $("#passwordCheckAlert").empty();
+                    let el = `<div class="alert alert-success" id="passwordCheckAlert">
+                              <strong>비밀번호 확인 완료!</strong>
+                              </div>`;
+                    $("#passwordCheckAlert").append(el);
+                } else {
+                    checkPassword = false;
+                    $("#passwordCheckAlert").empty();
+                    let el = `<div class="alert alert-danger">
+                              <strong>비밀번호가 다릅니다!</strong>
+                              </div>`;
+                    $("#passwordCheckAlert").append(el);
+                }
+            }
+        </script>
 
         <%@ include file="../layout/footer.jsp" %>
