@@ -55,52 +55,41 @@
                                 </div>
                                 <div class="mb-2">
                                     <div class="form-check form-check-inline" style="width: 19%">
-                                        <input class="form-check-input" type="checkbox" id="CheckboxJava"
-                                            value="option1">
+                                        <input class="form-check-input" type="checkbox" id="java">
                                         <label class="form-check-label" for="inlineCheckbox1">Java</label>
                                     </div>
                                     <div class="form-check form-check-inline" style="width: 19%">
-                                        <input class="form-check-input" type="checkbox" id="CheckboxSpring"
-                                            value="option2">
-                                        <label class="form-check-label" for="inlineCheckbox2">Spring</label>
+                                        <input class="form-check-input" type="checkbox" id="cLang">
+                                        <label class="form-check-label" for="inlineCheckbox2">C#</label>
                                     </div>
                                     <div class="form-check form-check-inline" style="width: 19%">
-                                        <input class="form-check-input" type="checkbox" id="CheckboxOracle"
-                                            value="option1">
-                                        <label class="form-check-label" for="inlineCheckbox1">Oracle</label>
+                                        <input class="form-check-input" type="checkbox" id="python">
+                                        <label class="form-check-label" for="inlineCheckbox1">Python</label>
                                     </div>
                                     <div class="form-check form-check-inline" style="width: 19%">
-                                        <input class="form-check-input" type="checkbox" id="CheckboxMySQL"
-                                            value="option2">
-                                        <label class="form-check-label" for="inlineCheckbox2">MySQL</label>
+                                        <input class="form-check-input" type="checkbox" id="php">
+                                        <label class="form-check-label" for="inlineCheckbox2">PHP</label>
                                     </div>
                                 </div>
                                 <div>
                                     <div class="form-check form-check-inline" style="width: 19%">
-                                        <input class="form-check-input" type="checkbox" id="CheckboxReact"
-                                            value="option1">
-                                        <label class="form-check-label" for="inlineCheckbox1">React</label>
+                                        <input class="form-check-input" type="checkbox" id="jsc">
+                                        <label class="form-check-label" for="inlineCheckbox1">Java Script</label>
                                     </div>
                                     <div class="form-check form-check-inline" style="width: 19%">
-                                        <input class="form-check-input" type="checkbox" id="CheckboxPython"
-                                            value="option2">
-                                        <label class="form-check-label" for="inlineCheckbox2">Python</label>
+                                        <input class="form-check-input" type="checkbox" id="ruby">
+                                        <label class="form-check-label" for="inlineCheckbox2">Ruby</label>
                                     </div>
                                     <div class="form-check form-check-inline" style="width: 19%">
-                                        <input class="form-check-input" type="checkbox" id="CheckboxC" value="option1">
-                                        <label class="form-check-label" for="inlineCheckbox1">C#</label>
+                                        <input class="form-check-input" type="checkbox" id="assemblyLang">
+                                        <label class="form-check-label" for="inlineCheckbox1">Assembly</label>
                                     </div>
                                     <div class="form-check form-check-inline" style="width: 19%">
-                                        <input class="form-check-input" type="checkbox" id="CheckboxSwift"
-                                            value="option2">
-                                        <label class="form-check-label" for="inlineCheckbox2">Swift</label>
+                                        <input class="form-check-input" type="checkbox" id="sqlLang">
+                                        <label class="form-check-label" for="inlineCheckbox2">SQL</label>
                                     </div>
-                                </div>
-                                <div>
-
                                 </div>
                             </div>
-                            <div></div>
                         </div>
                         <div class="d-flex justify-content-center">
                             <button type="submit" class="btn btn-primary my-button-color-default">정보 수정</button>
