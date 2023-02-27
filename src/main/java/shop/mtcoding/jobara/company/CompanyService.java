@@ -22,6 +22,11 @@ public class CompanyService {
     private CompanyRepository companyRepository;
 
     @Transactional(readOnly = true)
+    public void findByGetUsername(String username) {
+
+    }
+
+    @Transactional(readOnly = true)
     public Company getCompany(CompanyLoginReqDto companyLoginReqDto) {
         Company companyPS = companyRepository.findByUsernameAndPassword(
                 new Company(companyLoginReqDto.getUsername(), companyLoginReqDto.getPassword()));

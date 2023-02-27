@@ -8,8 +8,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import shop.mtcoding.jobara.common.dto.ResponseDto;
+import shop.mtcoding.jobara.common.ex.CustomApiException;
 import shop.mtcoding.jobara.common.util.Verify;
 import shop.mtcoding.jobara.company.dto.CompanyReq.CompanyJoinReqDto;
 import shop.mtcoding.jobara.company.dto.CompanyReq.CompanyLoginReqDto;
@@ -87,5 +90,20 @@ public class CompanyController {
             session.removeAttribute("coPrincipal");
             session.setAttribute("coPrincipal", companyPS);
             return "redirect:/";
+      }
+
+      @GetMapping("/company/usernameSameCheck")
+      public @ResponseBody ResponseDto<?> check(String username) {
+            // 유효성 검사
+            System.out.print("테스트 : " + username);
+            Verify.validateStiring(username, "username 쿼리스트링을 전달해주세요");
+
+            companyService.findByGetUsername(username);
+
+            if (username.equals("ssar2")) {
+                  return new ResponseDto<>(1, "동일한 아이디가 존재합니다", false);
+            } else {
+                  return new ResponseDto<>(1, "해당 아아디로 회원가입 할 수 있습니다", true);
+            }
       }
 }
