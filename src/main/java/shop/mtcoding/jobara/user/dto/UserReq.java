@@ -32,4 +32,11 @@ public class UserReq {
             private Integer career;
       }
 
+      @Getter
+      @Setter
+      public static class UserResumeFormReqDto {
+            private String resumeTitle;
+            private String resumeContent;
+      }
+
 }

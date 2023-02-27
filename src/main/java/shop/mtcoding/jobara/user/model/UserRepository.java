@@ -17,5 +17,7 @@ public interface UserRepository {
 
     public int updateById(User user);
 
+    public int updateResumeById(User user);
+
     public int deleteById(int id);
 }

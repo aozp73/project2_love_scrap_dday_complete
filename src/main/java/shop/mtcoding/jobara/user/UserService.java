@@ -11,6 +11,7 @@ import shop.mtcoding.jobara.common.ex.CustomException;
 import shop.mtcoding.jobara.common.util.Verify;
 import shop.mtcoding.jobara.user.dto.UserReq.UserJoinReqDto;
 import shop.mtcoding.jobara.user.dto.UserReq.UserLoginReqDto;
+import shop.mtcoding.jobara.user.dto.UserReq.UserResumeFormReqDto;
 import shop.mtcoding.jobara.user.dto.UserReq.UserUpdateReqDto;
 import shop.mtcoding.jobara.user.model.User;
 import shop.mtcoding.jobara.user.model.UserRepository;
@@ -63,6 +64,19 @@ public class UserService {
                         userUpdateReqDto.getDetailAddress(),
                         userUpdateReqDto.getTel(),
                         userUpdateReqDto.getCareer()));
+            if (result != 1) {
+                  throw new CustomException("서버에 일시적인 문제가 생겼습니다", HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+            User userPS = userRepository.findById(id);
+            return userPS;
+      }
+
+      @Transactional
+      public User updateUser(UserResumeFormReqDto userResumeFormReqDto, Integer id) {
+            int result = userRepository.updateResumeById(new User(
+                        id,
+                        userResumeFormReqDto.getResumeTitle(),
+                        userResumeFormReqDto.getResumeContent()));
             if (result != 1) {
                   throw new CustomException("서버에 일시적인 문제가 생겼습니다", HttpStatus.INTERNAL_SERVER_ERROR);
             }

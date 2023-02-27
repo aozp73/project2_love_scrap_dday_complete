@@ -47,6 +47,12 @@ public class User {
         this.career = career;
     }
 
+    public User(Integer id, String resumeTitle, String resumeContent) {
+        this.id = id;
+        this.resumeTitle = resumeTitle;
+        this.resumeContent = resumeContent;
+    }
+
     public String getCreatedAtToString() {
         return DateParse.format(createdAt);
     }

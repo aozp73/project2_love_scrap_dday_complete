@@ -36,4 +36,11 @@
                career = #{career}
         where id = #{id} 
     </update>    
+
+    <update id="updateResumeById">
+        update user_tb 
+           set resume_title = #{resumeTitle},
+               resume_content = #{resumeContent}
+        where id = #{id} 
+    </update>    
 </mapper>
