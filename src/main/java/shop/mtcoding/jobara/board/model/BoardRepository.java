@@ -19,7 +19,7 @@ public interface BoardRepository {
 
     public List<BoardListRespDto> findAllWithCompany();
 
-    public List<MyBoardListRespDto> findAllByIdWithCompany();
+    public List<MyBoardListRespDto> findAllByIdWithCompany(int companyId);
 
     public BoardDetailRespDto findByIdWithCompany(int boardId);
 

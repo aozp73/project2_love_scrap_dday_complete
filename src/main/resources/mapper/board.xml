@@ -26,7 +26,7 @@
         SELECT bt.id, bt.title, ct.company_name, ct.id company_id FROM BOARD_TB bt
         inner join company_tb ct
         on bt.company_id = ct.id
-        where company_id = {id}
+        where company_id = #{companyId}
     </select>
 
     <select id="findByIdWithCompany" resultType="shop.mtcoding.jobara.board.dto.BoardResp$BoardDetailRespDto">
