@@ -12,4 +12,14 @@ insert into board_tb(company_id, title, content, career, created_at) values(1, '
 insert into board_tb(company_id, title, content, career, created_at) values(2, '공고제목3','공고내용3', 6, now());
 insert into board_tb(company_id, title, content, career, created_at) values(2, '공고제목4','공고내용4', -1, now());
 
+insert into apply_tb(user_id, board_id, created_at) values(1, 1, now());
+insert into apply_tb(user_id, board_id, created_at) values(2, 1, now());
+insert into apply_tb(user_id, board_id, created_at) values(1, 2, now());
+insert into apply_tb(user_id, board_id, created_at) values(2, 2, now());
+
+insert into tech_tb(user_id, java, c_lang, python, php, jsc, ruby, assembly_lang, sql_lang, created_at) values(1, 1, 0, 0, 0, 1, 0, 0, 1, now());
+insert into tech_tb(user_id, java, c_lang, python, php, jsc, ruby, assembly_lang, sql_lang, created_at) values(2, 1, 0, 0, 1, 0, 0, 1, 0, now());
+insert into tech_tb(board_id, java, c_lang, python, php, jsc, ruby, assembly_lang, sql_lang, created_at) values(1, 1, 1, 0, 1, 0, 1, 0, 0, now());
+insert into tech_tb(board_id, java, c_lang, python, php, jsc, ruby, assembly_lang, sql_lang, created_at) values(2, 1, 0, 1, 1, 1, 0, 1, 1, now());
+
 commit; 

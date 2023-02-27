@@ -15,6 +15,9 @@ public class Board {
     private String title;
     private String content;
     private Integer career;
+    private String jobType;
+    private String education;
+    private String favor;
     private Timestamp createdAt;
 
     public Board(Integer companyId, String title, String content, Integer career) {
