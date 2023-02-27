@@ -27,6 +27,7 @@ public class ApplyService {
     public void insertApply(Integer id, Integer usPrincipalId) {
         Verify.validateObject(boardRepository.findById(id), "존재하지 않는 공고입니다.");
         Apply applyTemp = new Apply(usPrincipalId, id);
+        // 아래 코드 수정 요망
         Verify.validateApiObject(applyRepository.findByUserIdAndBoardId(applyTemp), "이미 지원한 공고입니다.");
         try {
             applyRepository.insert(applyTemp);
@@ -35,8 +36,9 @@ public class ApplyService {
         }
     }
 
-    public List<ListRespDto> getApplyList(Integer id) {
-        return null;
+    @Transactional(readOnly = true)
+    public List<ListRespDto> getApplyList(Integer companyId) {
+        return applyRepository.findByCompanyIdWithBoardAndUser(companyId);
     }
     
 }

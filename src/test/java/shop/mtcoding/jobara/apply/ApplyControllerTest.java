@@ -96,7 +96,7 @@ public class ApplyControllerTest {
         int id = 3;
         // when
         ResultActions resultActions = mvc.perform(
-                get("/company/" + id).session(mockSession));
+                get("/company/apply").session(mockSession));
         Map<String, Object> map = resultActions.andReturn().getModelAndView().getModel();
         List<ListRespDto> applyListDto = (List<ListRespDto>) map.get("applyList");
         String response = om.writeValueAsString(applyListDto);

@@ -34,7 +34,7 @@ public class ApplyController {
         return new ResponseEntity<>(new ResponseDto<>(1, "지원 성공", null), HttpStatus.OK);
     }
 
-    @GetMapping("/company/{id}")
+    @GetMapping("/company/apply")
     public String list(Model model){
         Company coPrincipal = (Company) session.getAttribute("coPrincipal");
         Verify.validateObject(coPrincipal, "로그인이 필요한 기능입니다",HttpStatus.UNAUTHORIZED, "/company/loginForm");
