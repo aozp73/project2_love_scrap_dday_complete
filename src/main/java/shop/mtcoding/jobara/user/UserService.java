@@ -83,4 +83,10 @@ public class UserService {
             User userPS = userRepository.findById(id);
             return userPS;
       }
+
+      @Transactional(readOnly = true)
+      public User checkUsername(String username) {
+            User userPS = userRepository.findByUsername(username);
+            return userPS;
+      }
 }

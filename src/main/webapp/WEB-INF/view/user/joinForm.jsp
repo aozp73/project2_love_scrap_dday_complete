@@ -25,8 +25,9 @@
                     <form action="/user/join" method="post" onsubmit="return valid()">
                         <div class="mb-3">
                             <label class="form-label">아이디</label>
-                            <input name="username" type="text" class="form-control" placeholder="Username">
+                                <input id="username" name="username" type="text" class="form-control" placeholder="Username" onchange="checkUsername()">
                         </div>
+                        <div id="usernameCheck"></div>
                         <div class="mb-3">
                             <label class="form-label">비밀번호</label>
                             <input type="password" name="password" id="password" class="form-control" placeholder="Password"
@@ -74,14 +75,21 @@ Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reprehenderit laudanti
         </div>
 
         <script>
+            let checkUser = false;
             let checkPassword = false;
+
             function valid() {
+                if (checkUser == false) {
+                    alert("유저네임을 확인해주세요");
+                    return false;
+                }
                 if (checkPassword == false) {
                     alert("비밀번호 확인란을 확인해주세요");
                     return false;
                 }
                 return true;
             }
+
             function checkSamePassword() {
                 let password = $("#password").val();
                 let passwordCheck = $("#passwordCheck").val();
@@ -101,6 +109,33 @@ Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reprehenderit laudanti
                     $("#passwordCheckAlert").append(el);
                 }
             }
+
+            function checkUsername(){
+                let username = $("#username").val();
+
+                $.ajax({
+                    type: "get",
+                    url: "/user/checkUsername?username=" + username
+                }).done(res => {
+                    console.log(res);
+                    if (res.code == 1) {
+                        $("#usernameCheck").empty();
+                        let el = `<div class="alert alert-success" id="usernameCheck">
+                                  <strong>`+res.msg+`</strong>
+                                  </div>`;
+                                  $("#usernameCheck").append(el);
+                        checkUser = true;
+                    } else {
+                        $("#usernameCheck").empty();
+                        let el = `<div class="alert alert-danger" id="usernameCheck">
+                                  <strong>`+res.msg+`</strong>
+                                  </div>`;
+                        $("#usernameCheck").append(el);
+                        checkUser = false;
+                    }
+                }).fail(err => { });
+            }
+
         </script>
 
         <%@ include file="../layout/footer.jsp" %>

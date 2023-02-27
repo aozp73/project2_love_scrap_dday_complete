@@ -124,4 +124,17 @@ public class UserController {
             return new ResponseEntity<>(new ResponseDto<>(1, "작성 완료", null), HttpStatus.CREATED);
       }
 
+      @GetMapping(value = "/user/checkUsername")
+      public @ResponseBody ResponseDto<?> checkUsername(String username) {
+            if (username == null || username.isEmpty()) {
+                  return new ResponseDto<>(-1, "유저네임을 입력하세요.", null);
+            }
+            User user = userService.checkUsername(username);
+            if (user != null) {
+                  return new ResponseDto<>(-1, "이미 존재하는 유저네임 입니다.", false);
+            } else {
+                  return new ResponseDto<>(1, "사용가능한 유저네임 입니다.", true);
+            }
+      }
+
 }

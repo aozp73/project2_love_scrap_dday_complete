@@ -11,6 +11,8 @@ public interface UserRepository {
 
     public User findById(int id);
 
+    public User findByUsername(String username);
+
     public User findByUsernameAndPassword(User user);
 
     public int insert(User user);
