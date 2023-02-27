@@ -30,8 +30,8 @@ import shop.mtcoding.jobara.board.dto.BoardResp.BoardDetailRespDto;
 import shop.mtcoding.jobara.board.dto.BoardResp.BoardListRespDto;
 import shop.mtcoding.jobara.board.dto.BoardResp.BoardMainRespDto;
 import shop.mtcoding.jobara.board.dto.BoardResp.BoardUpdateRespDto;
+import shop.mtcoding.jobara.board.dto.BoardResp.MyBoardListRespDto;
 import shop.mtcoding.jobara.company.model.Company;
-import shop.mtcoding.jobara.user.model.User;
 
 @Transactional
 @AutoConfigureMockMvc
@@ -47,29 +47,58 @@ public class BoardControllerTest {
 
     @BeforeEach
     public void setUp() {
-        User user = new User();
-        user.setId(1);
-        user.setUsername("ssar");
-        user.setPassword("1234");
-        user.setEmail("ssar@nate.com");
-        user.setCreatedAt(Timestamp.valueOf(LocalDateTime.now()));
+        Company companyUser = new Company();
+        companyUser.setId(2);
+        companyUser.setUsername("kit");
+        companyUser.setPassword("1234");
+        companyUser.setEmail("kit@nate.com");
+        companyUser.setAddress("부산시 봉구 원동");
+        companyUser.setDetailAddress("72길");
+        companyUser.setTel("01032113211");
+        companyUser.setCompanyName("(주)친친회사");
+        companyUser.setCompanyScale("중견기업");
+        companyUser.setCompanyNumb(122322421111L);
+        companyUser.setCompanyField(" IT업");
+
+        companyUser.setCreatedAt(Timestamp.valueOf(LocalDateTime.now()));
 
         mockSession = new MockHttpSession();
-        mockSession.setAttribute("principal", user);
+        mockSession.setAttribute("coPrincipal", companyUser);
+    }
+
+    @Test
+    public void myBoardList_test() throws Exception {
+        // given
+        // int id = 3; 수정권한 없음 체크완료
+        int id = 2;
+
+        // when
+        ResultActions resultActions = mvc.perform(
+                get("/board/boardList/" + id).session(mockSession));
+
+        Map<String, Object> map = resultActions.andReturn().getModelAndView().getModel();
+        List<MyBoardListRespDto> boardListDto = (List<MyBoardListRespDto>) map.get("myBoardList");
+        String model = om.writeValueAsString(boardListDto);
+        System.out.println("테스트 : " + model);
+
+        // then
+        resultActions.andExpect(status().is2xxSuccessful());
+
     }
 
     @Test
     public void update_test() throws Exception {
         // given
-        // int id = 2; 수정권한 없음 체크완료
-        int id = 1;
+        // int id = 1; 수정권한 없음 체크완료
+        int id = 3;
         String requestBody = "title=테스트제목&content=테스트내용&careerString=1년이상 ~ 3년미만";
 
         // when
         ResultActions resultActions = mvc.perform(
                 post("/board/update/" + id)
                         .content(requestBody)
-                        .contentType(MediaType.APPLICATION_FORM_URLENCODED_VALUE));
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+                        .session(mockSession));
 
         // then
         resultActions.andExpect(status().is3xxRedirection());
@@ -79,11 +108,12 @@ public class BoardControllerTest {
     @Test
     public void updateForm_test() throws Exception {
         // given
-        int id = 1;
+        int id = 3;
 
         // when
         ResultActions resultActions = mvc.perform(
-                get("/board/updateForm/" + id));
+                get("/board/updateForm/" + id)
+                        .session(mockSession));
         Map<String, Object> map = resultActions.andReturn().getModelAndView().getModel();
         BoardUpdateRespDto boardDto = (BoardUpdateRespDto) map.get("boardDetail");
 
@@ -92,7 +122,7 @@ public class BoardControllerTest {
 
         // then
         resultActions.andExpect(status().isOk());
-        assertThat(boardDto.getCareerString()).isEqualTo("1년이상 ~ 3년미만");
+        assertThat(boardDto.getCareerString()).isEqualTo("6년이상");
     }
 
     @Test
@@ -104,7 +134,8 @@ public class BoardControllerTest {
         ResultActions resultActions = mvc.perform(
                 post("/board/save")
                         .content(requestBody)
-                        .contentType(MediaType.APPLICATION_FORM_URLENCODED_VALUE));
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+                        .session(mockSession));
 
         // then
         resultActions.andExpect(status().is3xxRedirection());
@@ -116,13 +147,14 @@ public class BoardControllerTest {
 
         // when
         ResultActions resultActions = mvc.perform(
-                get("/board/saveForm"));
+                get("/board/saveForm")
+                        .session(mockSession));
 
         HttpSession session = resultActions.andReturn().getRequest().getSession();
         Company coPrincipal = (Company) session.getAttribute("coPrincipal");
 
         // then
-        assertThat(coPrincipal.getUsername()).isEqualTo("cos");
+        assertThat(coPrincipal.getUsername()).isEqualTo("kit");
         resultActions.andExpect(status().isOk());
     }
 
