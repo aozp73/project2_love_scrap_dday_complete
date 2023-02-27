@@ -8,6 +8,7 @@ import shop.mtcoding.jobara.board.dto.BoardResp.BoardDetailRespDto;
 import shop.mtcoding.jobara.board.dto.BoardResp.BoardListRespDto;
 import shop.mtcoding.jobara.board.dto.BoardResp.BoardMainRespDto;
 import shop.mtcoding.jobara.board.dto.BoardResp.BoardUpdateRespDto;
+import shop.mtcoding.jobara.board.dto.BoardResp.MyBoardListRespDto;
 
 @Mapper
 public interface BoardRepository {
@@ -17,6 +18,8 @@ public interface BoardRepository {
     public List<BoardMainRespDto> findAllWithCompanyToMain();
 
     public List<BoardListRespDto> findAllWithCompany();
+
+    public List<MyBoardListRespDto> findAllByIdWithCompany();
 
     public BoardDetailRespDto findByIdWithCompany(int boardId);
 

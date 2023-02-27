@@ -22,6 +22,13 @@
         on bt.company_id = ct.id
     </select>
 
+    <select id="findAllByIdWithCompany" resultType="shop.mtcoding.jobara.board.dto.BoardResp$MyBoardListRespDto">
+        SELECT bt.id, bt.title, ct.company_name, ct.id company_id FROM BOARD_TB bt
+        inner join company_tb ct
+        on bt.company_id = ct.id
+        where company_id = {id}
+    </select>
+
     <select id="findByIdWithCompany" resultType="shop.mtcoding.jobara.board.dto.BoardResp$BoardDetailRespDto">
         SELECT bt.id, bt.title, bt.content, bt.career, ct.id company_id, ct.company_name, ct. company_scale, ct.company_field FROM BOARD_TB bt 
         inner join company_tb ct

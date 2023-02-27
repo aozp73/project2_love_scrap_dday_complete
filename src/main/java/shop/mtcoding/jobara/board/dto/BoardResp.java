@@ -15,6 +15,15 @@ public class BoardResp {
 
     @Getter
     @Setter
+    public static class MyBoardListRespDto {
+        private Integer id;
+        private String title;
+        private String companyName;
+        private Integer companyId;
+    }
+
+    @Getter
+    @Setter
     public static class BoardMainRespDto {
         private Integer id;
         private String title;
