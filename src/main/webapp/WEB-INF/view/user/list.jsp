@@ -33,7 +33,7 @@
                                                       신입
                                                       </c:when>
                                                       <c:otherwise>
-                                                      ${user.career}
+                                                      ${user.career} 년차
                                                       </c:otherwise>
                                                       </c:choose>
                                                 </div>
