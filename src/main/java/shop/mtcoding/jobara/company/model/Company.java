@@ -24,12 +24,12 @@ public class Company {
     private String companyField;
     private Timestamp createdAt;
 
-    public Company(String username, String password){
+    public Company(String username, String password) {
         this.username = username;
         this.password = password;
     }
-    
-    public Company(String username, String password, String email, String address, String detailAddress, 
+
+    public Company(String username, String password, String email, String address, String detailAddress,
             Long companyNumb, String companyName) {
         this.username = username;
         this.password = password;
@@ -39,9 +39,9 @@ public class Company {
         this.companyNumb = companyNumb;
         this.companyName = companyName;
     }
-    
+
     public Company(Integer id, String password, String email, String address, String detailAddress,
-             String companyName,  String companyScale, String companyField, String tel) {
+            String companyName, String companyScale, String companyField, String tel, String profile) {
         this.id = id;
         this.password = password;
         this.email = email;
@@ -51,5 +51,6 @@ public class Company {
         this.tel = tel;
         this.companyScale = companyScale;
         this.companyField = companyField;
+        this.profile = profile;
     }
 }

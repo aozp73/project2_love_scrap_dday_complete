@@ -35,7 +35,8 @@
                detail_address = #{detailAddress}, 
                tel = #{tel}, 
                password = #{password}, 
-               email = #{email}
+               email = #{email},
+               profile = #{profile}
         where id = #{id} 
     </update>    
 </mapper>

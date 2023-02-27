@@ -36,6 +36,7 @@ public class BoardController {
       public String home(Model model) {
             List<BoardMainRespDto> boardListPS = boardService.getListToMain();
             model.addAttribute("boardMainList", boardListPS);
+
             return "board/home";
       }
 

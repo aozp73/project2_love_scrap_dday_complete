@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import shop.mtcoding.jobara.common.ex.CustomException;
+import shop.mtcoding.jobara.common.util.PathUtil;
 import shop.mtcoding.jobara.common.util.Verify;
 import shop.mtcoding.jobara.company.dto.CompanyReq.CompanyJoinReqDto;
 import shop.mtcoding.jobara.company.dto.CompanyReq.CompanyLoginReqDto;
@@ -40,13 +42,17 @@ public class CompanyService {
     }
 
     @Transactional
-    public Company updateCompany(CompanyUpdateReqDto companyUpdateReqDto, Integer coPrincipalId) {
+    public Company updateCompany(CompanyUpdateReqDto companyUpdateReqDto, Integer coPrincipalId,
+            MultipartFile profile) {
+        String uuidImageName = PathUtil.writeImageFile(profile);
+
         Company companyTemp = new Company(
                 coPrincipalId, companyUpdateReqDto.getPassword(), companyUpdateReqDto.getEmail(),
                 companyUpdateReqDto.getAddress(), companyUpdateReqDto.getDetailAddress(),
                 companyUpdateReqDto.getCompanyName(), companyUpdateReqDto.getCompanyScale(),
                 companyUpdateReqDto.getCompanyField(),
-                companyUpdateReqDto.getTel());
+                companyUpdateReqDto.getTel(), uuidImageName);
+
         try {
             companyRepository.updateById(companyTemp);
         } catch (Exception e) {

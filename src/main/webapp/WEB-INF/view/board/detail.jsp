@@ -59,7 +59,7 @@
                     <div class="row d-flex justify-content-center mb-3 mt-3 pt-2" style="height: 80px; flex: 1 1 auto;">
                         <div class="col-md-1"></div>
                         <div class="col-md-7">
-                            <img class="card-img-top" style="max-width: 170px;" src="/images/samplelogo.png"
+                            <img class="card-img-top" style="max-width: 170px;" src="${board.profile == null ? "/images/defaultProfile.png" : board.profile}"
                                 alt="Card image">
                         </div>
                         <div class="col-md-1"></div>

@@ -11,6 +11,8 @@ public class BoardResp {
         private String title;
         private String companyName;
         private Integer companyId;
+        private String profile;
+
     }
 
     @Getter
@@ -20,6 +22,7 @@ public class BoardResp {
         private String title;
         private String companyName;
         private Integer companyId;
+        private String profile;
     }
 
     @Getter
@@ -29,6 +32,7 @@ public class BoardResp {
         private String title;
         private String companyName;
         private Integer companyId;
+        private String profile;
     }
 
     @Getter
@@ -54,6 +58,7 @@ public class BoardResp {
         private String companyName;
         private String companyScale;
         private String companyField;
+        private String profile;
     }
 
 }

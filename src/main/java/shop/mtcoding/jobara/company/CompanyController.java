@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 import shop.mtcoding.jobara.common.util.Verify;
 import shop.mtcoding.jobara.company.dto.CompanyReq.CompanyJoinReqDto;
@@ -71,7 +72,7 @@ public class CompanyController {
       }
 
       @PostMapping("/company/update")
-      public String update(CompanyUpdateReqDto companyUpdateReqDto) {
+      public String update(CompanyUpdateReqDto companyUpdateReqDto, MultipartFile profile) {
             Company coPrincipal = (Company) session.getAttribute("coPrincipal");
             Verify.validateObject(coPrincipal, "로그인이 필요합니다.", HttpStatus.UNAUTHORIZED, "/company/loginForm");
             Verify.validateStiring(companyUpdateReqDto.getAddress(), "주소를 입력하세요.");
@@ -82,7 +83,7 @@ public class CompanyController {
             Verify.validateStiring(companyUpdateReqDto.getEmail(), "이메일을 입력하세요.");
             Verify.validateStiring(companyUpdateReqDto.getCompanyName(), "회사 이름을 입력하세요.");
             Verify.validateStiring(companyUpdateReqDto.getTel(), "전화번호를 입력하세요.");
-            Company companyPS = companyService.updateCompany(companyUpdateReqDto, coPrincipal.getId());
+            Company companyPS = companyService.updateCompany(companyUpdateReqDto, coPrincipal.getId(), profile);
             session.removeAttribute("coPrincipal");
             session.setAttribute("coPrincipal", companyPS);
             return "redirect:/";
