@@ -113,8 +113,8 @@ public class BoardController {
             return "redirect:/board/list";
       }
 
-      @GetMapping("/company/{id}/board")
-      public String myBoardList(@PathVariable int id) {
+      @GetMapping("/board/boardList")
+      public String myBoardList() {
             return "board/myBoardList";
       }
 

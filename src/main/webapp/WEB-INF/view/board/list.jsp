@@ -63,6 +63,7 @@
                 </ul>
             </nav>
         </div>
+        </div>
 
         <script>
             function mouseEnterImages(e) {
