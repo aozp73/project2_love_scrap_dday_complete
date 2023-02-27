@@ -33,6 +33,10 @@
         select * from board_tb where id = #{id}
     </select>    
 
+    <select id="findByIdForUpdate" resultType="shop.mtcoding.jobara.dto.board.BoardResp$BoardUpdateRespDto">
+        select * from board_tb where id = #{id}
+    </select>
+
     <insert id="insert">
         insert into board_tb (company_id, title, content, career, created_at) 
         values(#{companyId}, #{title}, #{content}, #{career}, now())

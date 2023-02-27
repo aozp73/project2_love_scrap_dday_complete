@@ -23,4 +23,11 @@ public class Board {
         this.content = content;
         this.career = career;
     }
+
+    public Board(String title, String content, Integer career, Integer id) {
+        this.id = id;
+        this.title = title;
+        this.content = content;
+        this.career = career;
+    }
 }

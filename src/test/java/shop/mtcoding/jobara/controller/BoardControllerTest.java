@@ -26,10 +26,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import shop.mtcoding.jobara.dto.board.BoardReq.BoardInsertReqDto;
 import shop.mtcoding.jobara.dto.board.BoardResp.BoardDetailRespDto;
 import shop.mtcoding.jobara.dto.board.BoardResp.BoardListRespDto;
 import shop.mtcoding.jobara.dto.board.BoardResp.BoardMainRespDto;
+import shop.mtcoding.jobara.dto.board.BoardResp.BoardUpdateRespDto;
 import shop.mtcoding.jobara.model.Company;
 import shop.mtcoding.jobara.model.User;
 
@@ -56,6 +56,43 @@ public class BoardControllerTest {
 
         mockSession = new MockHttpSession();
         mockSession.setAttribute("principal", user);
+    }
+
+    @Test
+    public void update_test() throws Exception {
+        // given
+        // int id = 3; 수정권한 없음 체크완료
+        int id = 1;
+        String requestBody = "title=테스트제목&content=테스트내용&careerString=1년이상 ~ 3년미만";
+
+        // when
+        ResultActions resultActions = mvc.perform(
+                post("/board/update/" + id)
+                        .content(requestBody)
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED_VALUE));
+
+        // then
+        resultActions.andExpect(status().is3xxRedirection());
+
+    }
+
+    @Test
+    public void updateForm_test() throws Exception {
+        // given
+        int id = 1;
+
+        // when
+        ResultActions resultActions = mvc.perform(
+                get("/board/updateForm/" + id));
+        Map<String, Object> map = resultActions.andReturn().getModelAndView().getModel();
+        BoardUpdateRespDto boardDto = (BoardUpdateRespDto) map.get("boardDetail");
+
+        // String model = om.writeValueAsString(boardDto);
+        // System.out.println("테스트 : " + model);
+
+        // then
+        resultActions.andExpect(status().isOk());
+        assertThat(boardDto.getCareerString()).isEqualTo("1년이상 ~ 3년미만");
     }
 
     @Test

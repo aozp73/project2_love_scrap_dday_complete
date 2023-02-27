@@ -16,4 +16,14 @@ public class BoardReq {
         private String content;
         private String career;
     }
+
+    @Getter
+    @Setter
+    public static class BoardUpdateReqDto {
+        private Integer id;
+        private String title;
+        private String content;
+        private String careerString;
+        private Integer career;
+    }
 }

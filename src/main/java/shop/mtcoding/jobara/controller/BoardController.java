@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import shop.mtcoding.jobara.dto.board.BoardReq.BoardInsertReqDto;
+import shop.mtcoding.jobara.dto.board.BoardReq.BoardUpdateReqDto;
 import shop.mtcoding.jobara.dto.board.BoardResp.BoardDetailRespDto;
 import shop.mtcoding.jobara.dto.board.BoardResp.BoardListRespDto;
 import shop.mtcoding.jobara.dto.board.BoardResp.BoardMainRespDto;
+import shop.mtcoding.jobara.dto.board.BoardResp.BoardUpdateRespDto;
 import shop.mtcoding.jobara.ex.CustomException;
 import shop.mtcoding.jobara.model.Company;
 import shop.mtcoding.jobara.model.CompanyRepository;
@@ -66,6 +68,42 @@ public class BoardController {
             Verify.validateObject(coPrincipal, "로그인이 필요한 페이지입니다", HttpStatus.BAD_REQUEST, "/company/loginForm");
 
             return "board/saveForm";
+      }
+
+      @GetMapping("/board/updateForm/{id}")
+      public String updateForm(Model model, @PathVariable int id) {
+            // Mock
+            Company mockCompanyUser = companyRepository.findById(1);
+            session.setAttribute("coPrincipal", mockCompanyUser);
+            Company coPrincipal = (Company) session.getAttribute("coPrincipal");
+
+            // 인증체크
+            Verify.validateObject(coPrincipal, "로그인이 필요한 페이지입니다", HttpStatus.BAD_REQUEST, "/company/loginForm");
+
+            BoardUpdateRespDto boardDetailPS = boardService.getDetailForUpdate(id, coPrincipal.getId());
+            model.addAttribute("boardDetail", boardDetailPS);
+
+            return "board/updateForm";
+      }
+
+      @PostMapping("/board/update/{id}")
+      public String update(@PathVariable int id, BoardUpdateReqDto boardUpdateReqDto) {
+            // Mock
+            Company mockCompanyUser = companyRepository.findById(1);
+            session.setAttribute("coPrincipal", mockCompanyUser);
+            Company coPrincipal = (Company) session.getAttribute("coPrincipal");
+
+            // 인증
+            Verify.validateObject(coPrincipal, "로그인이 필요한 페이지입니다", HttpStatus.BAD_REQUEST, "/company/loginForm");
+
+            // 유효성
+            Verify.validateStiring(boardUpdateReqDto.getTitle(), "제목을 입력하세요");
+            Verify.validateStiring(boardUpdateReqDto.getContent(), "내용을 입력하세요");
+            Verify.validateStiring(boardUpdateReqDto.getCareerString(), "경력을 입력하세요");
+
+            boardService.updateBoard(boardUpdateReqDto, coPrincipal.getId());
+
+            return "redirect:/board/" + id;
       }
 
       @PostMapping("/board/save")
