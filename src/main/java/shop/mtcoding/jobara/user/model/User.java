@@ -18,6 +18,7 @@ public class User {
     private String address;
     private String detailAddress;
     private String tel;
+    private String profile;
     private String realName;
     private Integer career;
     private String resumeTitle;

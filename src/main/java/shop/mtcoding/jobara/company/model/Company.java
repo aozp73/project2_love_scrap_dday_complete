@@ -17,6 +17,7 @@ public class Company {
     private String address;
     private String detailAddress;
     private String tel;
+    private String profile;
     private String companyName;
     private String companyScale;
     private Long companyNumb;
