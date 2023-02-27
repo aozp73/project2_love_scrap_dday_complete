@@ -10,7 +10,14 @@
                         <div class="col-12 p-3">
                             <div class="row">
                                 <div class="col-sm-5 m-3">
-                                    <h3>${user.realName}</h3>
+                                    <h3><c:choose>
+                                            <c:when test="${user.realName == null}">
+                                                비공개
+                                            </c:when>
+                                            <c:otherwise>
+                                                ${user.realName}
+                                            </c:otherwise>
+                                        </c:choose></h3>
                                 </div>
                                 <div class="col-sm-5">
                                     <img src="/images/newjeans.jpg" class="rounded-circle"
@@ -34,8 +41,22 @@
                                             주소 : 
                                         </div>
                                         <div class="col-9 ps-0">
-                                            ${user.address} <br>
-                                            ${user.detailAddress}
+                                            <c:choose>
+                                                <c:when test="${user.address == null}">
+                                                    비공개
+                                                </c:when>
+                                                <c:otherwise>
+                                                    ${user.realName}
+                                                </c:otherwise>
+                                            </c:choose><br>
+                                            <c:choose>
+                                                <c:when test="${user.detailAddress == null}">
+                                                    비공개
+                                                </c:when>
+                                                <c:otherwise>
+                                                    ${user.detailAddress}
+                                                </c:otherwise>
+                                            </c:choose>
                                         </div>
                                     </div>
                                 </li>
@@ -79,7 +100,14 @@
                                             전화번호 :
                                         </div>
                                         <div class="col-8">
-                                            ${user.tel}
+                                            <c:choose>
+                                                <c:when test="${user.tel == null}">
+                                                    비공개
+                                                </c:when>
+                                                <c:otherwise>
+                                                    ${user.tel}
+                                                </c:otherwise>
+                                            </c:choose> 
                                         </div>
                                     </div>
                                 </li>
@@ -89,7 +117,14 @@
                                             email :
                                         </div>
                                         <div class="col-8">
-                                            ${user.email}
+                                            <c:choose>
+                                                <c:when test="${user.email == null}">
+                                                    비공개
+                                                </c:when>
+                                                <c:otherwise>
+                                                    ${user.email}
+                                                </c:otherwise>
+                                            </c:choose>
                                             <!-- 이메일이 길어질경우 후에 간격 수정가능 -->
                                         </div>
                                     </div>
@@ -105,9 +140,23 @@
                     <div class="p-3 m-3 my-border-color-default rounded-1">
                         <h2 class="p-3"><b>지원자 자기 소개</b></h2>
                         <hr>
-                        <h5>${user.resumeTitle}</h5>
+                        <h5><c:choose>
+                                <c:when test="${user.resumeTitle == null}">
+                                    비공개
+                                </c:when>
+                                <c:otherwise>
+                                    ${user.resumeTitle}
+                                </c:otherwise>
+                            </c:choose></h5>
 
-                        <p>${user.resumeContent}</p>
+                        <p><c:choose>
+                                <c:when test="${user.resumeContent == null}">
+                                    비공개
+                                </c:when>
+                                <c:otherwise>
+                                    ${user.resumeContent}
+                                </c:otherwise>
+                            </c:choose></p>
                         
                     </div>
                     <div class="p-3 m-3 my-border-color-default rounded-1">

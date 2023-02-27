@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -112,8 +113,9 @@ public class UserControllerTest {
       public void detail_test() throws Exception {
             // given
             int id = 1;
+
             // when
-            ResultActions resultActions = mvc.perform(get("/user/1"));
+            ResultActions resultActions = mvc.perform(get("/user/id"));
             Map<String, Object> map = resultActions.andReturn().getModelAndView().getModel();
             User user = (User) map.get("user");
             // then
@@ -121,4 +123,5 @@ public class UserControllerTest {
             resultActions.andExpect(status().is2xxSuccessful());
 
       }
+
 }
