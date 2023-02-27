@@ -6,15 +6,20 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import shop.mtcoding.jobara.common.dto.ResponseDto;
 import shop.mtcoding.jobara.common.util.Verify;
 import shop.mtcoding.jobara.user.dto.UserReq.UserJoinReqDto;
 import shop.mtcoding.jobara.user.dto.UserReq.UserLoginReqDto;
+import shop.mtcoding.jobara.user.dto.UserReq.UserResumeFormReqDto;
 import shop.mtcoding.jobara.user.dto.UserReq.UserUpdateReqDto;
 import shop.mtcoding.jobara.user.model.User;
 
@@ -31,7 +36,6 @@ public class UserController {
       public String detail(@PathVariable int id, Model model) {
             User userPS = userService.getUser(id);
             model.addAttribute("user", userPS);
-            
             return "user/detail";
       }
 
@@ -93,6 +97,31 @@ public class UserController {
             Verify.validateObject(userPS, "유저 정보를 갱신하는데 일시적인 문제가 생겼습니다", HttpStatus.INTERNAL_SERVER_ERROR);
             session.setAttribute("usPrincipal", userPS);
             return "redirect:/";
+      }
+
+      @GetMapping("/user/{id}/resumeForm")
+      public String resumeForm(@PathVariable int id, Model model) {
+            User usPrincipal = (User) session.getAttribute("usPrincipal");
+            Verify.validateObject(usPrincipal, "로그인이 필요합니다.");
+
+            User userPS = userService.getUser(id);
+            model.addAttribute("user", userPS);
+            return "user/resumeForm";
+      }
+
+      @PostMapping("/user/{id}/resume")
+      public @ResponseBody ResponseEntity<?> resume(@RequestBody UserResumeFormReqDto userResumeFormReqDto,
+                  @PathVariable int id) {
+            User usPrincipal = (User) session.getAttribute("usPrincipal");
+            Verify.validateObject(usPrincipal, "로그인이 필요합니다.");
+
+            User userPS = userService.updateUser(userResumeFormReqDto, id);
+
+            session.removeAttribute("usPrincipal");
+            Verify.validateObject(userPS, "이력서 정보를 갱신하는데 일시적인 문제가 생겼습니다", HttpStatus.INTERNAL_SERVER_ERROR);
+            session.setAttribute("usPrincipal", userPS);
+
+            return new ResponseEntity<>(new ResponseDto<>(1, "작성 완료", null), HttpStatus.CREATED);
       }
 
 }
