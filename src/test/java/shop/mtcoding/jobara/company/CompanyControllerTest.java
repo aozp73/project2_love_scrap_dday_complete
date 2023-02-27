@@ -1,7 +1,9 @@
 package shop.mtcoding.jobara.company;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.sql.Timestamp;
@@ -146,5 +148,22 @@ public class CompanyControllerTest {
         // verify
         resultActions.andExpect(status().is3xxRedirection());
         assertThat(coPrincipal.getPassword()).isEqualTo(passwordVal);
+    }
+
+    @Test
+    public void usernameSameCheck_test() throws Exception {
+        // given
+        // String username = "cos"; 중복 테스트 완료
+        String username = "tes1";
+
+        // when
+        ResultActions resultActions = mvc.perform(get("/company/usernameSameCheck?username=" + username));
+
+        // String responseBody =
+        // resultActions.andReturn().getResponse().getContentAsString();
+        // System.out.println("테스트 :" + responseBody);
+
+        // resultActions.andExpect(jsonPath("$.msg").value("이미 존재하는 유저네임 입니다."));
+        resultActions.andExpect(status().isOk());
     }
 }

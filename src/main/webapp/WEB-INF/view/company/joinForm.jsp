@@ -43,8 +43,10 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label">아이디</label>
-                            <input type="text" name="username" class="form-control" placeholder="Username">
+                            <input id="username" type="text" name="username" class="form-control" placeholder="Username"
+                                onchange="checkUsername()">
                         </div>
+                        <div id="usernameCheck"></div>
                         <div class="mb-3">
                             <label class="form-label">비밀번호</label>
                             <input type="password" name="password" id="password" class="form-control"
@@ -92,14 +94,56 @@ Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reprehenderit laudanti
         </div>
 
         <script>
+
+            // 아이디 중복확인 
+            let checkUser = false;
+
+            function checkUsername() {
+                let username = $("#username").val();
+
+                $.ajax({
+                    type: "get",
+                    url: "/company/usernameSameCheck?username=" + username,
+                }).done((res) => {
+                    if (res.data == true) {
+                        $("#usernameCheck").empty();
+                        let el = `<div class="alert alert-success" id="usernameCheck">
+                                  <strong>`+ res.msg + `</strong>
+                                  </div>`;
+                        $("#usernameCheck").append(el);
+                        checkUser = true;
+                    } else {
+                        $("#usernameCheck").empty();
+                        let el = `<div class="alert alert-danger" id="usernameCheck">
+                                  <strong>`+ res.msg + `</strong>
+                                  </div>`;
+                        $("#usernameCheck").append(el);
+                        checkUser = false;
+                    }
+                }).fail((err) => {
+
+                });
+            }
+            // ~ 아이디 중복확인  
+
+
+            // 비밀번호 확인 체크
             let checkPassword = false;
+
             function valid() {
+                if (checkUser == false) {
+                    alert("유저네임을 확인해주세요")
+                    return false;
+                }
+
                 if (checkPassword == false) {
                     alert("비밀번호 확인란을 확인해주세요");
                     return false;
                 }
+
                 return true;
             }
+
             function checkSamePassword() {
                 let password = $("#password").val();
                 let passwordCheck = $("#passwordCheck").val();
@@ -119,6 +163,7 @@ Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reprehenderit laudanti
                     $("#passwordCheckAlert").append(el);
                 }
             }
+            // ~ 비밀번호 확인 체크
         </script>
 
         <%@ include file="../layout/footer.jsp" %>

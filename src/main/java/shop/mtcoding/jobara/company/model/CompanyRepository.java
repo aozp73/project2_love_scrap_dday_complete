@@ -13,6 +13,8 @@ public interface CompanyRepository {
 
     public Company findByUsernameAndPassword(Company company);
 
+    public Company findByUsername(String username);
+
     public int insert(Company company);
 
     public int updateById(Company company);

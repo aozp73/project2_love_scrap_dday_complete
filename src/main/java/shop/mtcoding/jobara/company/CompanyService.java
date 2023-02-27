@@ -1,11 +1,14 @@
 package shop.mtcoding.jobara.company;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import shop.mtcoding.jobara.common.ex.CustomApiException;
 import shop.mtcoding.jobara.common.ex.CustomException;
 import shop.mtcoding.jobara.common.util.PathUtil;
 import shop.mtcoding.jobara.common.util.Verify;
@@ -20,6 +23,12 @@ public class CompanyService {
 
     @Autowired
     private CompanyRepository companyRepository;
+
+    @Transactional(readOnly = true)
+    public Company checkUsername(String username) {
+        Company companyPS = companyRepository.findByUsername(username);
+        return companyPS;
+    }
 
     @Transactional(readOnly = true)
     public Company getCompany(CompanyLoginReqDto companyLoginReqDto) {
