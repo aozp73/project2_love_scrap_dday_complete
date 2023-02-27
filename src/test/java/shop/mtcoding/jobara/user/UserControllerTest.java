@@ -152,4 +152,18 @@ public class UserControllerTest {
 
       }
 
+      @Test
+      public void checkUsername_test() throws Exception {
+            // given
+            String username = "ssar";
+
+            // when
+            ResultActions resultActions = mvc.perform(get("/user/checkUsername?username=" + username));
+
+            // then
+            resultActions.andExpect(jsonPath("$.code").value(-1));
+            resultActions.andExpect(jsonPath("$.msg").value("이미 존재하는 유저네임 입니다."));
+
+      }
+
 }
