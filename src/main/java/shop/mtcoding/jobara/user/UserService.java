@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import shop.mtcoding.jobara.common.ex.CustomException;
+import shop.mtcoding.jobara.common.util.PathUtil;
 import shop.mtcoding.jobara.common.util.Verify;
 import shop.mtcoding.jobara.user.dto.UserReq.UserJoinReqDto;
 import shop.mtcoding.jobara.user.dto.UserReq.UserLoginReqDto;
@@ -54,7 +56,8 @@ public class UserService {
       }
 
       @Transactional
-      public User updateUser(UserUpdateReqDto userUpdateReqDto, Integer id) {
+      public User updateUser(UserUpdateReqDto userUpdateReqDto, MultipartFile profile, Integer id) {
+            String uuidImageName = PathUtil.writeImageFile(profile);
             int result = userRepository.updateById(new User(
                         id,
                         userUpdateReqDto.getUsername(),
@@ -63,6 +66,7 @@ public class UserService {
                         userUpdateReqDto.getAddress(),
                         userUpdateReqDto.getDetailAddress(),
                         userUpdateReqDto.getTel(),
+                        uuidImageName,
                         userUpdateReqDto.getCareer()));
             if (result != 1) {
                   throw new CustomException("서버에 일시적인 문제가 생겼습니다", HttpStatus.INTERNAL_SERVER_ERROR);

@@ -20,7 +20,8 @@
                                         </c:choose></h3>
                                 </div>
                                 <div class="col-sm-5">
-                                    <img src="/images/newjeans.jpg" class="rounded-circle"
+                                    <img src="${user.profile == null ? " /images/newjeans.jpg" :
+                                            user.profile}" class="rounded-circle"
                                         style="max-width: 100%; height: auto;">
                                 </div>
                             </div>

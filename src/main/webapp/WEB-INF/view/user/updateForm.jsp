@@ -8,24 +8,45 @@
             </div>
             <div class="justify-content-center d-flex">
                 <div class="my-border-color-default px-3 py-3" style="width: 50%; ">
-                    <form action="/user/update" method="post" onsubmit="return valid()">
-                        <div class="mb-3">
-                            <label for="exampleInputPassword" class="form-label">변경 비밀번호</label>
-                            <input type="password" name="password" id="password" class="form-control"
-                                value="${coPrincipal.password}" placeholder="Password" onchange="checkSamePassword()">
+                    <form action="/user/update" method="post" enctype="multipart/form-data" onsubmit="return valid()">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="mb-3">
+                                <label for="exampleInputPassword" class="form-label">변경 비밀번호</label>
+                                <input type="password" name="password" id="password" class="form-control"
+                                    value="${coPrincipal.password}" placeholder="Password" onchange="checkSamePassword()">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">비밀번호확인</label>
+                                <input type="password" class="form-control" id="passwordCheck" placeholder="Confirm Password"
+                                    onchange="checkSamePassword()">
+                            </div>
+                            <div id="passwordCheckAlert">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">이메일</label>
+                                <input name="email" type="email" class="form-control" placeholder="Email"
+                                    value="${user.email}">
+                            </div>
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label">비밀번호확인</label>
-                            <input type="password" class="form-control" id="passwordCheck" placeholder="Confirm Password"
-                                onchange="checkSamePassword()">
+                        <div class="col-md-7">
+                            <div class="d-flex justify-content-center">
+                                <div class="form-group d-flex justify-content-center my-thumbnail-color-default "
+                                    style="height: 150px; width: 150px; align-items: center">
+
+                                <img id="imagePreview" src="${usPrincipal.profile == null ? "/images/defaultProfile.png" : usPrincipal.profile}" alt="Current Photo"
+                                                class="img-fluid" style="height:80px; ">
+                                </div>
+                            </div>
+
+                            <div class="form-group mt-4 d-flex justify-content-center">
+                                <input type="file" class="form-control" id="thumbnail" name="profile"
+                                            onchange="chooseImage(this)" style="width: 250px; height: 35px; ">
+                            </div>
                         </div>
-                        <div id="passwordCheckAlert">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">이메일</label>
-                            <input name="email" type="email" class="form-control" placeholder="Email"
-                                value="${user.email}">
-                        </div>
+                    </div>
+
+
                         <div class="mb-3">
                             <label class="form-label">주소</label>
                             <input name="address" type="text" class="form-control" placeholder="Address"
@@ -128,6 +149,27 @@
                                               <strong>비밀번호가 다릅니다!</strong>
                                               </div>`;
                             $("#passwordCheckAlert").append(el);
+                        }
+                    }
+                </script>
+                <script>
+                    function chooseImage(obj) {
+                    // console.log(obj);
+                    // console.log(obj.files);
+                    let f = obj.files[0];
+
+                    if (!f.type.match("image.*")) {
+                        alert("이미지를 등록해야 합니다.");
+                        return;
+                    }
+
+                    let reader = new FileReader();
+                    reader.readAsDataURL(f);
+
+                    reader.onload = function (e) {
+                            console.log(e);
+                            console.log(e.target.result);
+                            $("#imagePreview").attr("src", e.target.result);
                         }
                     }
                 </script>
