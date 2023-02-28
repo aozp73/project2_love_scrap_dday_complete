@@ -20,6 +20,7 @@ public class User {
     private String tel;
     private String profile;
     private String realName;
+    private String education;
     private Integer career;
     private String resumeTitle;
     private String resumeContent;
@@ -37,7 +38,7 @@ public class User {
     }
 
     public User(Integer id, String username, String password, String email,
-            String address, String detailAddress, String tel, String profile, Integer career){
+            String address, String detailAddress, String tel, String profile, Integer career) {
         this.id = id;
         this.username = username;
         this.password = password;
