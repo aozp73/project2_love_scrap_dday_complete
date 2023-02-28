@@ -48,6 +48,11 @@
 
 
                         <div class="mb-3">
+                            <label class="form-label">학력</label>
+                            <input name="education" type="text" class="form-control" placeholder="Education"
+                                value="${user.education}">
+                        </div>
+                        <div class="mb-3">
                             <label class="form-label">주소</label>
                             <input name="address" type="text" class="form-control" placeholder="Address"
                                 value="${user.address}">
