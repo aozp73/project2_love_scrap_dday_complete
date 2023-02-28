@@ -47,7 +47,7 @@
             };
             $.ajax({
                 type: "post",
-                url: "/user/resume",
+                url: "/user/"+id+"/resume",
                 data: JSON.stringify(data),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json"

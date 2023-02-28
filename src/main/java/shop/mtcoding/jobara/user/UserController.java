@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import shop.mtcoding.jobara.common.dto.ResponseDto;
 import shop.mtcoding.jobara.common.util.Verify;
@@ -85,13 +86,13 @@ public class UserController {
       }
 
       @PostMapping("/user/update")
-      public String update(UserUpdateReqDto userUpdateReqDto) {
+      public String update(UserUpdateReqDto userUpdateReqDto, MultipartFile profile) {
             User usPrincipal = (User) session.getAttribute("usPrincipal");
             Verify.validateObject(usPrincipal, "로그인이 필요합니다.");
             Verify.validateStiring(userUpdateReqDto.getPassword(), "암호를 입력하세요.");
             Verify.validateStiring(userUpdateReqDto.getEmail(), "이메일을 입력하세요.");
 
-            User userPS = userService.updateUser(userUpdateReqDto, usPrincipal.getId());
+            User userPS = userService.updateUser(userUpdateReqDto, profile, usPrincipal.getId());
 
             session.removeAttribute("usPrincipal");
             Verify.validateObject(userPS, "유저 정보를 갱신하는데 일시적인 문제가 생겼습니다", HttpStatus.INTERNAL_SERVER_ERROR);

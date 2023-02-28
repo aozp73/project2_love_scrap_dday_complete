@@ -21,7 +21,8 @@
                               <div id="user${user.id}" onmouseenter="mouseEnterImages(this)"
                                     onmouseleave="mouseLeaveImages(this)" class="card col-lg-12">
                                     <a href="/user/${user.id}" class="no_under_line_link">
-                                          <img class="card-img-top" style="height: 100px;" src="/images/newjeans.jpg"
+                                          <img class="card-img-top" style="height: 100px;" src="${user.profile == null ? " /images/newjeans.jpg" :
+                                            user.profile}"
                                                 alt="Card image">
                                           <div class="card-body">
                                                 <div class="my-text-ellipsis">

@@ -37,7 +37,7 @@ public class User {
     }
 
     public User(Integer id, String username, String password, String email,
-            String address, String detailAddress, String tel, Integer career) {
+            String address, String detailAddress, String tel, String profile, Integer career){
         this.id = id;
         this.username = username;
         this.password = password;
@@ -45,6 +45,7 @@ public class User {
         this.address = address;
         this.detailAddress = detailAddress;
         this.tel = tel;
+        this.profile = profile;
         this.career = career;
     }
 
