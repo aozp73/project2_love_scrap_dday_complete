@@ -49,8 +49,12 @@
 
                         <div class="mb-3">
                             <label class="form-label">학력</label>
-                            <input name="education" type="text" class="form-control" placeholder="Education"
-                                value="${user.education}">
+                            <select name="education" type="text" class="form-select">
+                                <option>비공개</option>
+                                <option>고졸</option>
+                                <option>2~3년제 대졸</option>
+                                <option>4년제 대졸</option>
+                            </select>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">주소</label>
