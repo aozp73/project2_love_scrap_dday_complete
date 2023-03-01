@@ -3,44 +3,30 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="shop.mtcoding.jobara.company.model.CompanyRepository">
+<mapper namespace="shop.mtcoding.examtest.company.model.CompanyRepository">
 
-    <select id="findAll" resultType="shop.mtcoding.jobara.company.model.Company">
+    <select id="findAll" resultType="shop.mtcoding.examtest.company.model.Company">
         select * from company_tb
     </select>
 
-    <select id="findById" resultType="shop.mtcoding.jobara.company.model.Company">
-        select * from company_tb where id = #{id}
-    </select>    
-
-    <select id="findByUsernameAndPassword" resultType="shop.mtcoding.jobara.company.model.Company">
-        select * from company_tb where username = #{username} and password = #{password}
-    </select>    
-
-    <select id="findByUsername" resultType="shop.mtcoding.jobara.company.model.Company">
-        select * from company_tb where username = #{username}
-    </select>    
+    <select id="findByUserId" resultType="shop.mtcoding.examtest.company.model.Company">
+        select * from company_tb where user_id = #{userId}
+    </select>
 
     <insert id="insert">
-        insert into company_tb (username, password, email, address, detail_address, company_name, company_numb, created_at) 
-        values(#{username}, #{password}, #{email}, #{address}, #{detailAddress}, #{companyName}, #{companyNumb}, now())
+        insert into company_tb (user_id, company_name, company_numb) 
+        values(#{userId}, #{companyName}, #{companyNumb})
     </insert>    
 
-    <delete id="deleteById">
-        delete from company_tb where id = #{id} 
-    </delete>    
-
-    <update id="updateById">
-        update company_tb 
+    <update id="updateByUserId">
+        update company_tb
            set company_name = #{companyName}, 
                company_scale = #{companyScale}, 
-               company_field = #{companyField}, 
-               address = #{address}, 
-               detail_address = #{detailAddress}, 
-               tel = #{tel}, 
-               password = #{password}, 
-               email = #{email},
-               profile = #{profile}
-        where id = #{id} 
+               company_field = #{companyField},
+        where user_id = #{userId}
     </update>    
+
+    <delete id="deleteByUserId">
+        delete from company_tb where user_id = #{userId} 
+    </delete>    
 </mapper>

@@ -3,28 +3,20 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="shop.mtcoding.jobara.user.model.UserRepository">
+<mapper namespace="shop.mtcoding.examtest.user.model.UserRepository">
 
-    <select id="findAll" resultType="shop.mtcoding.jobara.user.model.User">
+    <select id="findAll" resultType="shop.mtcoding.examtest.user.model.User">
         select * from user_tb
     </select>
 
-    <select id="findById" resultType="shop.mtcoding.jobara.user.model.User">
+    <select id="findById" resultType="shop.mtcoding.examtest.user.model.User">
         select * from user_tb where id = #{id}
-    </select>    
-
-    <select id="findByUsername" resultType="shop.mtcoding.jobara.user.model.User">
-        select * from user_tb where username = #{username}
-    </select>    
-
-    <select id="findByUsernameAndPassword" resultType="shop.mtcoding.jobara.user.model.User">
-        select * from user_tb where username = #{username} and password = #{password}
-    </select>    
+    </select>
 
     <insert id="insert">
         insert into user_tb (username, password, email, created_at) 
         values(#{username}, #{password}, #{email}, now())
-    </insert>    
+    </insert>
 
     <delete id="deleteById">
         delete from user_tb where id = #{id} 
@@ -37,15 +29,25 @@
                address = #{address},
                detail_address = #{detailAddress},
                tel = #{tel},
-               profile = #{profile},
                career = #{career}
         where id = #{id} 
-    </update>    
+    </update>
 
-    <update id="updateResumeById">
-        update user_tb 
-           set resume_title = #{resumeTitle},
-               resume_content = #{resumeContent}
-        where id = #{id} 
-    </update>    
+    <insert id="insertForEmployee" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        insert into user_tb (username, password, email, role, created_at) 
+        values(#{username}, #{password}, #{email}, 'employee', now())
+    </insert>
+
+    <insert id="insertForCompany" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        insert into user_tb (username, password, email, address, detail_address, role, created_at) 
+        values(#{username}, #{password}, #{email}, #{address}, #{detailAddress}, 'company', now())
+    </insert>
+
+    <select id="findByUsername" resultType="shop.mtcoding.examtest.user.model.User">
+        select * from user_tb where username = #{username}
+    </select>
+
+    <select id="findByUsernameAndPassword" resultType="shop.mtcoding.examtest.user.vo.UserVo">
+        select * from user_tb where username = #{username} and password = #{password}
+    </select>
 </mapper>

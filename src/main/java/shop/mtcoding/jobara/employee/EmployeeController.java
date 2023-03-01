@@ -41,7 +41,7 @@ public class EmployeeController {
         }
         EmployeeUpdateRespDto employeeUpdateRespDto = employeeService.getEmployeeUpdateRespDto(principal.getId());
         model.addAttribute("employeeDto", employeeUpdateRespDto);
-        return "user/updateForm";
+        return "employee/updateForm";
     }
 
     @PostMapping("/employee/join")
