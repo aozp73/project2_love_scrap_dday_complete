@@ -18,76 +18,17 @@ import shop.mtcoding.jobara.board.model.Board;
 import shop.mtcoding.jobara.board.model.BoardRepository;
 import shop.mtcoding.jobara.common.ex.CustomException;
 import shop.mtcoding.jobara.common.util.CareerParse;
+import shop.mtcoding.jobara.common.util.EducationParse;
+import shop.mtcoding.jobara.common.util.JobTypeParse;
 
 @Service
 public class BoardService {
 
     @Autowired
-    private BoardRepository boardRepository;
-
-    @Transactional(readOnly = true)
-    public List<MyBoardListRespDto> getMyBoard(int coPrincipalId, int companyId) {
-        // 권한 체크
-        if (coPrincipalId != companyId) {
-            throw new CustomException("공고 리스트 열람 권한이 없습니다.");
-        }
-
-        List<MyBoardListRespDto> myBoardListPS;
-        try {
-            myBoardListPS = boardRepository.findAllByIdWithCompany(coPrincipalId);
-        } catch (Exception e) {
-            throw new CustomException("서버에 일시적인 문제가 생겼습니다", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-
-        return myBoardListPS;
-    }
-
-    @Transactional
-    public void insertBoard(BoardInsertReqDto boardInsertReqDto, int companyId) {
-
-        // career : String -> int parsing
-        int career = CareerParse.careerToInt(boardInsertReqDto.getCareer());
-        Board board = new Board(companyId, boardInsertReqDto.getTitle(), boardInsertReqDto.getContent(),
-                career);
-
-        try {
-            boardRepository.insert(board);
-        } catch (Exception e) {
-            throw new CustomException("서버에 일시적인 문제가 생겼습니다", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    @Transactional
-    public void updateBoard(BoardUpdateReqDto boardUpdateReqDto, int coPrincipalId) {
-
-        Board boardPS;
-
-        try {
-            boardPS = boardRepository.findById(boardUpdateReqDto.getId());
-        } catch (Exception e) {
-            throw new CustomException("없는 게시물을 수정할 수 없습니다", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-
-        if (boardPS.getCompanyId() != coPrincipalId) {
-            throw new CustomException("수정 권한이 없습니다", HttpStatus.BAD_REQUEST);
-        }
-
-        // career : String -> int parsing
-        int career = CareerParse.careerToInt(boardUpdateReqDto.getCareerString());
-        Board board = new Board(boardUpdateReqDto.getTitle(), boardUpdateReqDto.getContent(),
-                career, boardUpdateReqDto.getId());
-
-        try {
-            boardRepository.updateById(board);
-        } catch (Exception e) {
-            throw new CustomException("서버에 일시적인 문제가 생겼습니다", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-
-    }
+    BoardRepository boardRepository;
 
     @Transactional(readOnly = true)
     public List<BoardMainRespDto> getListToMain() {
-
         List<BoardMainRespDto> boardListPS;
 
         try {
@@ -97,26 +38,6 @@ public class BoardService {
         }
 
         return boardListPS;
-    }
-
-    @Transactional(readOnly = true)
-    public BoardUpdateRespDto getDetailForUpdate(int id, int coPrincipalId) {
-        BoardUpdateRespDto boardDetailPS;
-
-        try {
-            boardDetailPS = boardRepository.findByIdForUpdate(id);
-        } catch (Exception e) {
-            throw new CustomException("없는 게시물을 수정할 수 없습니다", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-
-        if (boardDetailPS.getCompanyId() != coPrincipalId) {
-            throw new CustomException("수정 권한이 없습니다", HttpStatus.BAD_REQUEST);
-        }
-
-        String career = CareerParse.careerToString(boardDetailPS.getCareer());
-        boardDetailPS.setCareerString(career);
-
-        return boardDetailPS;
     }
 
     @Transactional(readOnly = true)
@@ -132,6 +53,12 @@ public class BoardService {
         String career = CareerParse.careerToString(boardDetailPS.getCareer());
         boardDetailPS.setCareerString(career);
 
+        String education = EducationParse.educationToString(boardDetailPS.getEducation());
+        boardDetailPS.setEducationString(education);
+
+        String jobType = JobTypeParse.jopTypeToString(boardDetailPS.getJobType());
+        boardDetailPS.setJobTypeString(jobType);
+
         return boardDetailPS;
     }
 
@@ -139,16 +66,109 @@ public class BoardService {
     public List<BoardListRespDto> getList() {
         List<BoardListRespDto> boardListPS;
 
+        boardListPS = boardRepository.findAllWithCompany();
+        return boardListPS;
+
+    }
+
+    @Transactional(readOnly = true)
+    public BoardUpdateRespDto getDetailForUpdate(int id, int coPrincipalId) {
+        BoardUpdateRespDto boardDetailPS = boardRepository.findByIdForUpdate(id);
+
+        if (boardDetailPS == null) {
+            throw new CustomException("없는 게시물을 수정할 수 없습니다", HttpStatus.BAD_REQUEST);
+        }
+
+        if (boardDetailPS.getUserId() != coPrincipalId) {
+            throw new CustomException("수정 권한이 없습니다", HttpStatus.BAD_REQUEST);
+        }
+
+        String career = CareerParse.careerToString(boardDetailPS.getCareer());
+        boardDetailPS.setCareerString(career);
+
+        String education = EducationParse.educationToString(boardDetailPS.getEducation());
+        boardDetailPS.setEducationString(education);
+
+        String jobType = JobTypeParse.jopTypeToString(boardDetailPS.getJobType());
+        boardDetailPS.setJobTypeString(jobType);
+
+        return boardDetailPS;
+    }
+
+    @Transactional
+    public void updateBoard(BoardUpdateReqDto boardUpdateReqDto, int coPrincipalId) {
+
+        Board boardPS;
+        boardPS = boardRepository.findById(boardUpdateReqDto.getId());
+
         try {
-            boardListPS = boardRepository.findAllWithCompany();
+        } catch (Exception e) {
+            throw new CustomException("없는 게시물을 수정할 수 없습니다", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        if (boardPS.getUserId() != coPrincipalId) {
+            throw new CustomException("수정 권한이 없습니다", HttpStatus.BAD_REQUEST);
+        }
+
+        int career = CareerParse.careerToInt(boardUpdateReqDto.getCareerString());
+        int education = EducationParse.educationToInt(boardUpdateReqDto.getEducationString());
+        int jobType = JobTypeParse.jobTypeToInt(boardUpdateReqDto.getJobTypeString());
+
+        Board board = new Board(boardUpdateReqDto.getId(),
+                boardUpdateReqDto.getUserId(),
+                boardUpdateReqDto.getTitle(),
+                boardUpdateReqDto.getContent(),
+                career,
+                jobType,
+                education,
+                boardUpdateReqDto.getFavor());
+
+        try {
+            boardRepository.updateById(board);
         } catch (Exception e) {
             throw new CustomException("서버에 일시적인 문제가 생겼습니다", HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
-        return boardListPS;
     }
 
-    public void getMyBoard(Integer id) {
+    @Transactional
+    public int insertBoard(BoardInsertReqDto boardInsertReqDto, int userId) {
+
+        int career = CareerParse.careerToInt(boardInsertReqDto.getCareerString());
+        int education = EducationParse.educationToInt(boardInsertReqDto.getEducationString());
+        int jobType = JobTypeParse.jobTypeToInt(boardInsertReqDto.getJobTypeString());
+
+        Board board = new Board(userId, boardInsertReqDto.getTitle(),
+                boardInsertReqDto.getContent(),
+                career,
+                jobType,
+                education,
+                boardInsertReqDto.getFavor());
+
+        try {
+            boardRepository.insert(board);
+        } catch (Exception e) {
+            throw new CustomException("서버에 일시적인 문제가 생겼습니다", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        return board.getId();
+    }
+
+    @Transactional(readOnly = true)
+    public List<MyBoardListRespDto> getMyBoard(int coPrincipalId, int userId) {
+        // 권한 체크
+        if (coPrincipalId != userId) {
+            throw new CustomException("공고 리스트 열람 권한이 없습니다.");
+        }
+
+        List<MyBoardListRespDto> myBoardListPS;
+        try {
+            myBoardListPS = boardRepository.findAllByIdWithCompany(coPrincipalId);
+        } catch (Exception e) {
+            throw new CustomException("서버에 일시적인 문제가 생겼습니다", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        return myBoardListPS;
     }
 
 }
