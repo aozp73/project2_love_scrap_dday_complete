@@ -25,7 +25,6 @@ import shop.mtcoding.jobara.board.dto.BoardResp.MyBoardListRespDto;
 import shop.mtcoding.jobara.common.dto.ResponseDto;
 import shop.mtcoding.jobara.common.ex.CustomException;
 import shop.mtcoding.jobara.common.util.Verify;
-import shop.mtcoding.jobara.user.model.User;
 import shop.mtcoding.jobara.user.vo.UserVo;
 
 @Controller

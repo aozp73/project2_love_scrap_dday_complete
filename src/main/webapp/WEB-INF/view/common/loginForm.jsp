@@ -22,7 +22,7 @@
         </div>
         <div class="justify-content-center d-flex">
             <div class="my-border-color-default px-3 py-3" style="width: 50%; ">
-                <form action="/user/login" method="post">
+                <form action="/login" method="post">
                     <div class="my-4">
                         <input name="username" type="text" class="form-control" aria-describedby="emailHelp" placeholder="Username">
                     </div>

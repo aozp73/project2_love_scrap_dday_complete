@@ -3,13 +3,13 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="shop.mtcoding.examtest.company.model.CompanyRepository">
+<mapper namespace="shop.mtcoding.jobara.company.model.CompanyRepository">
 
-    <select id="findAll" resultType="shop.mtcoding.examtest.company.model.Company">
+    <select id="findAll" resultType="shop.mtcoding.jobara.company.model.Company">
         select * from company_tb
     </select>
 
-    <select id="findByUserId" resultType="shop.mtcoding.examtest.company.model.Company">
+    <select id="findByUserId" resultType="shop.mtcoding.jobara.company.model.Company">
         select * from company_tb where user_id = #{userId}
     </select>
 

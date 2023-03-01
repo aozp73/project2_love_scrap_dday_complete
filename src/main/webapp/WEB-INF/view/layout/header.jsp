@@ -45,7 +45,7 @@
                     </form>
                 
                 <c:choose>
-                    <c:when test="${coPrincipal != null}">
+                    <c:when test="${principal.role eq 'company'}">
                     <li class="nav-item fs-4 text-center">
                         <a class="nav-link" href="/company/updateForm">정보수정</a>
                     </li>
@@ -53,9 +53,9 @@
                         <a class="nav-link" href="/logout">로그아웃</a>
                     </li>
                     </c:when>
-                    <c:when test="${usPrincipal != null}">
+                    <c:when test="${principal.role eq 'employee'}">
                     <li class="nav-item fs-4 text-center">
-                        <a class="nav-link" href="/user/updateForm">정보수정</a>
+                        <a class="nav-link" href="/employee/updateForm">정보수정</a>
                     </li>
                     <li class="nav-item fs-4 text-center">
                         <a class="nav-link" href="/logout">로그아웃</a>
@@ -63,10 +63,10 @@
                     </c:when>
                    <c:otherwise>
                     <li class="nav-item fs-4 text-center">
-                        <a class="nav-link" href="/user/loginForm">로그인</a>
+                        <a class="nav-link" href="/loginForm">로그인</a>
                     </li>
                     <li class="nav-item fs-4 text-center">
-                        <a class="nav-link" href="/user/joinForm">회원가입</a>
+                        <a class="nav-link" href="/employee/joinForm">회원가입</a>
                     </li>
                    </c:otherwise>
                 </c:choose>

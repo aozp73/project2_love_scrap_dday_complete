@@ -54,7 +54,7 @@
             }).done(res => {
                 console.log(data);
                 alert(res.msg);
-                location.href = "/user/updateForm";
+                location.href = "/employee/updateForm";
             }).fail(err => {
                 alert(err.JSON)
             });
