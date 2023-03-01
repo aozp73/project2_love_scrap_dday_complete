@@ -1,25 +1,17 @@
 package shop.mtcoding.jobara.company.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-public class CompanyReq {
+public class CompanyResp {
 
     @Getter
     @Setter
-    public static class CompanyJoinReqDto {
-        private String username;
-        private String password;
-        private String email;
-        private String address;
-        private String detailAddress;
-        private Long companyNumb;
-        private String companyName;
-    }
-
-    @Getter
-    @Setter
-    public static class CompanyUpdateReqDto {
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class CompanyUpdateRespDto {
         private String password;
         private String email;
         private String address;
@@ -29,4 +21,5 @@ public class CompanyReq {
         private String companyScale;
         private String companyField;
     }
+
 }

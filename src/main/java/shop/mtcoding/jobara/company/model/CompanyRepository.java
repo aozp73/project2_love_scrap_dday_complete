@@ -9,15 +9,11 @@ public interface CompanyRepository {
 
     public List<Company> findAll();
 
-    public Company findById(int id);
-
-    public Company findByUsernameAndPassword(Company company);
-
-    public Company findByUsername(String username);
+    public Company findByUserId(int userId);
 
     public int insert(Company company);
 
-    public int updateById(Company company);
+    public int updateByUserId(Company company);
 
-    public int deleteById(int id);
+    public int deleteByUserId(int userId);
 }
