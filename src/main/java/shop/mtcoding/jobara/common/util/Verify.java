@@ -7,19 +7,19 @@ import shop.mtcoding.jobara.common.ex.CustomException;
 
 public class Verify {
 
-    public static void validateStiring(String target, String msg) {
+    public static void validateString(String target, String msg) {
         if (target == null || target.isEmpty()) {
             throw new CustomException(msg);
         }
     }
 
-    public static void validateStiring(String target, String msg, HttpStatus status) {
+    public static void validateString(String target, String msg, HttpStatus status) {
         if (target == null || target.isEmpty()) {
             throw new CustomException(msg, status);
         }
     }
 
-    public static void validateStiring(String target, String msg, HttpStatus status, String location) {
+    public static void validateString(String target, String msg, HttpStatus status, String location) {
         if (target == null || target.isEmpty()) {
             throw new CustomException(msg, status, location);
         }

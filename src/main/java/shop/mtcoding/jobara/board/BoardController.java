@@ -106,9 +106,9 @@ public class BoardController {
         }
 
         // 유효성
-        Verify.validateStiring(boardUpdateReqDto.getTitle(), "제목을 입력하세요");
-        Verify.validateStiring(boardUpdateReqDto.getContent(), "내용을 입력하세요");
-        Verify.validateStiring(boardUpdateReqDto.getCareerString(), "경력을 입력하세요");
+        Verify.validateString(boardUpdateReqDto.getTitle(), "제목을 입력하세요");
+        Verify.validateString(boardUpdateReqDto.getContent(), "내용을 입력하세요");
+        Verify.validateString(boardUpdateReqDto.getCareerString(), "경력을 입력하세요");
 
         boardService.updateBoard(boardUpdateReqDto, principal.getId());
 
@@ -129,8 +129,8 @@ public class BoardController {
         }
 
         // 유효성
-        Verify.validateStiring(boardInsertReqDto.getTitle(), "제목을 입력하세요");
-        Verify.validateStiring(boardInsertReqDto.getContent(), "내용을 입력하세요");
+        Verify.validateString(boardInsertReqDto.getTitle(), "제목을 입력하세요");
+        Verify.validateString(boardInsertReqDto.getContent(), "내용을 입력하세요");
 
         if (boardInsertReqDto.getCareerString().equals("경력선택")) {
             throw new CustomException("경력을 선택하세요");

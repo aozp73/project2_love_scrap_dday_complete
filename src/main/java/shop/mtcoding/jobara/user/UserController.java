@@ -28,8 +28,8 @@ public class UserController {
 
     @PostMapping("/login")
     public String login(UserLoginReqDto userLoginReqDto) {
-        Verify.validateStiring(userLoginReqDto.getUsername(), "유저네임을 입력하세요.");
-        Verify.validateStiring(userLoginReqDto.getPassword(), "암호를 입력하세요.");
+        Verify.validateString(userLoginReqDto.getUsername(), "유저네임을 입력하세요.");
+        Verify.validateString(userLoginReqDto.getPassword(), "암호를 입력하세요.");
         UserVo userVoPS = userService.getUser(userLoginReqDto);
         session.setAttribute("principal", userVoPS);
         return "redirect:/";
@@ -44,7 +44,7 @@ public class UserController {
     @GetMapping("/usernameSameCheck")
     public @ResponseBody ResponseEntity<?> usernameSameCheck(String username) {
         // 유효성 검사
-        Verify.validateStiring(username, "유저네임을 입력하세요.");
+        Verify.validateString(username, "유저네임을 입력하세요.");
 
         if (userService.checkUsername(username) == null) {
             return new ResponseEntity<>(new ResponseDto<>(1, "사용가능한 유저네임 입니다.", true), HttpStatus.OK);

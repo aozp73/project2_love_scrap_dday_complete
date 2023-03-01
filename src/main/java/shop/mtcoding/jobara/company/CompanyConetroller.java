@@ -47,9 +47,9 @@ public class CompanyConetroller {
 
     @PostMapping("/company/join")
     public String join(CompanyJoinReqDto companyJoinReqDto) {
-        Verify.validateStiring(companyJoinReqDto.getUsername(), "유저네임을 입력하세요.");
-        Verify.validateStiring(companyJoinReqDto.getPassword(), "암호를 입력하세요.");
-        Verify.validateStiring(companyJoinReqDto.getEmail(), "이메일을 입력하세요.");
+        Verify.validateString(companyJoinReqDto.getUsername(), "유저네임을 입력하세요.");
+        Verify.validateString(companyJoinReqDto.getPassword(), "암호를 입력하세요.");
+        Verify.validateString(companyJoinReqDto.getEmail(), "이메일을 입력하세요.");
         companyService.insertCompany(companyJoinReqDto);
         return "redirect:/loginForm";
     }
@@ -61,14 +61,14 @@ public class CompanyConetroller {
         if (!principal.getRole().equals("company")) {
             throw new CustomException("권한이 없습니다.", HttpStatus.FORBIDDEN);
         }
-        Verify.validateStiring(companyUpdateReqDto.getPassword(), "암호를 입력하세요.");
-        Verify.validateStiring(companyUpdateReqDto.getEmail(), "이메일을 입력하세요.");
-        Verify.validateStiring(companyUpdateReqDto.getCompanyName(), "회사 이름을 입력하세요.");
-        Verify.validateStiring(companyUpdateReqDto.getAddress(), "주소를 입력하세요.");
-        Verify.validateStiring(companyUpdateReqDto.getDetailAddress(), "상세 주소를 입력하세요.");
-        Verify.validateStiring(companyUpdateReqDto.getCompanyScale(), "회사 규모란을 선택하세요.");
-        Verify.validateStiring(companyUpdateReqDto.getCompanyField(), "회사 업종란을 선택하세요.");
-        Verify.validateStiring(companyUpdateReqDto.getTel(), "전화번호를 입력하세요.");
+        Verify.validateString(companyUpdateReqDto.getPassword(), "암호를 입력하세요.");
+        Verify.validateString(companyUpdateReqDto.getEmail(), "이메일을 입력하세요.");
+        Verify.validateString(companyUpdateReqDto.getCompanyName(), "회사 이름을 입력하세요.");
+        Verify.validateString(companyUpdateReqDto.getAddress(), "주소를 입력하세요.");
+        Verify.validateString(companyUpdateReqDto.getDetailAddress(), "상세 주소를 입력하세요.");
+        Verify.validateString(companyUpdateReqDto.getCompanyScale(), "회사 규모란을 선택하세요.");
+        Verify.validateString(companyUpdateReqDto.getCompanyField(), "회사 업종란을 선택하세요.");
+        Verify.validateString(companyUpdateReqDto.getTel(), "전화번호를 입력하세요.");
         UserVo UserVoPS = companyService.updateCompany(companyUpdateReqDto, principal.getId(), profile);
         session.removeAttribute("principal");
         session.setAttribute("principal", UserVoPS);

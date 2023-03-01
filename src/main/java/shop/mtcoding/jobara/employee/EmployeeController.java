@@ -45,9 +45,9 @@ public class EmployeeController {
 
     @PostMapping("/employee/join")
     public String join(EmployeeJoinReqDto employeeJoinReqDto) {
-        Verify.validateStiring(employeeJoinReqDto.getUsername(), "유저네임을 입력하세요.");
-        Verify.validateStiring(employeeJoinReqDto.getPassword(), "암호를 입력하세요.");
-        Verify.validateStiring(employeeJoinReqDto.getEmail(), "이메일을 입력하세요.");
+        Verify.validateString(employeeJoinReqDto.getUsername(), "유저네임을 입력하세요.");
+        Verify.validateString(employeeJoinReqDto.getPassword(), "암호를 입력하세요.");
+        Verify.validateString(employeeJoinReqDto.getEmail(), "이메일을 입력하세요.");
         employeeService.insertEmployee(employeeJoinReqDto);
         return "redirect:/loginForm";
     }
@@ -59,13 +59,13 @@ public class EmployeeController {
         if (!principal.getRole().equals("employee")) {
             throw new CustomException("권한이 없습니다.", HttpStatus.FORBIDDEN);
         }
-        Verify.validateStiring(employeeUpdateReqDto.getPassword(), "암호를 입력하세요.");
-        Verify.validateStiring(employeeUpdateReqDto.getEmail(), "이메일을 입력하세요.");
-        Verify.validateStiring(employeeUpdateReqDto.getAddress(), "주소를 입력하세요.");
-        Verify.validateStiring(employeeUpdateReqDto.getDetailAddress(), "상세 주소를 입력하세요.");
-        Verify.validateStiring(employeeUpdateReqDto.getTel(), "전화번호를 입력하세요.");
+        Verify.validateString(employeeUpdateReqDto.getPassword(), "암호를 입력하세요.");
+        Verify.validateString(employeeUpdateReqDto.getEmail(), "이메일을 입력하세요.");
+        Verify.validateString(employeeUpdateReqDto.getAddress(), "주소를 입력하세요.");
+        Verify.validateString(employeeUpdateReqDto.getDetailAddress(), "상세 주소를 입력하세요.");
+        Verify.validateString(employeeUpdateReqDto.getTel(), "전화번호를 입력하세요.");
         Verify.validateObject(employeeUpdateReqDto.getCareer(), "경력을 입력하세요.");
-        Verify.validateStiring(employeeUpdateReqDto.getEducation(), "학력을 입력하세요.");
+        Verify.validateString(employeeUpdateReqDto.getEducation(), "학력을 입력하세요.");
 
         UserVo UserVoPS = employeeService.updateEmpolyee(employeeUpdateReqDto, principal.getId(), profile);
         session.removeAttribute("principal");
