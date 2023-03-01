@@ -17,7 +17,7 @@
                                 <div class="mb-3">
                                     <label for="exampleInputCompanyName" class="form-label">회사명</label>
                                     <input type="text" name="companyName" class="form-control"
-                                        value="${coPrincipal.companyName}" placeholder="Company Name">
+                                        value="${companyDto.companyName}" placeholder="Company Name">
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">회사규모</label>
@@ -49,7 +49,8 @@
                                         <div class="form-group d-flex justify-content-center my-thumbnail-color-default "
                                             style="height: 150px; width: 150px; align-items: center">
 
-                                            <img id="imagePreview" src="${coPrincipal.profile == null ? "/images/defaultProfile.png" : coPrincipal.profile}" alt="Current Photo"
+                                            <img id="imagePreview" src="${principal.profile == null ? "
+                                                /images/defaultProfile.png" : principal.profile}" alt="Current Photo"
                                                 class="img-fluid" style="height:80px; ">
                                         </div>
                                     </div>
@@ -68,33 +69,12 @@
                             </div>
 
                         </div>
-                        <script>
-                            function chooseImage(obj) {
-                                // console.log(obj);
-                                // console.log(obj.files);
-                                let f = obj.files[0];
-
-                                if (!f.type.match("image.*")) {
-                                    alert("이미지를 등록해야 합니다.");
-                                    return;
-                                }
-
-                                let reader = new FileReader();
-                                reader.readAsDataURL(f);
-
-                                reader.onload = function (e) {
-                                    console.log(e);
-                                    console.log(e.target.result);
-                                    $("#imagePreview").attr("src", e.target.result);
-                                }
-                            }
-                        </script>
 
 
                         <div class="mb-3">
                             <label for="exampleInputPassword" class="form-label">변경 비밀번호</label>
                             <input type="password" name="password" id="password" class="form-control"
-                                value="${coPrincipal.password}" placeholder="Password" onchange="checkSamePassword()"
+                                value="${companyDto.password}" placeholder="Password" onchange="checkSamePassword()"
                                 style="width:100%">
                         </div>
                         <div class="mb-3">
@@ -106,23 +86,23 @@
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputEmail" class="form-label">이메일</label>
-                            <input type="email" name="email" class="form-control" value="${coPrincipal.email}"
+                            <input type="email" name="email" class="form-control" value="${companyDto.email}"
                                 placeholder="Email" style="width:100%">
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputCompanyAddress" class="form-label">회사주소</label>
-                            <input type="text" name="address" class="form-control" value="${coPrincipal.address}"
+                            <input type="text" name="address" class="form-control" value="${companyDto.address}"
                                 placeholder="Company Address">
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputCompanyAddress" class="form-label">상세주소</label>
                             <input type="text" name="detailAddress" class="form-control"
-                                value="${coPrincipal.detailAddress}" placeholder="Company Address">
+                                value="${companyDto.detailAddress}" placeholder="Company Address">
                         </div>
 
                         <div class="mb-3">
                             <label for="exampleInputTelNumber" class="form-label">전화번호</label>
-                            <input type="text" name="tel" class="form-control" value="${coPrincipal.tel}"
+                            <input type="text" name="tel" class="form-control" value="${companyDto.tel}"
                                 placeholder="하이픈(-) 없이 입력해주세요"
                                 oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                         </div>
@@ -163,6 +143,25 @@
                               <strong>비밀번호가 다릅니다!</strong>
                               </div>`;
                     $("#passwordCheckAlert").append(el);
+                }
+            }
+            function chooseImage(obj) {
+                // console.log(obj);
+                // console.log(obj.files);
+                let f = obj.files[0];
+
+                if (!f.type.match("image.*")) {
+                    alert("이미지를 등록해야 합니다.");
+                    return;
+                }
+
+                let reader = new FileReader();
+                reader.readAsDataURL(f);
+
+                reader.onload = function (e) {
+                    console.log(e);
+                    console.log(e.target.result);
+                    $("#imagePreview").attr("src", e.target.result);
                 }
             }
         </script>
