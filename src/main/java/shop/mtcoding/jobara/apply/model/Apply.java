@@ -15,7 +15,7 @@ public class Apply {
     private Integer boardId;
     private Timestamp createdAt;
 
-    public Apply(Integer userId, Integer boardId){
+    public Apply(Integer boardId, Integer userId) {
         this.userId = userId;
         this.boardId = boardId;
     }
