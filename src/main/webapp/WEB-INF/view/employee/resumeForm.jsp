@@ -13,10 +13,10 @@
                 <div class="px-3">
                     <div class="title column py-3">
                         <input id="resumeTitle" class="form-control my-border-color-default" type="text"
-                            placeholder="제목을 입력해주세요." value="${user.resumeTitle}" name="resumeTitle"> 
+                            placeholder="제목을 입력해주세요." value="${resume.title}" name="resumeTitle"> 
                     </div>
                     <div class="form-group">
-                        <textarea class="form-control summernote" rows="5" name="resumeContent" id="resumeContent">${user.resumeContent}</textarea>
+                        <textarea class="form-control summernote" rows="5" name="resumeContent" id="resumeContent">${resume.content}</textarea>
                     </div>
                 </div>
             </form>
