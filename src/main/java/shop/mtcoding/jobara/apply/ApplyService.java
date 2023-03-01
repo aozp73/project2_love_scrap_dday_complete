@@ -16,7 +16,7 @@ import shop.mtcoding.jobara.common.util.Verify;
 
 @Service
 public class ApplyService {
-    
+
     @Autowired
     ApplyRepository applyRepository;
 
@@ -32,7 +32,7 @@ public class ApplyService {
         try {
             applyRepository.insert(applyTemp);
         } catch (Exception e) {
-            throw new CustomApiException("서버 오류로 인한 지원 실패",HttpStatus.INTERNAL_SERVER_ERROR);
+            throw new CustomApiException("서버 오류로 인한 지원 실패", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -40,5 +40,5 @@ public class ApplyService {
     public List<ListRespDto> getApplyList(Integer companyId) {
         return applyRepository.findByCompanyIdWithBoardAndUser(companyId);
     }
-    
+
 }
