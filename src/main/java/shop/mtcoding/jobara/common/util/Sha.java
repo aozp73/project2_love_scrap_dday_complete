@@ -6,7 +6,8 @@ public class Sha {
 
       public static String sha256(String password) throws Exception {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
-            md.update(password.getBytes("UTF-8"));
+            String salt = password + "salt";
+            md.update(salt.getBytes("UTF-8"));
             byte[] HashByte = md.digest();
             StringBuffer hash = new StringBuffer();
 
