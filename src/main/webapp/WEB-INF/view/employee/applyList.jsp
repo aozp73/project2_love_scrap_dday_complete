@@ -13,7 +13,7 @@
                             <th>번호</th>
                             <th style="width: 20%;">지원 공고</th>
                             <th style="width: 30%;">지원한 자소서</th>
-                            <th style="width: 20%;">지원 분야</th>
+                            <th style="width: 20%;">상태</th>
                             <th style="width: 20%;">지원 일자</th>
                         </tr>
                     </thead>
@@ -28,8 +28,8 @@
                                         ${apply.boardTitle}</a></td>
                                 <td class="text-center"><a href="/user/${apply.userId}" class="no_under_line_link"
                                         style="width: 100%; display: block;">${apply.resumeTitle}</a></td>
-                                <td class="my-text-ellipsis text-center">${apply.jobType}</td>
-                                <td class="text-center my-text-ellipsis">${apply.createdAt}</td>
+                                <td class="my-text-ellipsis text-center">${apply.stateToString}</td>
+                                <td class="text-center my-text-ellipsis">${apply.createdAtToString}</td>
                             </tr>
                         </c:forEach>
                         <!-- 반복문종료 -->
