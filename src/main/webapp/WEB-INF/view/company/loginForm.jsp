@@ -11,7 +11,7 @@
                     <div class="container-fluid">
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
-                                <a class="nav-link" href="/user/loginForm">일반회원</a>
+                                <a class="nav-link" href="/loginForm">일반회원</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="#">기업회원</a>

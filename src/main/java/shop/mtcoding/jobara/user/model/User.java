@@ -5,7 +5,6 @@ import java.sql.Timestamp;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import shop.mtcoding.jobara.common.util.DateParse;
 
 @Getter
 @Setter
@@ -19,11 +18,7 @@ public class User {
     private String detailAddress;
     private String tel;
     private String profile;
-    private String realName;
-    private String education;
-    private Integer career;
-    private String resumeTitle;
-    private String resumeContent;
+    private String role;
     private Timestamp createdAt;
 
     public User(String username, String password) {
@@ -37,26 +32,22 @@ public class User {
         this.email = email;
     }
 
-    public User(Integer id, String username, String password, String email,
-            String address, String detailAddress, String tel, String profile, Integer career) {
-        this.id = id;
+    public User(String username, String password, String email, String address, String detailAddress) {
         this.username = username;
+        this.password = password;
+        this.email = email;
+        this.address = address;
+        this.detailAddress = detailAddress;
+    }
+
+    public User(Integer id, String password, String email, String address, String detailAddress, String tel,
+            String profile) {
+        this.id = id;
         this.password = password;
         this.email = email;
         this.address = address;
         this.detailAddress = detailAddress;
         this.tel = tel;
         this.profile = profile;
-        this.career = career;
-    }
-
-    public User(Integer id, String resumeTitle, String resumeContent) {
-        this.id = id;
-        this.resumeTitle = resumeTitle;
-        this.resumeContent = resumeContent;
-    }
-
-    public String getCreatedAtToString() {
-        return DateParse.format(createdAt);
     }
 }

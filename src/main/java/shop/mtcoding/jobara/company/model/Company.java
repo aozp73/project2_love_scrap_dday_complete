@@ -1,56 +1,39 @@
 package shop.mtcoding.jobara.company.model;
 
-import java.sql.Timestamp;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+/*
+ * create table company_tb(
+    user_id int not null unique,
+    company_name varchar not null,
+    company_scale varchar,
+    company_numb bigint not null,
+    company_field varchar
+);
+ */
 
 @Getter
 @Setter
 @NoArgsConstructor
 public class Company {
-    private Integer id;
-    private String username;
-    private String password;
-    private String email;
-    private String address;
-    private String detailAddress;
-    private String tel;
-    private String profile;
+    private Integer userId;
     private String companyName;
     private String companyScale;
     private Long companyNumb;
     private String companyField;
-    private Timestamp createdAt;
 
-    public Company(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
-
-    public Company(String username, String password, String email, String address, String detailAddress,
-            Long companyNumb, String companyName) {
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.address = address;
-        this.detailAddress = detailAddress;
+    public Company(Integer userId, String companyName, Long companyNumb) {
+        this.userId = userId;
+        this.companyName = companyName;
         this.companyNumb = companyNumb;
-        this.companyName = companyName;
     }
 
-    public Company(Integer id, String password, String email, String address, String detailAddress,
-            String companyName, String companyScale, String companyField, String tel, String profile) {
-        this.id = id;
-        this.password = password;
-        this.email = email;
-        this.address = address;
-        this.detailAddress = detailAddress;
+    public Company(Integer userId, String companyName, String companyScale, String companyField) {
+        this.userId = userId;
         this.companyName = companyName;
-        this.tel = tel;
         this.companyScale = companyScale;
         this.companyField = companyField;
-        this.profile = profile;
     }
 }

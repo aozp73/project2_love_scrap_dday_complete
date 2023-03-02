@@ -15,17 +15,17 @@ public interface BoardRepository {
 
     public List<Board> findAll();
 
-    public List<BoardMainRespDto> findAllWithCompanyToMain();
+    public BoardDetailRespDto findByIdWithCompany(int boardId);
 
     public List<BoardListRespDto> findAllWithCompany();
 
-    public List<MyBoardListRespDto> findAllByIdWithCompany(int companyId);
+    public List<BoardMainRespDto> findAllWithCompanyToMain();
 
-    public BoardDetailRespDto findByIdWithCompany(int boardId);
-
-    public Board findById(int id);
+    public List<MyBoardListRespDto> findAllByIdWithCompany(int userId);
 
     public BoardUpdateRespDto findByIdForUpdate(int id);
+
+    public Board findById(int id);
 
     public int insert(Board board);
 

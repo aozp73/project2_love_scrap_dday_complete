@@ -10,9 +10,8 @@ public class BoardResp {
         private Integer id;
         private String title;
         private String companyName;
-        private Integer companyId;
+        private Integer userId;
         private String profile;
-
     }
 
     @Getter
@@ -21,7 +20,7 @@ public class BoardResp {
         private Integer id;
         private String title;
         private String companyName;
-        private Integer companyId;
+        private Integer userId;
         private String profile;
     }
 
@@ -31,7 +30,7 @@ public class BoardResp {
         private Integer id;
         private String title;
         private String companyName;
-        private Integer companyId;
+        private Integer userId;
         private String profile;
     }
 
@@ -41,9 +40,16 @@ public class BoardResp {
         private Integer id;
         private String title;
         private String content;
+
         private Integer career;
         private String careerString;
-        private Integer companyId;
+        private Integer education;
+        private String educationString;
+        private Integer jobType;
+        private String jobTypeString;
+
+        private String favor;
+        private Integer userId;
     }
 
     @Getter
@@ -52,9 +58,16 @@ public class BoardResp {
         private Integer id;
         private String title;
         private String content;
+
         private Integer career;
         private String careerString;
-        private Integer companyId;
+        private Integer education;
+        private String educationString;
+        private Integer jobType;
+        private String jobTypeString;
+
+        private String favor;
+        private Integer userId;
         private String companyName;
         private String companyScale;
         private String companyField;

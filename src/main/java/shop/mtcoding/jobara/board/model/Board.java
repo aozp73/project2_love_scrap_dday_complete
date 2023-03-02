@@ -11,26 +11,36 @@ import lombok.Setter;
 @Setter
 public class Board {
     private Integer id;
-    private Integer companyId;
+    private Integer userId;
     private String title;
     private String content;
     private Integer career;
-    private String jobType;
-    private String education;
+    private Integer jobType;
+    private Integer education;
     private String favor;
     private Timestamp createdAt;
 
-    public Board(Integer companyId, String title, String content, Integer career) {
-        this.companyId = companyId;
+    public Board(Integer id, Integer userId, String title, String content, Integer career, Integer jobType,
+            Integer education, String favor) {
+        this.id = id;
+        this.userId = userId;
         this.title = title;
         this.content = content;
         this.career = career;
+        this.jobType = jobType;
+        this.education = education;
+        this.favor = favor;
     }
 
-    public Board(String title, String content, Integer career, Integer id) {
-        this.id = id;
+    public Board(Integer userId, String title, String content, Integer career, Integer jobType, Integer education,
+            String favor) {
+        this.userId = userId;
         this.title = title;
         this.content = content;
         this.career = career;
+        this.jobType = jobType;
+        this.education = education;
+        this.favor = favor;
     }
+
 }

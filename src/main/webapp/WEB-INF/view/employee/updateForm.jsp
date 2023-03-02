@@ -14,7 +14,7 @@
                             <div class="mb-3">
                                 <label for="exampleInputPassword" class="form-label">변경 비밀번호</label>
                                 <input type="password" name="password" id="password" class="form-control"
-                                    value="${coPrincipal.password}" placeholder="Password" onchange="checkSamePassword()">
+                                    value="${employeeDto.password}" placeholder="Password" onchange="checkSamePassword()">
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">비밀번호확인</label>
@@ -26,7 +26,7 @@
                             <div class="mb-3">
                                 <label class="form-label">이메일</label>
                                 <input name="email" type="email" class="form-control" placeholder="Email"
-                                    value="${user.email}">
+                                    value="${employeeDto.email}">
                             </div>
                         </div>
                         <div class="col-md-7">
@@ -34,7 +34,7 @@
                                 <div class="form-group d-flex justify-content-center my-thumbnail-color-default "
                                     style="height: 150px; width: 150px; align-items: center">
 
-                                <img id="imagePreview" src="${usPrincipal.profile == null ? "/images/defaultProfile.png" : usPrincipal.profile}" alt="Current Photo"
+                                <img id="imagePreview" src="${principal.profile == null ? "/images/defaultProfile.png" : usPrincipal.profile}" alt="Current Photo"
                                                 class="img-fluid" style="height:80px; ">
                                 </div>
                             </div>
@@ -59,21 +59,21 @@
                         <div class="mb-3">
                             <label class="form-label">주소</label>
                             <input name="address" type="text" class="form-control" placeholder="Address"
-                                value="${user.address}">
+                                value="${employeeDto.address}">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">상세주소</label>
                             <input name="detailAddress" type="text" class="form-control" placeholder="Detail Address"
-                                value="${user.detailAddress}">
+                                value="${employeeDto.detailAddress}">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">연락처</label>
-                            <input name="tel" type="text" class="form-control" placeholder="Tel" value="${user.tel}">
+                            <input name="tel" type="text" class="form-control" placeholder="Tel" value="${employeeDto.tel}">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">경력 연차</label>
                             <input name="career" type="number" class="form-control" placeholder="Career Year" min="0"
-                                value="${user.career}">
+                                value="${employeeDto.career}">
                         </div>
                         <label class="form-label">관심분야</label>
                         <div class="mb-5" style="display: grid;
@@ -104,7 +104,7 @@
                                 <div>
                                     <div class="form-check form-check-inline" style="width: 19%">
                                         <input class="form-check-input" type="checkbox" id="jsc">
-                                        <label class="form-check-label" for="inlineCheckbox1">Java Script</label>
+                                        <label class="form-check-label" for="inlineCheckbox1">JS</label>
                                     </div>
                                     <div class="form-check form-check-inline" style="width: 19%">
                                         <input class="form-check-input" type="checkbox" id="ruby">

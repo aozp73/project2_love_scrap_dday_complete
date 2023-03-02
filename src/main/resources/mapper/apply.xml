@@ -11,35 +11,26 @@
 
     <select id="findById" resultType="shop.mtcoding.jobara.apply.model.Apply">
         select * from apply_tb where id = #{id}
-    </select>    
+    </select>
 
     <insert id="insert">
         insert into apply_tb (board_id, user_id, created_at) 
         values(#{boardId}, #{userId}, now())
-    </insert>    
-
-    <delete id="deleteById">
-        delete from apply_tb where id = #{id} 
-    </delete>    
+    </insert>  
 
     <update id="updateById">
         update apply_tb 
            set board_id = #{boardId}, 
-               user_id = #{userId}, 
+               user_id = #{userId},
         where id = #{id} 
-    </update>    
+    </update>
+
+    <delete id="deleteById">
+        delete from apply_tb where id = #{id}
+    </delete>
 
     <select id="findByUserIdAndBoardId" resultType="shop.mtcoding.jobara.apply.model.Apply">
         select * from apply_tb where user_id = #{userId} and board_id = #{boardId}
-    </select>  
+    </select>
 
-    <select id="findByCompanyIdWithBoardAndUser" resultType="shop.mtcoding.jobara.apply.dto.ApplyResp$ListRespDto">
-        select at.id, at.user_id, at.board_id, at.created_at, ut.real_name, bt.title, bt.job_type, 
-        from apply_tb at
-        inner join user_tb ut
-        on ut.id = at.user_id
-        inner join board_tb bt
-        on at.board_id = bt.id
-        where bt.company_id = #{companyId}
-    </select>  
 </mapper>

@@ -1,21 +1,9 @@
 package shop.mtcoding.jobara.board.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 public class BoardReq {
-
-    @Getter
-    @Setter
-    @AllArgsConstructor
-    @NoArgsConstructor
-    public static class BoardInsertReqDto {
-        private String title;
-        private String content;
-        private String career;
-    }
 
     @Getter
     @Setter
@@ -23,7 +11,32 @@ public class BoardReq {
         private Integer id;
         private String title;
         private String content;
-        private String careerString;
+
         private Integer career;
+        private String careerString;
+        private Integer education;
+        private String educationString;
+        private Integer jobType;
+        private String jobTypeString;
+
+        private String favor;
+        private Integer userId;
+    }
+
+    @Getter
+    @Setter
+    public static class BoardInsertReqDto {
+        private String title;
+        private String content;
+
+        private Integer career;
+        private String careerString;
+        private Integer education;
+        private String educationString;
+        private Integer jobType;
+        private String jobTypeString;
+
+        private String favor;
+        private Integer userId;
     }
 }

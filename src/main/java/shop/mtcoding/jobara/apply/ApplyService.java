@@ -1,44 +1,28 @@
 package shop.mtcoding.jobara.apply;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import shop.mtcoding.jobara.apply.dto.ApplyResp.ListRespDto;
 import shop.mtcoding.jobara.apply.model.Apply;
 import shop.mtcoding.jobara.apply.model.ApplyRepository;
-import shop.mtcoding.jobara.board.model.BoardRepository;
 import shop.mtcoding.jobara.common.ex.CustomApiException;
-import shop.mtcoding.jobara.common.util.Verify;
 
 @Service
 public class ApplyService {
-    
     @Autowired
-    ApplyRepository applyRepository;
+    private ApplyRepository applyRepository;
 
-    @Autowired
-    BoardRepository boardRepository;
-
-    @Transactional
-    public void insertApply(Integer id, Integer usPrincipalId) {
-        Verify.validateObject(boardRepository.findById(id), "존재하지 않는 공고입니다.");
-        Apply applyTemp = new Apply(usPrincipalId, id);
-        // 아래 코드 수정 요망
-        Verify.validateApiObject(applyRepository.findByUserIdAndBoardId(applyTemp), "이미 지원한 공고입니다.");
+    public void insertApply(Integer boardId, Integer principalId) {
+        Apply apply = new Apply(boardId, principalId);
+        if (applyRepository.findByUserIdAndBoardId(apply) != null) {
+            throw new CustomApiException("이미 지원한 공고입니다.");
+        }
         try {
-            applyRepository.insert(applyTemp);
+            applyRepository.insert(apply);
         } catch (Exception e) {
-            throw new CustomApiException("서버 오류로 인한 지원 실패",HttpStatus.INTERNAL_SERVER_ERROR);
+            throw new CustomApiException("서버 에러 : 지원 실패", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @Transactional(readOnly = true)
-    public List<ListRespDto> getApplyList(Integer companyId) {
-        return applyRepository.findByCompanyIdWithBoardAndUser(companyId);
-    }
-    
 }
