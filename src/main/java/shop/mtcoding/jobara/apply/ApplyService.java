@@ -29,7 +29,7 @@ public class ApplyService {
     }
 
     public List<CompanyApplyRespDto> getApplyForCompany(Integer principalId) {
-        return applyRepository.findByCompanyIdWithBoardAndUser(principalId);
+        return applyRepository.findByUserIdWithBoardAndUser(principalId);
     }
 
 }
