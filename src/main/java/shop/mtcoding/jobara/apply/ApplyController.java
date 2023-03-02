@@ -1,14 +1,18 @@
 package shop.mtcoding.jobara.apply;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import shop.mtcoding.jobara.apply.dto.ApplyResp.CompanyApplyRespDto;
 import shop.mtcoding.jobara.common.dto.ResponseDto;
 import shop.mtcoding.jobara.common.ex.CustomApiException;
 import shop.mtcoding.jobara.common.util.Verify;
@@ -32,5 +36,20 @@ public class ApplyController {
         }
         applyService.insertApply(id, principal.getId());
         return new ResponseEntity<>(new ResponseDto<>(1, "지원 성공", null), HttpStatus.OK);
+    }
+
+    @GetMapping("/company/{id}/apply")
+    public String companyApplyList(@PathVariable Integer id, Model model) {
+        UserVo principal = (UserVo) session.getAttribute("principal");
+        Verify.validateApiObject(principal, "로그인이 필요한 기능입니다");
+        if (!principal.getRole().equals("company")) {
+            throw new CustomApiException("권한이 없습니다.", HttpStatus.FORBIDDEN);
+        }
+        if (principal.getId() != id) {
+            throw new CustomApiException("권한이 없습니다.", HttpStatus.FORBIDDEN);
+        }
+        List<CompanyApplyRespDto> applyListPS = applyService.getApplyForCompany(id);
+        model.addAttribute("applyList", applyListPS);
+        return "company/applyList";
     }
 }
