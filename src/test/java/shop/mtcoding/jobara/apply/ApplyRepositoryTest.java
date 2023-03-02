@@ -32,7 +32,7 @@ public class ApplyRepositoryTest {
         // then
         assertThat(EmployeeApplyRespDtoList.get(0).getResumeTitle()).isEqualTo("이력제 제목1");
         assertThat(EmployeeApplyRespDtoList.get(0).getBoardTitle()).isEqualTo("공고제목1");
-        assertThat(EmployeeApplyRespDtoList.get(0).getJobType()).isEqualTo(1);
+        assertThat(EmployeeApplyRespDtoList.get(0).getState()).isEqualTo(-1);
     }
 
     @Test
