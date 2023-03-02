@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import shop.mtcoding.jobara.common.util.DateParse;
 
 @Getter
 @Setter
@@ -18,5 +19,9 @@ public class Apply {
     public Apply(Integer boardId, Integer userId) {
         this.userId = userId;
         this.boardId = boardId;
+    }
+
+    public String getCreatedAtToString() {
+        return DateParse.format(createdAt);
     }
 }
