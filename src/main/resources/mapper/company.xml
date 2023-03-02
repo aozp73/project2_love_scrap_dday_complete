@@ -22,7 +22,7 @@
         update company_tb
            set company_name = #{companyName}, 
                company_scale = #{companyScale}, 
-               company_field = #{companyField},
+               company_field = #{companyField}
         where user_id = #{userId}
     </update>    
 

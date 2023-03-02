@@ -41,13 +41,13 @@
                                     ${board.careerString}
                                 </div>
                                 <div class="my-text-ellipsis">
-                                    대졸이상 (졸업예정자 가능)
+                                    ${board.educationString}
                                 </div>
                                 <div class="my-text-ellipsis">
-                                    인턴
+                                    ${board.jobTypeString}
                                 </div>
                                 <div class="my-text-ellipsis">
-                                    프로젝트 유경험자, 관련 자격증 보유자
+                                    ${board.favor}
                                 </div>
                             </div>
                         </div>
