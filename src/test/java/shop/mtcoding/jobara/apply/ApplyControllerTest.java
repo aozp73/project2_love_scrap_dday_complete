@@ -22,13 +22,14 @@ import org.springframework.transaction.annotation.Transactional;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import shop.mtcoding.jobara.apply.dto.ApplyResp.CompanyApplyRespDto;
+import shop.mtcoding.jobara.apply.dto.ApplyResp.EmployeeApplyRespDto;
 import shop.mtcoding.jobara.user.vo.UserVo;
 
 @Transactional
 @AutoConfigureMockMvc
 @SpringBootTest(webEnvironment = WebEnvironment.MOCK)
 public class ApplyControllerTest {
-    
+
     @Autowired
     private MockMvc mvc;
 
@@ -40,9 +41,9 @@ public class ApplyControllerTest {
     @BeforeEach
     public void setUp() {
         UserVo pricipal = new UserVo();
-        pricipal.setId(6);
+        pricipal.setId(1);
         pricipal.setUsername("ssar");
-        pricipal.setRole("company");
+        pricipal.setRole("employee");
         pricipal.setProfile(null);
         mockSession = new MockHttpSession();
         mockSession.setAttribute("principal", pricipal);
@@ -65,18 +66,36 @@ public class ApplyControllerTest {
     }
 
     @Test
-    public void companyApplyList_test() throws Exception{
+    public void companyApplyList_test() throws Exception {
         // given
         int id = 6;
 
         // when
         ResultActions resultActions = mvc.perform(
-                get("/company/"+id+"/apply").session(mockSession));
+                get("/company/" + id + "/apply").session(mockSession));
         Map<String, Object> map = resultActions.andReturn().getModelAndView().getModel();
         List<CompanyApplyRespDto> applyListPS = (List<CompanyApplyRespDto>) map.get("applyList");
 
         // verify
         resultActions.andExpect(status().isOk());
         assertThat(applyListPS.get(0).getRealName()).isEqualTo("김살");
+    }
+
+    @Test
+    public void employeeApplyList_test() throws Exception {
+        // given
+        int id = 1;
+
+        // when
+        ResultActions resultActions = mvc.perform(
+                get("/employee/" + id + "/apply").session(mockSession));
+        Map<String, Object> map = resultActions.andReturn().getModelAndView().getModel();
+        List<EmployeeApplyRespDto> applyListPS = (List<EmployeeApplyRespDto>) map.get("applyList");
+
+        // verify
+        resultActions.andExpect(status().isOk());
+        assertThat(applyListPS.get(0).getBoardTitle()).isEqualTo("공고제목1");
+        assertThat(applyListPS.get(0).getResumeTitle()).isEqualTo("이력제 제목1");
+        assertThat(applyListPS.get(0).getJobType()).isEqualTo(1);
     }
 }

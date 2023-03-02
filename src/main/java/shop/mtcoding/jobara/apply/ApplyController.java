@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import shop.mtcoding.jobara.apply.dto.ApplyResp.CompanyApplyRespDto;
+import shop.mtcoding.jobara.apply.dto.ApplyResp.EmployeeApplyRespDto;
 import shop.mtcoding.jobara.common.dto.ResponseDto;
 import shop.mtcoding.jobara.common.ex.CustomApiException;
 import shop.mtcoding.jobara.common.util.Verify;
@@ -51,5 +52,20 @@ public class ApplyController {
         List<CompanyApplyRespDto> applyListPS = applyService.getApplyForCompany(id);
         model.addAttribute("applyList", applyListPS);
         return "company/applyList";
+    }
+
+    @GetMapping("/employee/{id}/apply")
+    public String employeeApplyList(@PathVariable Integer id, Model model){
+        UserVo principal = (UserVo) session.getAttribute("principal");
+        Verify.validateApiObject(principal, "로그인이 필요한 기능입니다");
+        if (!principal.getRole().equals("employee")) {
+            throw new CustomApiException("권한이 없습니다.", HttpStatus.FORBIDDEN);
+        }
+        if (principal.getId() != id) {
+            throw new CustomApiException("권한이 없습니다.", HttpStatus.FORBIDDEN);
+        }
+        List<EmployeeApplyRespDto> applyListPS = applyService.getApplyForEmployee(id);
+        model.addAttribute("applyList", applyListPS);
+        return "employee/applyList";
     }
 }
