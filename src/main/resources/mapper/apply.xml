@@ -14,8 +14,8 @@
     </select>
 
     <insert id="insert">
-        insert into apply_tb (board_id, user_id, created_at) 
-        values(#{boardId}, #{userId}, now())
+        insert into apply_tb (board_id, user_id, state, created_at) 
+        values(#{boardId}, #{userId}, 0, now())
     </insert>  
 
     <update id="updateById">

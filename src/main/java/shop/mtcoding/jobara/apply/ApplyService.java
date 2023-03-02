@@ -11,16 +11,24 @@ import shop.mtcoding.jobara.apply.dto.ApplyResp.CompanyApplyRespDto;
 import shop.mtcoding.jobara.apply.dto.ApplyResp.EmployeeApplyRespDto;
 import shop.mtcoding.jobara.apply.model.Apply;
 import shop.mtcoding.jobara.apply.model.ApplyRepository;
+import shop.mtcoding.jobara.board.model.Board;
+import shop.mtcoding.jobara.board.model.BoardRepository;
 import shop.mtcoding.jobara.common.ex.CustomApiException;
+import shop.mtcoding.jobara.common.util.Verify;
 
 @Service
 public class ApplyService {
     @Autowired
     private ApplyRepository applyRepository;
 
+    @Autowired
+    private BoardRepository boardRepository;
+
     @Transactional
     public void insertApply(Integer boardId, Integer principalId) {
         Apply apply = new Apply(boardId, principalId);
+        Board boardPS = boardRepository.findById(boardId);
+        Verify.validateApiObject(boardPS, "존재하지 않는 게시물 입니다.");
         if (applyRepository.findByUserIdAndBoardId(apply) != null) {
             throw new CustomApiException("이미 지원한 공고입니다.");
         }
