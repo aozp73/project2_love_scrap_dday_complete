@@ -56,6 +56,7 @@ public class CompanyConetroller {
 
     @PostMapping("/company/update")
     public String update(CompanyUpdateReqDto companyUpdateReqDto, MultipartFile profile) {
+
         UserVo principal = (UserVo) session.getAttribute("principal");
         Verify.validateObject(principal, "로그인이 필요합니다.", HttpStatus.UNAUTHORIZED, "/company/loginForm");
         if (!principal.getRole().equals("company")) {

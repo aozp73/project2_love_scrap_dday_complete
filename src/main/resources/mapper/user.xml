@@ -29,7 +29,7 @@
                address = #{address},
                detail_address = #{detailAddress},
                tel = #{tel},
-               career = #{career}
+               profile = #{profile}
         where id = #{id} 
     </update>
 
