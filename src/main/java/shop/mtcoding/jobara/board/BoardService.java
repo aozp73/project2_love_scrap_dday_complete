@@ -1,5 +1,6 @@
 package shop.mtcoding.jobara.board;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import shop.mtcoding.jobara.board.dto.BoardReq.BoardInsertReqDto;
+import shop.mtcoding.jobara.board.dto.BoardReq.BoardInsertSkillReqDto;
 import shop.mtcoding.jobara.board.dto.BoardReq.BoardUpdateReqDto;
 import shop.mtcoding.jobara.board.dto.BoardResp.BoardDetailRespDto;
 import shop.mtcoding.jobara.board.dto.BoardResp.BoardListRespDto;
@@ -16,6 +18,7 @@ import shop.mtcoding.jobara.board.dto.BoardResp.BoardUpdateRespDto;
 import shop.mtcoding.jobara.board.dto.BoardResp.MyBoardListRespDto;
 import shop.mtcoding.jobara.board.model.Board;
 import shop.mtcoding.jobara.board.model.BoardRepository;
+import shop.mtcoding.jobara.board.model.BoardTechRepository;
 import shop.mtcoding.jobara.common.ex.CustomException;
 import shop.mtcoding.jobara.common.util.CareerParse;
 import shop.mtcoding.jobara.common.util.EducationParse;
@@ -26,6 +29,9 @@ public class BoardService {
 
     @Autowired
     BoardRepository boardRepository;
+
+    @Autowired
+    BoardTechRepository boardTechRepository;
 
     @Transactional(readOnly = true)
     public List<BoardMainRespDto> getListToMain() {
@@ -169,6 +175,53 @@ public class BoardService {
         }
 
         return myBoardListPS;
+    }
+
+    @Transactional
+    public void insertSkill(ArrayList<Integer> checkLang, int boardId) {
+
+        BoardInsertSkillReqDto boardInsertSkillReqDto = new BoardInsertSkillReqDto(boardId, checkLang);
+
+        try {
+            boardTechRepository.insertSkill(boardInsertSkillReqDto);
+        } catch (Exception e) {
+            throw new CustomException("서버에 일시적인 문제가 생겼습니다", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
+
+    @Transactional(readOnly = true)
+    public ArrayList<Integer> getSkillForDetail(int boardId) {
+        ArrayList<Integer> checkLang;
+
+        try {
+            checkLang = boardTechRepository.findByIdWithSkillForDetail(boardId);
+        } catch (Exception e) {
+            throw new CustomException("서버에 일시적인 문제가 생겼습니다", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return checkLang;
+    }
+
+    @Transactional
+    public void updateTech(ArrayList<Integer> techList, int boardId) {
+        try {
+            boardTechRepository.deleteByBoardId(boardId);
+        } catch (Exception e) {
+            throw new CustomException("서버에 일시적인 문제가 생겼습니다", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        BoardInsertSkillReqDto boardInsertSkillReqDto = new BoardInsertSkillReqDto(boardId, techList);
+        try {
+            boardTechRepository.insertSkill(boardInsertSkillReqDto);
+        } catch (Exception e) {
+            throw new CustomException("서버에 일시적인 문제가 생겼습니다", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
+
+    public List<BoardListRespDto> getLangMatchList(int userId) {
+
+        return boardRepository.findAllByUserIdForLangMatching(userId);
     }
 
 }

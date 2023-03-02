@@ -6,8 +6,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -33,7 +33,6 @@ import shop.mtcoding.jobara.board.dto.BoardResp.BoardListRespDto;
 import shop.mtcoding.jobara.board.dto.BoardResp.BoardMainRespDto;
 import shop.mtcoding.jobara.board.dto.BoardResp.BoardUpdateRespDto;
 import shop.mtcoding.jobara.board.dto.BoardResp.MyBoardListRespDto;
-import shop.mtcoding.jobara.user.model.User;
 import shop.mtcoding.jobara.user.vo.UserVo;
 
 @Transactional
@@ -53,10 +52,11 @@ public class BoardControllerTest {
     public void setUp() {
         UserVo principal = new UserVo();
         principal.setId(6);
+        // principal.setId(1);
         principal.setUsername("cos");
         principal.setRole("company");
 
-        // companyUser.setRole("employee");
+        // principal.setRole("employee");
 
         mockSession = new MockHttpSession();
         mockSession.setAttribute("principal", principal);
@@ -98,6 +98,8 @@ public class BoardControllerTest {
         boardUpdateReqDto.setEducationString("4년 대졸이상");
         boardUpdateReqDto.setJobTypeString("정규직");
         boardUpdateReqDto.setFavor("관련 프로젝트 경험");
+        ArrayList<Integer> arrayList = new ArrayList<>(Arrays.asList(1, 3, 5, 7));
+        boardUpdateReqDto.setCheckedValues(arrayList);
 
         String requestBody = om.writeValueAsString(boardUpdateReqDto);
 
@@ -139,7 +141,7 @@ public class BoardControllerTest {
     @Test
     public void save_test() throws Exception {
         // given
-        String requestBody = "title=테스트제목&content=테스트내용&careerString=1년이상 ~ 3년미만&educationString=4년 대졸이상&jobTypeString=정규직&favor=관련프로젝트 경험&userId=6";
+        String requestBody = "title=테스트제목&content=테스트내용&careerString=1년이상 ~ 3년미만&educationString=4년 대졸이상&jobTypeString=정규직&favor=관련프로젝트 경험&userId=6&checkLang=2&checkLang=4&checkLang=6";
 
         // when
         ResultActions resultActions = mvc.perform(
@@ -219,10 +221,12 @@ public class BoardControllerTest {
     @Test
     public void boardList_test() throws Exception {
         // given
+        String keyword = "lang";
 
         // when
         ResultActions resultActions = mvc.perform(
-                get("/board/list"));
+                get("/board/list?keyword=lang")
+                        .session(mockSession));
 
         Map<String, Object> map = resultActions.andReturn().getModelAndView().getModel();
         List<BoardListRespDto> boardList = (List<BoardListRespDto>) map.get("boardList");

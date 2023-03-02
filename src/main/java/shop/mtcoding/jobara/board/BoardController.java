@@ -1,5 +1,6 @@
 package shop.mtcoding.jobara.board;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import shop.mtcoding.jobara.board.dto.BoardReq.BoardInsertReqDto;
 import shop.mtcoding.jobara.board.dto.BoardReq.BoardUpdateReqDto;
@@ -38,6 +40,7 @@ public class BoardController {
 
     @GetMapping({ "/", "/home" })
     public String home(Model model) {
+
         List<BoardMainRespDto> boardListPS = boardService.getListToMain();
         model.addAttribute("boardMainList", boardListPS);
 
@@ -52,9 +55,21 @@ public class BoardController {
     }
 
     @GetMapping("/board/list")
-    public String list(Model model) {
-        List<BoardListRespDto> boardListPS = boardService.getList();
-        model.addAttribute("boardList", boardListPS);
+    public String list(Model model, String keyword) {
+
+        if (keyword == null) {
+            keyword = "";
+        }
+        UserVo principalCheck = (UserVo) session.getAttribute("principal");
+
+        if (keyword.equals("lang") && principalCheck.getRole().equals("employee")) {
+            List<BoardListRespDto> boardListPS = boardService.getLangMatchList(principalCheck.getId());
+            model.addAttribute("boardList", boardListPS);
+            model.addAttribute("check", "lang");
+        } else {
+            List<BoardListRespDto> boardListPS = boardService.getList();
+            model.addAttribute("boardList", boardListPS);
+        }
 
         return "board/list";
     }
@@ -86,17 +101,18 @@ public class BoardController {
             throw new CustomException("기업회원으로 로그인 해주세요.");
         }
 
+        List<Integer> boardSkill = boardService.getSkillForDetail(id);
+
         BoardUpdateRespDto boardDetailPS = boardService.getDetailForUpdate(id, principal.getId());
         model.addAttribute("boardDetail", boardDetailPS);
+        model.addAttribute("boardSkill", boardSkill);
 
         return "board/updateForm";
     }
 
     @PutMapping("/board/update/{id}")
     public ResponseEntity<?> update(@PathVariable int id, @RequestBody BoardUpdateReqDto boardUpdateReqDto) {
-
         UserVo principal = (UserVo) session.getAttribute("principal");
-
         // 인증체크
         Verify.validateObject(
                 principal, "로그인이 필요한 페이지입니다", HttpStatus.BAD_REQUEST,
@@ -111,12 +127,13 @@ public class BoardController {
         Verify.validateString(boardUpdateReqDto.getCareerString(), "경력을 입력하세요");
 
         boardService.updateBoard(boardUpdateReqDto, principal.getId());
+        boardService.updateTech(boardUpdateReqDto.getCheckedValues(), id);
 
         return new ResponseEntity<>(new ResponseDto<>(1, "게시글 수정완료", null), HttpStatus.OK);
     }
 
     @PostMapping("/board/save")
-    public String save(BoardInsertReqDto boardInsertReqDto) {
+    public String save(BoardInsertReqDto boardInsertReqDto, @RequestParam ArrayList<Integer> checkLang) {
 
         UserVo principal = (UserVo) session.getAttribute("principal");
 
@@ -142,7 +159,8 @@ public class BoardController {
             throw new CustomException("근무형태를 선택하세요");
         }
 
-        boardService.insertBoard(boardInsertReqDto, principal.getId());
+        int boardId = boardService.insertBoard(boardInsertReqDto, principal.getId());
+        boardService.insertSkill(checkLang, boardId);
 
         return "redirect:/board/boardList/" + principal.getId();
     }
