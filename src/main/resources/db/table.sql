@@ -49,6 +49,7 @@ create table apply_tb(
     id int auto_increment primary key,
     user_id int not null,
     board_id int not null,
+    state int not null,
     created_at timestamp not null
 );
 

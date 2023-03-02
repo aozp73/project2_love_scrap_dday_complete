@@ -26,10 +26,10 @@ insert into board_tb(user_id, title, content, career, job_type, education, favor
 insert into board_tb(user_id, title, content, career, job_type, education, favor, created_at) values(7, '공고제목3','공고내용3', 6, 2, 4, '관련 자격증 보유자', now());
 insert into board_tb(user_id, title, content, career, job_type, education, favor, created_at) values(7, '공고제목4','공고내용4', -1, 2, 0, '관련 자격증 보유자', now());
 
-insert into apply_tb(user_id, board_id, created_at) values(1, 1, now());
-insert into apply_tb(user_id, board_id, created_at) values(2, 1, now());
-insert into apply_tb(user_id, board_id, created_at) values(1, 2, now());
-insert into apply_tb(user_id, board_id, created_at) values(2, 2, now());
+insert into apply_tb(user_id, board_id, state, created_at) values(1, 1, -1, now());
+insert into apply_tb(user_id, board_id, state, created_at) values(2, 1, 1, now());
+insert into apply_tb(user_id, board_id, state, created_at) values(1, 2, 0, now());
+insert into apply_tb(user_id, board_id, state, created_at) values(2, 2, 0, now());
 
 insert into skill_tb(skill_code, skill_name) values(1, 'JAVA');
 insert into skill_tb(skill_code, skill_name) values(2, 'C');

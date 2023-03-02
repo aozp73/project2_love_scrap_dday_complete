@@ -16,6 +16,7 @@ import shop.mtcoding.jobara.apply.dto.ApplyResp.CompanyApplyRespDto;
 import shop.mtcoding.jobara.apply.dto.ApplyResp.EmployeeApplyRespDto;
 import shop.mtcoding.jobara.common.dto.ResponseDto;
 import shop.mtcoding.jobara.common.ex.CustomApiException;
+import shop.mtcoding.jobara.common.ex.CustomException;
 import shop.mtcoding.jobara.common.util.Verify;
 import shop.mtcoding.jobara.user.vo.UserVo;
 
@@ -42,12 +43,12 @@ public class ApplyController {
     @GetMapping("/company/{id}/apply")
     public String companyApplyList(@PathVariable Integer id, Model model) {
         UserVo principal = (UserVo) session.getAttribute("principal");
-        Verify.validateApiObject(principal, "로그인이 필요한 기능입니다");
+        Verify.validateObject(principal, "로그인이 필요한 기능입니다");
         if (!principal.getRole().equals("company")) {
-            throw new CustomApiException("권한이 없습니다.", HttpStatus.FORBIDDEN);
+            throw new CustomException("권한이 없습니다.", HttpStatus.FORBIDDEN);
         }
         if (principal.getId() != id) {
-            throw new CustomApiException("권한이 없습니다.", HttpStatus.FORBIDDEN);
+            throw new CustomException("권한이 없습니다.", HttpStatus.FORBIDDEN);
         }
         List<CompanyApplyRespDto> applyListPS = applyService.getApplyForCompany(id);
         model.addAttribute("applyList", applyListPS);
@@ -55,14 +56,14 @@ public class ApplyController {
     }
 
     @GetMapping("/employee/{id}/apply")
-    public String employeeApplyList(@PathVariable Integer id, Model model){
+    public String employeeApplyList(@PathVariable Integer id, Model model) {
         UserVo principal = (UserVo) session.getAttribute("principal");
-        Verify.validateApiObject(principal, "로그인이 필요한 기능입니다");
+        Verify.validateObject(principal, "로그인이 필요한 기능입니다");
         if (!principal.getRole().equals("employee")) {
-            throw new CustomApiException("권한이 없습니다.", HttpStatus.FORBIDDEN);
+            throw new CustomException("권한이 없습니다.", HttpStatus.FORBIDDEN);
         }
         if (principal.getId() != id) {
-            throw new CustomApiException("권한이 없습니다.", HttpStatus.FORBIDDEN);
+            throw new CustomException("권한이 없습니다.", HttpStatus.FORBIDDEN);
         }
         List<EmployeeApplyRespDto> applyListPS = applyService.getApplyForEmployee(id);
         model.addAttribute("applyList", applyListPS);

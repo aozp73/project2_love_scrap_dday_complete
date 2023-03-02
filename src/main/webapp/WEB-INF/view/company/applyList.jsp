@@ -13,7 +13,7 @@
                             <th>번호</th>
                             <th style="width: 20%;">이름</th>
                             <th style="width: 30%;">지원 공고</th>
-                            <th style="width: 20%;">지원 분야</th>
+                            <th style="width: 20%;">상태</th>
                             <th style="width: 20%;">지원 일자</th>
                         </tr>
                     </thead>
@@ -28,8 +28,8 @@
                                 <td class="my-text-ellipsis"><a href="/board/${apply.boardId}"
                                         class="no_under_line_link" style="width: 100%; display: block;">
                                         ${apply.title}</a></td>
-                                <td class="my-text-ellipsis">${apply.jobType}</td>
-                                <td class="text-center my-text-ellipsis">${apply.createdAt}</td>
+                                <td class="my-text-ellipsis text-center">${apply.stateToString}</td>
+                                <td class="text-center my-text-ellipsis">${apply.createdAtToString}</td>
                             </tr>
                         </c:forEach>
                         <!-- 반복문종료 -->

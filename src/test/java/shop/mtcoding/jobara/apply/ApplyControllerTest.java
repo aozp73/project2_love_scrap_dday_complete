@@ -96,6 +96,6 @@ public class ApplyControllerTest {
         resultActions.andExpect(status().isOk());
         assertThat(applyListPS.get(0).getBoardTitle()).isEqualTo("공고제목1");
         assertThat(applyListPS.get(0).getResumeTitle()).isEqualTo("이력제 제목1");
-        assertThat(applyListPS.get(0).getJobType()).isEqualTo(1);
+        assertThat(applyListPS.get(0).getState()).isEqualTo(-1);
     }
 }
