@@ -33,4 +33,13 @@
         select * from apply_tb where user_id = #{userId} and board_id = #{boardId}
     </select>
 
+    <select id="findByCompanyIdWithBoardAndUser" resultType="shop.mtcoding.jobara.apply.dto.ApplyResp$CompanyApplyRespDto">
+        select at.id, at.user_id, at.board_id, at.created_at, et.real_name, bt.title, bt.job_type, 
+        from apply_tb at
+        inner join employee_tb et
+        on et.user_id = at.user_id
+        inner join board_tb bt
+        on at.board_id = bt.id
+        where bt.user_id = #{userId}
+    </select>  
 </mapper>

@@ -1,6 +1,5 @@
 package shop.mtcoding.jobara.apply;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,11 +28,8 @@ public class ApplyService {
         }
     }
 
-    public List<CompanyApplyRespDto> getApplyForCompany(Integer id) {
-        List<CompanyApplyRespDto> applyListPS = new ArrayList<>();
-        CompanyApplyRespDto companyApplyRespDto = new CompanyApplyRespDto(1, 1, "김살", "공고제목1", "인턴", "2022-03-12");
-        applyListPS.add(companyApplyRespDto);
-        return applyListPS;
+    public List<CompanyApplyRespDto> getApplyForCompany(Integer principalId) {
+        return applyRepository.findByCompanyIdWithBoardAndUser(principalId);
     }
 
 }
