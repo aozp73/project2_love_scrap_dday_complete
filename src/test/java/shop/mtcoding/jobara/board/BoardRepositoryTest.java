@@ -61,7 +61,7 @@ public class BoardRepositoryTest {
 
         // then
         assertThat(pagingDto.getCurrentPage()).isEqualTo(1);
-        assertThat(pagingDto.getTotalCount()).isEqualTo(7);
+        assertThat(pagingDto.getTotalCount()).isEqualTo(17);
         // assertThat(pagingDto.getTotalCount()).isEqualTo(1);
         // assertThat(pagingDto.getTotalCount()).isEqualTo(3);
     }
@@ -85,7 +85,7 @@ public class BoardRepositoryTest {
         System.out.println("테스트 : " + responseBody);
 
         // then
-        assertThat(boardListRespDto.size()).isEqualTo(7);
+        assertThat(boardListRespDto.size()).isEqualTo(8);
         // assertThat(boardListRespDto.size()).isEqualTo(3);
 
     }

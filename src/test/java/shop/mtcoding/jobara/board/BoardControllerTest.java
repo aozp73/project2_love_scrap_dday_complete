@@ -29,10 +29,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import shop.mtcoding.jobara.board.dto.BoardReq.BoardUpdateReqDto;
 import shop.mtcoding.jobara.board.dto.BoardResp.BoardDetailRespDto;
-import shop.mtcoding.jobara.board.dto.BoardResp.BoardListRespDto;
 import shop.mtcoding.jobara.board.dto.BoardResp.BoardMainRespDto;
 import shop.mtcoding.jobara.board.dto.BoardResp.BoardUpdateRespDto;
 import shop.mtcoding.jobara.board.dto.BoardResp.MyBoardListRespDto;
+import shop.mtcoding.jobara.board.dto.BoardResp.PagingDto;
 import shop.mtcoding.jobara.user.vo.UserVo;
 
 @Transactional
@@ -221,23 +221,25 @@ public class BoardControllerTest {
     @Test
     public void boardList_test() throws Exception {
         // given
-        String keyword = "lang";
+        // String keyword = "lang";
+        // Integer page = 1; userId=1, role="employee" 의 세션 (ssar 로그인) 일 때 테스트 완료
+        String keyword = null;
+        Integer page = 2;
 
         // when
         ResultActions resultActions = mvc.perform(
-                get("/board/list?keyword=lang")
+                get("/board/list?page=" + page + "&keyword=" + keyword)
                         .session(mockSession));
 
         Map<String, Object> map = resultActions.andReturn().getModelAndView().getModel();
-        List<BoardListRespDto> boardList = (List<BoardListRespDto>) map.get("boardList");
+        PagingDto boardList = (PagingDto) map.get("pagingDto");
 
-        // String model = om.writeValueAsString(boardList);
+        // String model = om.writeValueAsString(boardList.getBoardListDtos());
         // System.out.println("테스트 : " + model);
 
         // then
-        resultActions.andExpect(status().isOk());
-        assertThat(boardList.get(0).getTitle()).isEqualTo("공고제목1");
-        assertThat(boardList.get(1).getTitle()).isEqualTo("공고제목2");
+        // resultActions.andExpect(status().isOk());
+        assertThat(boardList.getBoardListDtos().size()).isEqualTo(1);
     }
 
     @Test

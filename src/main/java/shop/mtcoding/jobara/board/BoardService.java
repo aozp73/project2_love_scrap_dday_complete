@@ -89,7 +89,7 @@ public class BoardService {
         // System.out.println("keyword : " + keyword);
         // System.out.println("==========");
 
-        if (uservo != null) {
+        if (uservo != null && uservo.getRole().equals("employee")) {
             boardsList = boardRepository.findAllWithCompany(startNum, keyword, PagingDto.ROW, uservo.getId());
             pagingDto = boardRepository.paging(page, keyword, PagingDto.ROW, uservo.getId());
         } else {
