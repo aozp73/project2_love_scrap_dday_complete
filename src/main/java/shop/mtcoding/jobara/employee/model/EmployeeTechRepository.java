@@ -11,6 +11,8 @@ public interface EmployeeTechRepository {
 
     public List<EmployeeTech> findAll();
 
+    public List<Integer> findByIdWithSkillForDetail(int userId);
+
     public EmployeeTech findByUserId(int userId);
 
     public int insert(EmployeeTech employeeTech);

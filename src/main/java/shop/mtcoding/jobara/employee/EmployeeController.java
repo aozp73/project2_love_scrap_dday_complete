@@ -77,7 +77,9 @@ public class EmployeeController {
             throw new CustomException("권한이 없습니다.", HttpStatus.FORBIDDEN);
         }
         EmployeeUpdateRespDto employeeUpdateRespDto = employeeService.getEmployeeUpdateRespDto(principal.getId());
+        List<Integer> employeeSkill = employeeService.getSkillForDetail(principal.getId());
         model.addAttribute("employeeDto", employeeUpdateRespDto);
+        model.addAttribute("employeeSkill", employeeSkill);
         return "employee/updateForm";
     }
 

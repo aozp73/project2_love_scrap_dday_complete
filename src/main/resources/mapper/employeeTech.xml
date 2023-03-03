@@ -13,6 +13,11 @@
         select * from employeetech_tb where user_id = #{userId}
     </select>
 
+    <select id="findByIdWithSkillForDetail" resultType="Integer">
+        SELECT skill FROM employeetech_tb 
+        where user_id = #{userId}
+    </select>
+
     <insert id="insert">
         insert into employeetech_tb (user_id, skill) values(#{userId}, #{skill})
     </insert>

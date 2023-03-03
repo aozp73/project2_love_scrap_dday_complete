@@ -119,4 +119,9 @@ public class EmployeeService {
             throw new CustomException("서버에 일시적인 문제가 생겼습니다", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    public List<Integer> getSkillForDetail(Integer id) {
+        List<Integer> employeeTechPS = employeeTechRepository.findByIdWithSkillForDetail(id);
+        return employeeTechPS;
+    }
 }
