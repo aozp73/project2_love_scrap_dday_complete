@@ -6,13 +6,7 @@
             <div class="p-3">
                   <h2 style="text-align: center;">인재 목록</h2>
             </div>
-            <div class="d-flex justify-content-end mb-2">
-                  <select class="form-select" style="width: 123px;">
-                        <option>관련도순</option>
-                        <option> 연차순</option>
-                        <option> 날짜순</option>
-                  </select>
-            </div>
+
             <c:choose>
                   <c:when test="${principal.role eq 'company' and recommendEmployeeList[0].id != null}">
                   <h2 style="text-align: center;">최근 공고에 대한 추천 유저입니다.</h2>
@@ -59,7 +53,8 @@
                   </div>
                   <div class="p-3">
                   <div class="row">
-                  <c:forEach items="${allEmployeeList}" var="employee">
+                  
+                  <c:forEach items="${pagingDto.resumeListDtos}" var="employee">
                         <div class="col-md-3 py-2">
                               <div id="employee${employee.id}" onmouseenter="mouseEnterImages(this)"
                                     onmouseleave="mouseLeaveImages(this)" class="card col-lg-12">
@@ -100,7 +95,7 @@
                   <c:otherwise>
                   <div class="p-3">
                         <div class="row">
-                        <c:forEach items="${allEmployeeList}" var="employee">
+                        <c:forEach items="${pagingDto.resumeListDtos}" var="employee">
                               <div class="col-md-3 py-2">
                                     <div id="employee${employee.id}" onmouseenter="mouseEnterImages(this)"
                                           onmouseleave="mouseLeaveImages(this)" class="card col-lg-12">
@@ -139,9 +134,36 @@
                   </div>
                   </c:otherwise>
             </c:choose>
-            
+
+             <div class="d-flex justify-content-center">
+                  <ul class="pagination">
+
+                        <li class='page-item ${pagingDto.first ? "disabled" : ""}'><a class="page-link"
+                              href="javascript:void(0);" onclick="callPrev();">Prev</a></li>
+
+                        <c:forEach var="num" begin="${pagingDto.startPageNum}" end="${pagingDto.lastPageNum}">
+      
+                              <li class='page-item'><a class='page-link' href="/employee/list?page=${num-1}">${num}</a></li>              
+                        </c:forEach>
+
+                        <li class='page-item ${pagingDto.last ? "disabled" : ""}'><a class="page-link"
+                              href="javascript:void(0);" onclick="callNext();">Next</a></li>
+
+                  </ul>
+            </div>
       </div>
       <script>
+            function callPrev() {
+                let currentPage = `${pagingDto.currentPage - 1}`
+                    location.href = "/employee/list?page=" + currentPage;
+            }
+
+            function callNext() {
+                let currentPage = `${pagingDto.currentPage + 1}`
+                    location.href = "/employee/list?page=" + currentPage;
+            }
+
+
             function mouseEnterImages(e) {
                   let id = e.getAttribute('id');
                   $("#" + id).addClass("border border-primary");

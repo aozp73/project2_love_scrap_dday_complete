@@ -51,7 +51,7 @@ public class EmployeeControllerTest {
       @Test
       public void update_test() throws Exception {
             // given
-            String requestBody = "password=1234&email=ssar@nate.com&address=부산시&detailAddress=12구&tel=01099876554&career=2&education=고졸";
+            String requestBody = "password=1234&email=ssar@nate.com&realName=김살&address=부산시&detailAddress=12구&tel=01099876554&career=2&education=고졸";
             String requestBody2 = "password=1234&email=&tel=01099876554&career=2"; // null 테스트
 
             // when

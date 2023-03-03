@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.RequiredArgsConstructor;
+import shop.mtcoding.jobara.board.dto.BoardResp.BoardListRespDto;
+import shop.mtcoding.jobara.board.dto.BoardResp.PagingDto;
 import shop.mtcoding.jobara.common.ex.CustomException;
 import shop.mtcoding.jobara.common.util.PathUtil;
 import shop.mtcoding.jobara.employee.dto.EmployeeReq.EmployeeInsertSkillReqDto;
@@ -31,9 +33,22 @@ public class EmployeeService {
     private final UserRepository userRepository;
     private final EmployeeTechRepository employeeTechRepository;
 
-    public List<EmployeeAndResumeRespDto> getEmployee() {
-        List<EmployeeAndResumeRespDto> employeePS = employeeRepository.findAllWithResume();
-        return employeePS;
+    public PagingDto getEmployee(Integer page) {
+
+        if (page == null) {
+            page = 0;
+        }
+
+        int startNum = page * PagingDto.ROW;
+
+        List<EmployeeAndResumeRespDto> employeePS = employeeRepository.findAllWithResume(startNum,
+                PagingDto.ROW);
+        PagingDto pagingPS = employeeRepository.paging(page, PagingDto.ROW);
+
+        pagingPS.makeBlockInfo("");
+        pagingPS.setResumeListDtos(employeePS);
+
+        return pagingPS;
     }
 
     public List<EmployeeAndResumeRespDto> getRecommendEmployee(int id) {

@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import shop.mtcoding.jobara.employee.dto.EmployeeResp.EmployeeAndResumeRespDto;
 
 public class BoardResp {
     @Getter
@@ -97,6 +98,7 @@ public class BoardResp {
         private boolean isFirst; // getter가 만들어지면 isFirst() 이름으로 만들어짐. -> el에서는 first로 찾음
 
         private List<BoardListRespDto> boardListDtos;
+        private List<EmployeeAndResumeRespDto> resumeListDtos;
 
         public void makeBlockInfo(String keyword) {
             this.keyword = keyword;

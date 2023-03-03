@@ -10,10 +10,27 @@
     </select>
 
     <select id="findAllWithResume" resultType="shop.mtcoding.jobara.employee.dto.EmployeeResp$EmployeeAndResumeRespDto">
+        <!-- select user_tb.*, real_name, education, career, title, content
+        from user_tb, employee_tb, resume_tb
+        where user_tb.id = employee_tb.user_id and employee_tb.user_id = resume_tb.user_id -->
         select user_tb.*, real_name, education, career, title, content
         from user_tb, employee_tb, resume_tb
         where user_tb.id = employee_tb.user_id and employee_tb.user_id = resume_tb.user_id
+        OFFSET #{startNum} ROWS 
+        FETCH NEXT #{row} ROWS ONLY
     </select>
+
+    <select id="paging" resultType="shop.mtcoding.jobara.board.dto.BoardResp$PagingDto">
+        SELECT count(*) total_count,  CEILING( count(*) / #{row} ) total_page, #{page} current_page,
+        case when #{page} = 0 then 1
+            else 0 
+            end first,
+        case when #{page} = CEILING( count(*) / #{row} ) - 1 then 1
+            else 0 
+            end last
+        FROM resume_tb
+	</select>
+
 
     <select id="findEmployeeByIdWithResume" resultType="shop.mtcoding.jobara.employee.dto.EmployeeResp$EmployeeAndResumeRespDto">
         select user_tb.*, real_name, education, career, title, content

@@ -20,9 +20,11 @@ public class EmployeeRepositoryTest {
       @Test
       public void findAllWithResume_test() {
             // given
+            int startnum = 0;
+            int row = 8;
 
             // when
-            List<EmployeeAndResumeRespDto> list = employeeRepository.findAllWithResume();
+            List<EmployeeAndResumeRespDto> list = employeeRepository.findAllWithResume(startnum, row);
             // then
             assertThat(list.get(0).getTitle()).isEqualTo("이력제 제목1");
             assertThat(list.get(1).getContent()).isEqualTo("이력서 내용2");
