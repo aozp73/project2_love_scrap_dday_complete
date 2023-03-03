@@ -15,6 +15,7 @@ public class EmployeeResp {
     @AllArgsConstructor
     @NoArgsConstructor
     public static class EmployeeUpdateRespDto {
+        private Integer id;
         private String password;
         private String email;
         private String address;

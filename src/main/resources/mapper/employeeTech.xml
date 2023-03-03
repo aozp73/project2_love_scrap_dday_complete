@@ -15,7 +15,15 @@
 
     <insert id="insert">
         insert into employeetech_tb (user_id, skill) values(#{userId}, #{skill})
-    </insert>    
+    </insert>
+
+    <insert id="insertSkill">
+        insert into employeetech_tb (user_id, skill) 
+            VALUES
+        <foreach collection="checkLang" item="skill" separator=",">
+            (#{employeeId}, #{skill})
+        </foreach>
+    </insert>     
 
     <delete id="deleteByUserId">
         delete from employeetech_tb where user_id = #{userId} 

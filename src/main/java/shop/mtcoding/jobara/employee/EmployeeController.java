@@ -6,21 +6,25 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import shop.mtcoding.jobara.common.dto.ResponseDto;
 import shop.mtcoding.jobara.common.ex.CustomException;
 import shop.mtcoding.jobara.common.util.Verify;
 import shop.mtcoding.jobara.employee.dto.EmployeeReq.EmployeeJoinReqDto;
 import shop.mtcoding.jobara.employee.dto.EmployeeReq.EmployeeLoginReqDto;
+import shop.mtcoding.jobara.employee.dto.EmployeeReq.EmployeeTechUpdateReqDto;
 import shop.mtcoding.jobara.employee.dto.EmployeeReq.EmployeeUpdateReqDto;
 import shop.mtcoding.jobara.employee.dto.EmployeeResp.EmployeeAndResumeRespDto;
 import shop.mtcoding.jobara.employee.dto.EmployeeResp.EmployeeUpdateRespDto;
-import shop.mtcoding.jobara.user.model.User;
 import shop.mtcoding.jobara.user.vo.UserVo;
 
 @Controller
@@ -95,7 +99,7 @@ public class EmployeeController {
         return "redirect:/";
     }
 
-    @PostMapping("/employee/update")
+    @PostMapping("/employee/update/{id}")
     public String update(EmployeeUpdateReqDto employeeUpdateReqDto, MultipartFile profile) {
         UserVo principal = (UserVo) session.getAttribute("principal");
         Verify.validateObject(principal, "로그인이 필요합니다.", HttpStatus.UNAUTHORIZED, "/employee/loginForm");
@@ -115,4 +119,20 @@ public class EmployeeController {
         session.setAttribute("principal", UserVoPS);
         return "redirect:/";
     }
+
+    @PutMapping("/employee/update/tech/{id}")
+    public ResponseEntity<?> update(@PathVariable int id,
+            @RequestBody EmployeeTechUpdateReqDto employeeTechUpdateReqDto) {
+        UserVo principal = (UserVo) session.getAttribute("principal");
+        Verify.validateObject(principal, "로그인이 필요합니다.", HttpStatus.UNAUTHORIZED, "/employee/loginForm");
+        if (!principal.getRole().equals("employee")) {
+            throw new CustomException("권한이 없습니다.", HttpStatus.FORBIDDEN);
+        }
+        if (employeeTechUpdateReqDto.getCheckedValues() != null) {
+            employeeService.updateEmpolyeeTech(employeeTechUpdateReqDto.getCheckedValues(), principal.getId());
+        }
+
+        return new ResponseEntity<>(new ResponseDto<>(1, " 수정완료", null), HttpStatus.OK);
+    }
+
 }
