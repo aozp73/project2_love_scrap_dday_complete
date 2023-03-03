@@ -11,11 +11,13 @@ import shop.mtcoding.jobara.apply.dto.ApplyReq.ApplyDecideReqDto;
 import shop.mtcoding.jobara.apply.dto.ApplyReq.ApplyReqDto;
 import shop.mtcoding.jobara.apply.dto.ApplyResp.CompanyApplyRespDto;
 import shop.mtcoding.jobara.apply.dto.ApplyResp.EmployeeApplyRespDto;
+import shop.mtcoding.jobara.apply.dto.ApplyResp.MailDto;
 import shop.mtcoding.jobara.apply.model.Apply;
 import shop.mtcoding.jobara.apply.model.ApplyRepository;
 import shop.mtcoding.jobara.board.model.Board;
 import shop.mtcoding.jobara.board.model.BoardRepository;
 import shop.mtcoding.jobara.common.ex.CustomApiException;
+import shop.mtcoding.jobara.common.util.Mail;
 import shop.mtcoding.jobara.common.util.Verify;
 import shop.mtcoding.jobara.user.model.User;
 import shop.mtcoding.jobara.user.model.UserRepository;
@@ -30,6 +32,9 @@ public class ApplyService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private Mail mail;
 
     @Transactional
     public void insertApply(ApplyReqDto applyReqDto, Integer principalId) {
@@ -66,7 +71,22 @@ public class ApplyService {
             throw new CustomApiException("존재하지 않는 지원입니다.");
         }
         applyPS.setState(applyDecideReqDto.getState());
-        applyRepository.updateById(applyPS);
+        try {
+            applyRepository.updateById(applyPS);
+        } catch (Exception e) {
+            throw new CustomApiException("결과 처리 실패", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        try {
+            new Thread(() -> {
+                MailDto mailDto = applyRepository.findByIdWithBoardForMail(applyPS.getId());
+                System.out.println("테스트1" + user.getEmail());
+                mail.sendMail(mailDto, user.getEmail());
+                System.out.println("테스트2");
+            }).start();
+
+        } catch (Exception e) {
+           // 로그만 남기고!!
+        }
     }
 
 }
