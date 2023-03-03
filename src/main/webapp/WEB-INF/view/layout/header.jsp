@@ -6,7 +6,16 @@
 <head>
     <title>구인구직</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet"
+        type="text/css" />
+    <script src="/js/scripts.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
@@ -15,61 +24,44 @@
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
     <link rel="stylesheet" href="/css/style.css">
+    <link href="/css/styles.css" rel="stylesheet" />
 </head>
 
 <body>
-    <div class="d-flex justify-content-center">
-        <div class="text-center fs-1 my-5">
-            <a href="/" class="no_under_line_link">구인해요</a>
-        </div>
-    </div>
-
-    <nav class="navbar navbar-expand-sm my-bg-color-default navbar-dark">
-        <div class="container-fluid">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
-                <span class="navbar-toggler-icon"></span>
+    <body>
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand" href="/">Jobara</a>
+            <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button"
+                data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive"
+                aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars"></i>
             </button>
-            <div class="collapse navbar-collapse justify-content-center" id="collapsibleNavbar">
-                <ul class="navbar-nav my-nav-bar">
-                    <li class="nav-item fs-4 text-center">
-                        <a class="nav-link" href="/board/list">채용정보</a>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded"
+                            href="/employee/list">구인</a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded"
+                            href="/board/list">구직</a>
                     </li>
-                    <li class="nav-item fs-4 text-center">
-                        <a class="nav-link" href="/employee/list">인재정보</a>
-                    </li>
-                    <form class="d-flex">
-                        <button class="btn btn-primary my-button-no-round" type="button"
-                            style="display : none; visibility : hidden;"><img src="/images/search.png" alt="검색"
-                                style="width: 20px; height: 23px;"></button>
-                        <input class="form-control my-button-no-round text-center" type="text" placeholder="기업 검색">
-                    </form>
-                
-                <c:choose>
-                    <c:when test="${principal.role eq 'company'}">
-                    <li class="nav-item fs-4 text-center">
-                        <a class="nav-link" href="/company/updateForm">정보수정</a>
-                    </li>
-                    <li class="nav-item fs-4 text-center">
-                        <a class="nav-link" href="/logout">로그아웃</a>
-                    </li>
-                    </c:when>
-                    <c:when test="${principal.role eq 'employee'}">
-                    <li class="nav-item fs-4 text-center">
-                        <a class="nav-link" href="/employee/updateForm">정보수정</a>
-                    </li>
-                    <li class="nav-item fs-4 text-center">
-                        <a class="nav-link" href="/logout">로그아웃</a>
-                    </li>
-                    </c:when>
-                   <c:otherwise>
-                    <li class="nav-item fs-4 text-center">
-                        <a class="nav-link" href="/loginForm">로그인</a>
-                    </li>
-                    <li class="nav-item fs-4 text-center">
-                        <a class="nav-link" href="/employee/joinForm">회원가입</a>
-                    </li>
-                   </c:otherwise>
-                </c:choose>
+                    <c:choose>
+                       <c:when test="${principal == null}">
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded"
+                            href="/#contact">로그인</a></li>
+                       </c:when>
+                       <c:when test="${principal.role eq 'company'}">
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded"
+                            href="/company/updateForm">정보수정</a></li>
+                        
+                       </c:when>
+                       <c:otherwise>
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded"
+                            href="/employee/updateForm">정보수정</a></li>
+
+                       </c:otherwise>
+                    </c:choose>
                 </ul>
             </div>
         </div>

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
     <%@ include file="../layout/header.jsp" %>
-
+<div style="height: 100px;"></div>
         <div class="container my-3 py-3 px-3">
             <div class="p-3">
                 <h2 style="text-align: center;">나의 공고 목록</h2>
