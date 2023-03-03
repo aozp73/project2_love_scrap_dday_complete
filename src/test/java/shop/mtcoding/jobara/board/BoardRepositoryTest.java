@@ -16,6 +16,7 @@ import shop.mtcoding.jobara.board.dto.BoardReq.BoardInsertSkillReqDto;
 import shop.mtcoding.jobara.board.dto.BoardResp.BoardDetailRespDto;
 import shop.mtcoding.jobara.board.dto.BoardResp.BoardListRespDto;
 import shop.mtcoding.jobara.board.dto.BoardResp.MyBoardListRespDto;
+import shop.mtcoding.jobara.board.dto.BoardResp.PagingDto;
 import shop.mtcoding.jobara.board.model.BoardRepository;
 import shop.mtcoding.jobara.board.model.BoardTech;
 import shop.mtcoding.jobara.board.model.BoardTechRepository;
@@ -41,6 +42,52 @@ public class BoardRepositoryTest {
 
         // then
         assertThat(boardDetailRespDto.getCompanyScale()).isEqualTo("대기업");
+    }
+
+    @Test
+    public void paging_test() throws Exception {
+        // given
+        ObjectMapper om = new ObjectMapper();
+        int page = 1;
+        String keyword = null;
+        // String keyword = "lang";
+        int row = page * 8;
+        int userId = 1;
+
+        // when
+        PagingDto pagingDto = boardRepository.paging(page, keyword, row, userId);
+        String responseBody = om.writeValueAsString(pagingDto);
+        System.out.println("테스트 : " + responseBody);
+
+        // then
+        assertThat(pagingDto.getCurrentPage()).isEqualTo(1);
+        assertThat(pagingDto.getTotalCount()).isEqualTo(17);
+        // assertThat(pagingDto.getTotalCount()).isEqualTo(1);
+        // assertThat(pagingDto.getTotalCount()).isEqualTo(3);
+    }
+
+    @Test
+    public void findAllWithCompany() throws Exception {
+        // given
+        ObjectMapper om = new ObjectMapper();
+        int page = 0;
+
+        int startNum = page * 8;
+        String keyword = null;
+        // String keyword = "lang";
+        int row = 8;
+        int userId = 1;
+
+        // when
+        List<BoardListRespDto> boardListRespDto = boardRepository.findAllWithCompany(startNum, keyword, row,
+                userId);
+        String responseBody = om.writeValueAsString(boardListRespDto);
+        System.out.println("테스트 : " + responseBody);
+
+        // then
+        assertThat(boardListRespDto.size()).isEqualTo(8);
+        // assertThat(boardListRespDto.size()).isEqualTo(3);
+
     }
 
     @Test

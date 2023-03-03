@@ -16,6 +16,7 @@ import shop.mtcoding.jobara.board.dto.BoardResp.BoardListRespDto;
 import shop.mtcoding.jobara.board.dto.BoardResp.BoardMainRespDto;
 import shop.mtcoding.jobara.board.dto.BoardResp.BoardUpdateRespDto;
 import shop.mtcoding.jobara.board.dto.BoardResp.MyBoardListRespDto;
+import shop.mtcoding.jobara.board.dto.BoardResp.PagingDto;
 import shop.mtcoding.jobara.board.model.Board;
 import shop.mtcoding.jobara.board.model.BoardRepository;
 import shop.mtcoding.jobara.board.model.BoardTechRepository;
@@ -26,6 +27,7 @@ import shop.mtcoding.jobara.common.util.EducationParse;
 import shop.mtcoding.jobara.common.util.JobTypeParse;
 import shop.mtcoding.jobara.resume.model.Resume;
 import shop.mtcoding.jobara.resume.model.ResumeRepository;
+import shop.mtcoding.jobara.user.vo.UserVo;
 
 @Service
 public class BoardService {
@@ -74,13 +76,33 @@ public class BoardService {
         return boardDetailPS;
     }
 
-    @Transactional(readOnly = true)
-    public List<BoardListRespDto> getList() {
-        List<BoardListRespDto> boardListPS;
+    public PagingDto getListWithPaging(Integer page, String keyword, UserVo uservo) {
 
-        boardListPS = boardRepository.findAllWithCompany();
-        return boardListPS;
+        if (page == null) {
+            page = 0;
+        }
+        List<BoardListRespDto> boardsList;
+        PagingDto pagingDto;
+        int startNum = page * PagingDto.ROW;
 
+        // System.out.println("==========");
+        // System.out.println("keyword : " + keyword);
+        // System.out.println("==========");
+
+        if (uservo != null && uservo.getRole().equals("employee")) {
+            boardsList = boardRepository.findAllWithCompany(startNum, keyword, PagingDto.ROW, uservo.getId());
+            pagingDto = boardRepository.paging(page, keyword, PagingDto.ROW, uservo.getId());
+        } else {
+            boardsList = boardRepository.findAllWithCompany(startNum, keyword, PagingDto.ROW, 0);
+            pagingDto = boardRepository.paging(page, keyword, PagingDto.ROW, 0);
+        }
+
+        if (boardsList.size() == 0)
+            pagingDto.setNotResult(true);
+        pagingDto.makeBlockInfo(keyword);
+        pagingDto.setBoardListDtos(boardsList);
+
+        return pagingDto;
     }
 
     @Transactional(readOnly = true)
@@ -231,7 +253,7 @@ public class BoardService {
     }
 
     @Transactional(readOnly = true)
-    public List<Resume> getResume(int principalId){
+    public List<Resume> getResume(int principalId) {
         return resumeRepository.findByUserId(principalId);
     }
 
