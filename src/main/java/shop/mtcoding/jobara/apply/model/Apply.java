@@ -14,6 +14,7 @@ public class Apply {
     private Integer id;
     private Integer userId;
     private Integer boardId;
+    private Integer resumeId;
     private Integer state;
     private Timestamp createdAt;
 

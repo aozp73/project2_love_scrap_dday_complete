@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
     <%@ include file="../layout/header.jsp" %>
-<div style="height: 100px;"></div>
+        <div style="height: 100px;"></div>
         <div class="container my-3 py-3 px-3">
             <div class="my-border-color-default">
                 <div class="my-boardDetail-header">
@@ -95,17 +95,72 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-center mt-5">
-                        <div><button type="submit" class="btn btn-primary my-button-color-default" onclick="apply(${board.id})">지원하기</button></div>
+                        <div><button type="submit" class="btn btn-primary my-button-color-default"
+                                data-bs-toggle="modal" data-bs-target="#portfolioModal1">지원하기</button></div>
                     </div>
                 </div>
             </div>
         </div>
         </div>
+
+        <!-- Portfolio Modal 1-->
+        <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" aria-labelledby="portfolioModal1"
+            aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal"
+                            aria-label="Close"></button></div>
+                    <div class="modal-body text-center pb-5">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-8">
+                                    <!-- Portfolio Modal - Title-->
+                                    <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">이력서 선택</h2>
+                                    <!-- Icon Divider-->
+                                    <div class="divider-custom">
+                                        <div class="divider-custom-line"></div>
+                                        <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                                        <div class="divider-custom-line"></div>
+                                    </div>
+                                    <!-- Portfolio Modal - Image-->
+                                    <!-- Portfolio Modal - Text-->
+                                    <table style="width: 100%;" class="mb-3">
+                                        <table class="table table-hover">
+                                            <thead class="my-bg-color-default">
+                                                <tr class="text-center text-white">
+                                                    <th style="width: 20%;">번호</th>
+                                                    <th style="width: 70%;">이력서제목</th>
+                                                    <th style="width: 10%;">선택</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- 반복문 -->
+                                                <tr>
+                                                    <td class="text-center">1</td>
+                                                    <td class="my-text-ellipsis">이력서제목</td>
+                                                    <td><button type="button"
+                                                            class="badge bg-success my-border-color-default">지원</span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </table>
+                                    <button class="btn btn-primary" data-bs-dismiss="modal">
+                                        <i class="fas fa-xmark fa-fw"></i>
+                                        창닫기
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <script>
             function apply(boardId) {
                 $.ajax({
                     type: "get",
-                    url: '/board/'+boardId+'/apply',
+                    url: '/board/' + boardId + '/apply',
                     dataType: "json",
                 }).done((res) => {
                     alert(res.msg);
