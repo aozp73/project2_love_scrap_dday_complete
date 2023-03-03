@@ -79,9 +79,7 @@ public class ApplyService {
         try {
             new Thread(() -> {
                 MailDto mailDto = applyRepository.findByIdWithBoardForMail(applyPS.getId());
-                System.out.println("테스트1" + user.getEmail());
                 mail.sendMail(mailDto, user.getEmail());
-                System.out.println("테스트2");
             }).start();
 
         } catch (Exception e) {

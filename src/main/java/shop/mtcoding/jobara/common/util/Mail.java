@@ -17,8 +17,6 @@ public class Mail {
         String subject = "지원하신 공고가 " + getStateToString(mailDto.getState()) + " 처리되었습니다.";
         String content = "지원하신 공고 " + mailDto.getBoardTitle() + "이 " + getStateToString(mailDto.getState())
                 + "처리 되었습니다.";
-        System.out.println("테스트 : " + subject);
-        System.out.println("테스트 : " + content);
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(fromAddress);
         message.setTo(email);
