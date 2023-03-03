@@ -63,4 +63,15 @@ public class ApplyResp {
             }
         }
     }
+
+    @Getter
+    @Setter
+    public static class MailDto {
+        private Integer id;
+        private Integer userId;
+        private Integer boardId;
+        private Integer resumeId;
+        private Integer state;
+        private String boardTitle;
+    }
 }
