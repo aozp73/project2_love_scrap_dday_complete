@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import shop.mtcoding.jobara.apply.dto.ApplyReq.ApplyReqDto;
 import shop.mtcoding.jobara.common.util.DateParse;
 
 @Getter
@@ -21,6 +22,12 @@ public class Apply {
     public Apply(Integer boardId, Integer userId) {
         this.userId = userId;
         this.boardId = boardId;
+    }
+
+    public Apply(Integer userId,ApplyReqDto applyReqDto) {
+        this.userId = userId;
+        this.boardId = applyReqDto.getBoardId();
+        this.resumeId = applyReqDto.getResumeId();
     }
 
     public Apply(Integer boardId, Integer userId, Integer state) {

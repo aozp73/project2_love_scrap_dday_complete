@@ -94,10 +94,12 @@
                             <br>
                         </div>
                     </div>
+                    <c:if test="" >
                     <div class="d-flex justify-content-center mt-5">
                         <div><button type="submit" class="btn btn-primary my-button-color-default"
                                 data-bs-toggle="modal" data-bs-target="#portfolioModal1">지원하기</button></div>
                     </div>
+                    </c:if>
                 </div>
             </div>
         </div>
@@ -158,9 +160,15 @@
         </div>
         <script>
             function apply(boardId) {
+                let data {
+                    boardId = boardId,
+                    resumeId = resumeId,
+                }
                 $.ajax({
-                    type: "get",
-                    url: '/board/' + boardId + '/apply',
+                    type: "post",
+                    url: '/apply',
+                    data: JSON.stringify(data),
+                    contentType: "application/json; charset=utf-8",
                     dataType: "json",
                 }).done((res) => {
                     alert(res.msg);

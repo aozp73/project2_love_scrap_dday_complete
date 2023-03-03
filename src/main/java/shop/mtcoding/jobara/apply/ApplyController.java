@@ -11,11 +11,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import shop.mtcoding.jobara.apply.dto.ApplyReq.ApplyDecideReqDto;
+import shop.mtcoding.jobara.apply.dto.ApplyReq.ApplyReqDto;
 import shop.mtcoding.jobara.apply.dto.ApplyResp.CompanyApplyRespDto;
 import shop.mtcoding.jobara.apply.dto.ApplyResp.EmployeeApplyRespDto;
 import shop.mtcoding.jobara.common.dto.ResponseDto;
@@ -33,14 +35,14 @@ public class ApplyController {
     @Autowired
     private ApplyService applyService;
 
-    @GetMapping("/board/{id}/apply")
-    public ResponseEntity<?> apply(@PathVariable Integer id) {
+    @PostMapping("/apply")
+    public ResponseEntity<?> apply(@RequestBody ApplyReqDto applyReqDto) {
         UserVo principal = (UserVo) session.getAttribute("principal");
         Verify.validateApiObject(principal, "로그인이 필요한 기능입니다");
         if (!principal.getRole().equals("employee")) {
             throw new CustomApiException("권한이 없습니다.", HttpStatus.FORBIDDEN);
         }
-        applyService.insertApply(id, principal.getId());
+        applyService.insertApply(applyReqDto, principal.getId());
         return new ResponseEntity<>(new ResponseDto<>(1, "지원 성공", null), HttpStatus.OK);
     }
 
@@ -75,7 +77,8 @@ public class ApplyController {
     }
 
     @PutMapping("/board/{id}/apply")
-    public @ResponseBody ResponseEntity<?> decideApplyment(@PathVariable int id,@RequestBody ApplyDecideReqDto applyDecideReqDto) {
+    public @ResponseBody ResponseEntity<?> decideApplyment(@PathVariable int id,
+            @RequestBody ApplyDecideReqDto applyDecideReqDto) {
         UserVo principal = (UserVo) session.getAttribute("principal");
         Verify.validateObject(principal, "로그인이 필요한 기능입니다");
         if (!principal.getRole().equals("company")) {

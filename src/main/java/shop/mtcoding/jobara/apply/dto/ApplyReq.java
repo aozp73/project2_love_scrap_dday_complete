@@ -16,4 +16,13 @@ public class ApplyReq {
         private Integer state;
     }
 
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class ApplyReqDto {
+        private Integer boardId;
+        private Integer resumeId;
+    }
+
 }
