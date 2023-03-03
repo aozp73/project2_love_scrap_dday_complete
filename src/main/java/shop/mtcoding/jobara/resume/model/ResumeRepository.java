@@ -16,4 +16,6 @@ public interface ResumeRepository {
     public int updateById(Resume resume);
 
     public int deleteById(int id);
+
+    public List<Resume> findByUserId(int userId);
 }

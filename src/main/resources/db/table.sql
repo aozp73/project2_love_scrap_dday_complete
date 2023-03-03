@@ -27,7 +27,7 @@ create table employee_tb(
 );
 
 create table resume_tb(
-	id int,
+	id int auto_increment primary key,
 	user_id int not null,
     title varchar not null,
     content longtext
@@ -49,6 +49,7 @@ create table apply_tb(
     id int auto_increment primary key,
     user_id int not null,
     board_id int not null,
+    resume_id int not null,
     state int not null,
     created_at timestamp not null
 );

@@ -24,6 +24,8 @@ import shop.mtcoding.jobara.common.ex.CustomException;
 import shop.mtcoding.jobara.common.util.CareerParse;
 import shop.mtcoding.jobara.common.util.EducationParse;
 import shop.mtcoding.jobara.common.util.JobTypeParse;
+import shop.mtcoding.jobara.resume.model.Resume;
+import shop.mtcoding.jobara.resume.model.ResumeRepository;
 
 @Service
 public class BoardService {
@@ -33,6 +35,9 @@ public class BoardService {
 
     @Autowired
     BoardTechRepository boardTechRepository;
+
+    @Autowired
+    ResumeRepository resumeRepository;
 
     @Transactional(readOnly = true)
     public List<BoardMainRespDto> getListToMain() {
@@ -223,6 +228,11 @@ public class BoardService {
     public List<BoardListRespDto> getLangMatchList(int userId) {
 
         return boardRepository.findAllByUserIdForLangMatching(userId);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Resume> getResume(int principalId){
+        return resumeRepository.findByUserId(principalId);
     }
 
 }

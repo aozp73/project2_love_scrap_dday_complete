@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import shop.mtcoding.jobara.apply.dto.ApplyReq.ApplyDecideReqDto;
+import shop.mtcoding.jobara.apply.dto.ApplyReq.ApplyReqDto;
 import shop.mtcoding.jobara.apply.dto.ApplyResp.CompanyApplyRespDto;
 import shop.mtcoding.jobara.apply.dto.ApplyResp.EmployeeApplyRespDto;
 import shop.mtcoding.jobara.apply.model.Apply;
@@ -31,9 +32,9 @@ public class ApplyService {
     private UserRepository userRepository;
 
     @Transactional
-    public void insertApply(Integer boardId, Integer principalId) {
-        Apply apply = new Apply(boardId, principalId);
-        Board boardPS = boardRepository.findById(boardId);
+    public void insertApply(ApplyReqDto applyReqDto, Integer principalId) {
+        Apply apply = new Apply(principalId, applyReqDto);
+        Board boardPS = boardRepository.findById(apply.getBoardId());
         Verify.validateApiObject(boardPS, "존재하지 않는 게시물 입니다.");
         if (applyRepository.findByUserIdAndBoardId(apply) != null) {
             throw new CustomApiException("이미 지원한 공고입니다.");

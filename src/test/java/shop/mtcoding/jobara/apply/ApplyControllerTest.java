@@ -2,6 +2,7 @@ package shop.mtcoding.jobara.apply;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -24,6 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import shop.mtcoding.jobara.apply.dto.ApplyReq.ApplyDecideReqDto;
+import shop.mtcoding.jobara.apply.dto.ApplyReq.ApplyReqDto;
 import shop.mtcoding.jobara.apply.dto.ApplyResp.CompanyApplyRespDto;
 import shop.mtcoding.jobara.apply.dto.ApplyResp.EmployeeApplyRespDto;
 import shop.mtcoding.jobara.user.vo.UserVo;
@@ -46,7 +48,7 @@ public class ApplyControllerTest {
         UserVo pricipal = new UserVo();
         pricipal.setId(1);
         pricipal.setUsername("ssar");
-        pricipal.setRole("company");
+        pricipal.setRole("employee");
         pricipal.setProfile(null);
         mockSession = new MockHttpSession();
         mockSession.setAttribute("principal", pricipal);
@@ -55,12 +57,17 @@ public class ApplyControllerTest {
     @Test
     public void apply_test() throws Exception {
         // given
-        int id = 4;
+        ApplyReqDto applyReqDto = new ApplyReqDto(3, 1);
+        String requestBody = om.writeValueAsString(applyReqDto);
 
         // when
         ResultActions resultActions = mvc.perform(
-                get("/board/" + id + "/apply").session(mockSession));
+                post("/apply")
+                        .content(requestBody)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .session(mockSession));
         String responseBody = resultActions.andReturn().getResponse().getContentAsString();
+        System.out.println("테스트 : " + responseBody);
 
         // verify
         resultActions.andExpect(status().isOk());
@@ -116,7 +123,8 @@ public class ApplyControllerTest {
                         .content(requestBody)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .session(mockSession));
-        // String responseBody = resultActions.andReturn().getResponse().getContentAsString();
+        // String responseBody =
+        // resultActions.andReturn().getResponse().getContentAsString();
         // System.out.println("테스트 : " + responseBody);
 
         // verify

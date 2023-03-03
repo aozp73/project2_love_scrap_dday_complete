@@ -28,6 +28,7 @@ import shop.mtcoding.jobara.common.dto.ResponseDto;
 import shop.mtcoding.jobara.common.ex.CustomApiException;
 import shop.mtcoding.jobara.common.ex.CustomException;
 import shop.mtcoding.jobara.common.util.Verify;
+import shop.mtcoding.jobara.resume.model.Resume;
 import shop.mtcoding.jobara.user.vo.UserVo;
 
 @Controller
@@ -51,6 +52,11 @@ public class BoardController {
     @GetMapping("/board/{id}")
     public String detail(@PathVariable int id, Model model) {
         BoardDetailRespDto boardPS = boardService.getDetail(id);
+        UserVo principal = (UserVo) session.getAttribute("principal");
+        if (principal != null) {
+            List<Resume> resumeList = boardService.getResume(principal.getId());
+            model.addAttribute("resumeList", resumeList);
+        }
         model.addAttribute("board", boardPS);
         return "board/detail";
     }

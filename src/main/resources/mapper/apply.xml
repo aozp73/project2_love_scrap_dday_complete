@@ -14,14 +14,15 @@
     </select>
 
     <insert id="insert">
-        insert into apply_tb (board_id, user_id, state, created_at) 
-        values(#{boardId}, #{userId}, 0, now())
+        insert into apply_tb (board_id, user_id, resume_id, state, created_at) 
+        values(#{boardId}, #{userId}, #{resumeId}, 0, now())
     </insert>  
 
     <update id="updateById">
         update apply_tb 
            set board_id = #{boardId}, 
                user_id = #{userId},
+               resume_id = #{resumeId},
                state = #{state}
         where id = #{id} 
     </update>
