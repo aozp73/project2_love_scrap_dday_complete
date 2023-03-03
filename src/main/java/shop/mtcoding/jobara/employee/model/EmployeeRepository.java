@@ -3,7 +3,9 @@ package shop.mtcoding.jobara.employee.model;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
+import shop.mtcoding.jobara.board.dto.BoardResp.PagingDto;
 import shop.mtcoding.jobara.employee.dto.EmployeeResp.EmployeeAndResumeRespDto;
 
 @Mapper
@@ -11,11 +13,13 @@ public interface EmployeeRepository {
 
     public List<Employee> findAll();
 
-    public List<EmployeeAndResumeRespDto> findAllWithResume();
-
     public EmployeeAndResumeRespDto findEmployeeByIdWithResume(int id);
 
     public List<EmployeeAndResumeRespDto> findRecommendWithResume(int id);
+
+    public List<EmployeeAndResumeRespDto> findAllWithResume(@Param("startNum") int startNum, @Param("row") int row);
+
+    public PagingDto paging(@Param("page") int page, @Param("row") int row);
 
     public Employee findByUserId(int userId);
 

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import shop.mtcoding.jobara.board.dto.BoardResp.PagingDto;
 import shop.mtcoding.jobara.common.dto.ResponseDto;
 import shop.mtcoding.jobara.common.ex.CustomException;
 import shop.mtcoding.jobara.common.util.Verify;
@@ -47,10 +48,11 @@ public class EmployeeController {
     }
 
     @GetMapping("/employee/list")
-    public String employeeList(Model model) {
+    public String employeeList(Model model, Integer page) {
         UserVo principal = (UserVo) session.getAttribute("principal");
-        List<EmployeeAndResumeRespDto> employeeListPS = employeeService.getEmployee();
-        model.addAttribute("allEmployeeList", employeeListPS);
+        PagingDto pagingPS = employeeService.getEmployee(page);
+
+        model.addAttribute("pagingDto", pagingPS);
         model.addAttribute("principal", principal);
         if (principal != null) {
             if (principal.getRole().equals("company")) {
@@ -59,6 +61,7 @@ public class EmployeeController {
                 model.addAttribute("recommendEmployeeList", recommendEmployeeListPS);
             }
         }
+
         return "employee/list";
     }
 
