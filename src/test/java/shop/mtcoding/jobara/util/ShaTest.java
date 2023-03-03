@@ -2,14 +2,14 @@ package shop.mtcoding.jobara.util;
 
 import org.junit.jupiter.api.Test;
 
-import shop.mtcoding.jobara.common.util.Sha;
+import shop.mtcoding.jobara.common.util.Hash;
 
 public class ShaTest {
 
       @Test
       public void Sha_test() {
             String password = "1234";
-            String encryption = Sha.sha256(password);
+            String encryption = Hash.sha256(password);
             System.out.println(encryption);
 
             // 1234 : 4b3bed8af7b7612e8c1e25f63ba24496f5b16b2df44efb2db7ce3cb24b7e96f7
