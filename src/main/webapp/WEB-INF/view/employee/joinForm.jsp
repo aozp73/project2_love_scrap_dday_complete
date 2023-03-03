@@ -22,7 +22,7 @@
             </div>
             <div class="justify-content-center d-flex">
                 <div class="my-border-color-default px-3 py-3" style="width: 50%; ">
-                    <form action="/user/join" method="post" onsubmit="return valid()">
+                    <form action="/employee/join" method="post" onsubmit="return valid()">
                         <div class="mb-3">
                             <label class="form-label">아이디</label>
                                 <input id="username" name="username" type="text" class="form-control" placeholder="Username" onchange="checkUsername()">
@@ -115,7 +115,7 @@ Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reprehenderit laudanti
 
                 $.ajax({
                     type: "get",
-                    url: "/user/checkUsername?username=" + username
+                    url: "/usernameSameCheck?username=" + username
                 }).done(res => {
                     console.log(res);
                     if (res.code == 1) {

@@ -1,4 +1,4 @@
-insert into user_tb(username, password, email, address, detail_address, tel, role, created_at) values('ssar', '1234', 'ssar@nate.com', '부산시 야호구 야동','11길','01023452344', 'employee', now());
+insert into user_tb(username, password, email, address, detail_address, tel, role, created_at) values('ssar', '1234', 'kimalss22@gmail.com', '부산시 야호구 야동','11길','01023452344', 'employee', now());
 insert into user_tb(username, password, email, address, detail_address, tel, role, created_at) values('love', '1234', 'love@nate.com', '부산시 야호구 상동','12길','01011111111', 'employee', now());
 insert into user_tb(username, password, email, address, detail_address, tel, role, created_at) values('google', '1234', 'google@nate.com', '부산시 야구 김동','13길','01012331233', 'employee', now());
 insert into user_tb(username, password, email, address, detail_address, tel, role, created_at) values('naver', '1234', 'naver@nate.com', '부산시 박박구 쿠동','14길','01034566666',  'employee', now());

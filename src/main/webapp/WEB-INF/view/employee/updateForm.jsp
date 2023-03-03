@@ -128,7 +128,7 @@
                         </div>
                         <div class="d-flex justify-content-center">
                             <button type="submit" class="btn btn-primary my-button-color-default">정보 수정</button>
-                        <a href="/resume/${user.id}">
+                        <a href="/resume/${principal.id}">
                             <div class="btn btn-secondary ms-3">이력서 수정</div>
                         </a>
                         </div>
