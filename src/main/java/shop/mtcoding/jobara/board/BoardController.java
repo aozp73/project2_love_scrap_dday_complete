@@ -25,6 +25,7 @@ import shop.mtcoding.jobara.board.dto.BoardResp.BoardMainRespDto;
 import shop.mtcoding.jobara.board.dto.BoardResp.BoardUpdateRespDto;
 import shop.mtcoding.jobara.board.dto.BoardResp.MyBoardListRespDto;
 import shop.mtcoding.jobara.common.dto.ResponseDto;
+import shop.mtcoding.jobara.common.ex.CustomApiException;
 import shop.mtcoding.jobara.common.ex.CustomException;
 import shop.mtcoding.jobara.common.util.Verify;
 import shop.mtcoding.jobara.user.vo.UserVo;
@@ -118,10 +119,14 @@ public class BoardController {
                 principal, "로그인이 필요한 페이지입니다", HttpStatus.BAD_REQUEST,
                 "/company/loginForm");
         if (!principal.getRole().equals("company")) {
-            throw new CustomException("기업회원으로 로그인 해주세요.");
+            throw new CustomApiException("기업회원으로 로그인 해주세요.");
         }
 
         // 유효성
+        if (boardUpdateReqDto.getCheckedValues().size() == 0) {
+            throw new CustomApiException("선호기술을 한 가지 이상 선택해주세요.");
+        }
+
         Verify.validateString(boardUpdateReqDto.getTitle(), "제목을 입력하세요");
         Verify.validateString(boardUpdateReqDto.getContent(), "내용을 입력하세요");
         Verify.validateString(boardUpdateReqDto.getCareerString(), "경력을 입력하세요");

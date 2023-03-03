@@ -309,7 +309,7 @@
                     alert(res.msg);
                     location.href = "/board/" + boardId;
                 }).fail((err) => {
-                    alert("게시글 수정 실패");
+                      alert(err.responseJSON.msg);
                 });
             }
 
