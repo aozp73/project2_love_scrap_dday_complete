@@ -8,13 +8,16 @@ import org.junit.jupiter.api.Test;
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import shop.mtcoding.jobara.apply.dto.ApplyResp.EmployeeApplyRespDto;
+import shop.mtcoding.jobara.apply.dto.ApplyResp.MailDto;
 import shop.mtcoding.jobara.apply.model.Apply;
 import shop.mtcoding.jobara.apply.model.ApplyRepository;
 
 @MybatisTest
 public class ApplyRepositoryTest {
-    
+
     @Autowired
     private ApplyRepository applyRepository;
 
@@ -45,6 +48,20 @@ public class ApplyRepositoryTest {
         applyRepository.findByUserIdAndBoardId(apply);
         // String responseBody = om.writeValueAsString(EmployeeApplyRespDtoList);
         // System.out.println("테스트 : " + responseBody);
+
+        // then
+    }
+
+    @Test
+    public void findByidWithBoardForMail_test() throws Exception {
+        // given
+        ObjectMapper om = new ObjectMapper();
+        int id = 1;
+
+        // when
+        MailDto mailDto = applyRepository.findByIdWithBoardForMail(id);
+        String responseBody = om.writeValueAsString(mailDto);
+        System.out.println("테스트 : " + responseBody);
 
         // then
     }

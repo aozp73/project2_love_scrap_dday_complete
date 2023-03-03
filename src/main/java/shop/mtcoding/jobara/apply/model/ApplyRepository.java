@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import shop.mtcoding.jobara.apply.dto.ApplyResp.CompanyApplyRespDto;
 import shop.mtcoding.jobara.apply.dto.ApplyResp.EmployeeApplyRespDto;
+import shop.mtcoding.jobara.apply.dto.ApplyResp.MailDto;
 
 @Mapper
 public interface ApplyRepository {
@@ -25,4 +26,6 @@ public interface ApplyRepository {
     public List<CompanyApplyRespDto> findByUserIdWithBoardAndUser(int userId);
 
     public List<EmployeeApplyRespDto> findByUserIdWithBoardAndResume(int userId);
+
+    public MailDto findByIdWithBoardForMail(int id);
 }

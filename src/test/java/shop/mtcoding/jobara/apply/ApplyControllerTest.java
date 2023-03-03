@@ -48,7 +48,7 @@ public class ApplyControllerTest {
         UserVo pricipal = new UserVo();
         pricipal.setId(1);
         pricipal.setUsername("ssar");
-        pricipal.setRole("employee");
+        pricipal.setRole("company");
         pricipal.setProfile(null);
         mockSession = new MockHttpSession();
         mockSession.setAttribute("principal", pricipal);
