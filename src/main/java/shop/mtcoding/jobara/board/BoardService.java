@@ -19,6 +19,7 @@ import shop.mtcoding.jobara.board.dto.BoardResp.MyBoardListRespDto;
 import shop.mtcoding.jobara.board.model.Board;
 import shop.mtcoding.jobara.board.model.BoardRepository;
 import shop.mtcoding.jobara.board.model.BoardTechRepository;
+import shop.mtcoding.jobara.common.ex.CustomApiException;
 import shop.mtcoding.jobara.common.ex.CustomException;
 import shop.mtcoding.jobara.common.util.CareerParse;
 import shop.mtcoding.jobara.common.util.EducationParse;
@@ -109,11 +110,11 @@ public class BoardService {
 
         try {
         } catch (Exception e) {
-            throw new CustomException("없는 게시물을 수정할 수 없습니다", HttpStatus.INTERNAL_SERVER_ERROR);
+            throw new CustomApiException("없는 게시물을 수정할 수 없습니다", HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
         if (boardPS.getUserId() != coPrincipalId) {
-            throw new CustomException("수정 권한이 없습니다", HttpStatus.BAD_REQUEST);
+            throw new CustomApiException("수정 권한이 없습니다", HttpStatus.BAD_REQUEST);
         }
 
         int career = CareerParse.careerToInt(boardUpdateReqDto.getCareerString());
@@ -132,7 +133,7 @@ public class BoardService {
         try {
             boardRepository.updateById(board);
         } catch (Exception e) {
-            throw new CustomException("서버에 일시적인 문제가 생겼습니다", HttpStatus.INTERNAL_SERVER_ERROR);
+            throw new CustomApiException("서버에 일시적인 문제가 생겼습니다", HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
     }
@@ -207,14 +208,14 @@ public class BoardService {
         try {
             boardTechRepository.deleteByBoardId(boardId);
         } catch (Exception e) {
-            throw new CustomException("서버에 일시적인 문제가 생겼습니다", HttpStatus.INTERNAL_SERVER_ERROR);
+            throw new CustomApiException("서버에 일시적인 문제가 생겼습니다", HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
         BoardInsertSkillReqDto boardInsertSkillReqDto = new BoardInsertSkillReqDto(boardId, techList);
         try {
             boardTechRepository.insertSkill(boardInsertSkillReqDto);
         } catch (Exception e) {
-            throw new CustomException("서버에 일시적인 문제가 생겼습니다", HttpStatus.INTERNAL_SERVER_ERROR);
+            throw new CustomApiException("서버에 일시적인 문제가 생겼습니다", HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
     }

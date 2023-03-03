@@ -62,6 +62,13 @@ public class CompanyConetroller {
         if (!principal.getRole().equals("company")) {
             throw new CustomException("권한이 없습니다.", HttpStatus.FORBIDDEN);
         }
+
+        if (profile.isEmpty()) {
+            throw new CustomException("사진이 전송되지 않았습니다");
+        }
+        if (!profile.getContentType().startsWith("image")) {
+            throw new CustomException("사진 파일만 업로드 할 수 있습니다.");
+        }
         Verify.validateString(companyUpdateReqDto.getPassword(), "암호를 입력하세요.");
         Verify.validateString(companyUpdateReqDto.getEmail(), "이메일을 입력하세요.");
         Verify.validateString(companyUpdateReqDto.getCompanyName(), "회사 이름을 입력하세요.");
