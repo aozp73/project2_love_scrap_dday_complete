@@ -2,82 +2,83 @@
 
     <%@ include file="../layout/header.jsp" %>
 
-        <div class="container my-3 py-3 px-3">
-            <div class="row">
-                <div id="mainImage1" class="col d-flex justify-content-center" onmouseenter="popularEnterImages(this)"
-                    onmouseleave="popularLeaveImages(this)">
-                    <img src="/images/newjeans.jpg" class="img-thumbnail" alt="Cinque Terre">
-                </div>
-                <div id="mainImage2" class="col d-flex justify-content-center" onmouseenter="popularEnterImages(this)"
-                    onmouseleave="popularLeaveImages(this)">
-                    <img src="/images/newjeans.jpg" class="img-thumbnail" alt="Cinque Terre">
-                </div>
-                <div id="mainImage3" class="col d-flex justify-content-center" onmouseenter="popularEnterImages(this)"
-                    onmouseleave="popularLeaveImages(this)">
-                    <img src="/images/newjeans.jpg" class="img-thumbnail" alt="Cinque Terre">
-                </div>
+            <header class="masthead bg-primary text-white text-center">
+        <div class="container d-flex align-items-center flex-column">
+            <!-- Masthead Heading-->
+            <h1 class="masthead-heading text-uppercase mb-0">Start Your Career</h1>
+            <!-- Icon Divider-->
+            <div class="divider-custom divider-light">
+                <div class="divider-custom-line"></div>
+                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                <div class="divider-custom-line"></div>
             </div>
-            <div>
-                <!-- 카드 들어갈 곳 -->
+            <!-- Masthead Subheading-->
+            <p class="masthead-subheading font-weight-light mb-0">빠르고 쉽게 구인 구직</p>
+        </div>
+    </header>
+    <!-- About Section-->
+        <section class="page-section bg-primary text-white mb-0" id="about">
+            <div class="container">
+                <!-- About Section Heading-->
+                <h2 class="page-section-heading text-center text-uppercase text-white">사이트 정보</h2>
+                <!-- Icon Divider-->
+                <div class="divider-custom divider-light">
+                    <div class="divider-custom-line"></div>
+                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                    <div class="divider-custom-line"></div>
+                </div>
+                <!-- About Section Content-->
                 <div class="row">
-
-                    <c:forEach items="${boardMainList}" var="board">
-                        <div class="col-md-3 py-2">
-                            <a href="/board/${board.id}" class="no_under_line_link">
-                                <div id="boardImage-${board.id}" class="card col-lg-12"
-                                    onmouseenter="boardEnterImages(this)" onmouseleave="boardLeaveImages(this)">
-                                    <div class="d-flex justify-content-center">
-                                        <img class="card-img-top" style="height: 100px; max-width: 200px;"
-                                            src="${board.profile == null ? "/images/defaultProfile.png" :
-                                            board.profile}" alt="Card image">
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="my-text-ellipsis">
-                                            <h5>${board.companyName}</h5>
-                                        </div>
-                                        <div class="my-text-ellipsis">
-                                            ${board.title}
-                                        </div>
-                                        <div class="my-text-ellipsis">
-                                            채용
-                                        </div>
-                                    </div>
-                            </a>
-                            <div class="card-footer d-flex justify-content-between">
-                                <div>(D-1)</div>
-                                <div><i id="heart" class="fa-regular fa-heart my-xl my-cursor fa-lg"></i></div>
-                            </div>
-                        </div>
+                    <div class="col-lg-4 ms-auto"><p class="lead">프로그래머인데 일자리를 구하기 힘들다구요? 여기 여러분들을 위한 일자리가 준비되어 있습니다!</p></div>
+                    <div class="col-lg-4 me-auto"><p class="lead">IT업계 사장님이신데 좋은 구직자를 구하기 힘드신가요? 여기 모든 프로그래머들이 있습니다!</p></div>
                 </div>
-                </c:forEach>
-
-
+                <!-- About Section Button-->
+                <div class="text-center mt-4">
+                    <a class="btn btn-xl btn-outline-light" href="/employee/joinForm">
+                        <i class="fa-solid fa-user me-2"></i>
+                        회원가입하기
+                    </a>
+                </div>
             </div>
-        </div>
-        </div>
-
-        <script>
-            function popularEnterImages(e) {
-                console.log(e.getAttribute('id'));
-                let id = e.getAttribute('id');
-                $("#" + id).removeClass("col");
-                $("#" + id).addClass("col-6");
-            }
-            function popularLeaveImages(e) {
-                console.log(e.getAttribute('id'));
-                let id = e.getAttribute('id');
-                $("#" + id).removeClass("col-6");
-                $("#" + id).addClass("col");
-            }
-
-            function boardEnterImages(e) {
-                let id = e.getAttribute('id');
-                $("#" + id).addClass("border border-primary");
-            }
-            function boardLeaveImages(e) {
-                let id = e.getAttribute('id');
-                $("#" + id).removeClass("border border-primary");
-            }
-        </script>
-
+        </section>
+    <!-- Contact Section-->
+        <section class="page-section" id="contact">
+            <div class="container">
+                <!-- Contact Section Heading-->
+                <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Login</h2>
+                <!-- Icon Divider-->
+                <div class="divider-custom">
+                    <div class="divider-custom-line"></div>
+                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                    <div class="divider-custom-line"></div>
+                </div>
+                <!-- Contact Section Form-->
+                <div class="row justify-content-center">
+                    <div class="col-lg-8 col-xl-7">
+                        <!-- * * * * * * * * * * * * * * *-->
+                        <!-- * * SB Forms Contact Form * *-->
+                        <!-- * * * * * * * * * * * * * * *-->
+                        <!-- This form is pre-integrated with SB Forms.-->
+                        <!-- To make this form functional, sign up at-->
+                        <!-- https://startbootstrap.com/solution/contact-forms-->
+                        <!-- to get an API token!-->
+                        <form action="/login" method="post">
+                            <!-- Name input-->
+                            <div class="form-floating mb-3">
+                                <input class="form-control" name="username" type="text" placeholder="Enter your name..."/>
+                                <label for="name">Username</label>
+                                <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
+                            </div>
+                            <!-- Email address input-->
+                            <div class="form-floating mb-3">
+                                <input class="form-control" name="password" type="password" placeholder="Enter password..." />
+                                <label for="email">Password</label>
+                            </div>
+                            <!-- Submit Button-->
+                            <button class="btn btn-primary btn-xl disabled" id="submitButton" type="submit">Send</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
         <%@ include file="../layout/footer.jsp" %>

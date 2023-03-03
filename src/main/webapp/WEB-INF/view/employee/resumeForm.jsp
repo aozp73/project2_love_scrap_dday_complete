@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
     <%@ include file="../layout/header.jsp" %>
-
+<div style="height: 100px;"></div>
     <div class="container py-3 px-3">
         <div class="justify-content-center d-flex my-3 py-3">
             <h2>
