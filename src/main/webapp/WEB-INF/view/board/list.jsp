@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
     <%@ include file="../layout/header.jsp" %>
-        <input id="checkKeyword" type="hidden" name="" value="${check}">
+        <input id="checkKeyword" type="hidden" name="" value="${pagingDto.keyword}">
 <div style="height: 100px;"></div>
 
+       
         <div class="container my-3 py-3 px-3">
             <div class="p-3">
                 <h2 style="text-align: center;">채용 공고 목록</h2>
@@ -23,7 +24,7 @@
             <div class="p-3">
                 <div class="row gx-3">
 
-                    <c:forEach items="${boardList}" var="board">
+                    <c:forEach items="${pagingDto.boardListDtos}" var="board">
                         <div class="col-md-3 py-2">
                             <a href="/board/${board.id}" class="no_under_line_link">
                                 <div id="boardImage-${board.id}" class="card col-lg-12"
@@ -58,23 +59,48 @@
 
         <!-- 페이징 -->
 
-        <div class="d-flex justify-content-center mt-5" style="margin-bottom: 60px;">
-            <nav aria-label="Page navigation example">
+            <div class="d-flex justify-content-center">
                 <ul class="pagination">
-                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">4</a></li>
-                    <li class="page-item"><a class="page-link" href="#">5</a></li>
-                    <li class="page-item"><a class="page-link" href="#">6</a></li>
-                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+
+                    <li class='page-item ${pagingDto.first ? "disabled" : ""}'><a class="page-link"
+                            href="javascript:void(0);" onclick="callPrev();">Prev</a></li>
+
+                    <c:forEach var="num" begin="${pagingDto.startPageNum}" end="${pagingDto.lastPageNum}">
+  
+                            <li class='page-item'><a class='page-link' href="/board/list?page=${num-1}&keyword=${pagingDto.keyword}">${num}</a></li>
+             
+                            <%-- <li class='page-item'><a class='page-link' href="/board/list?page=${num-1}">${num}</a></li> --%>
+                  </c:forEach>
+
+                    <li class='page-item ${pagingDto.last ? "disabled" : ""}'><a class="page-link"
+                            href="javascript:void(0);" onclick="callNext();">Next</a></li>
+
                 </ul>
-            </nav>
-        </div>
+            </div>
         </div>
 
         <script>
+            function callPrev() {
+                // el표현식으로 값을 받지 못해 hidden에서 받아 옴
+                let keyword = $("#checkKeyword").val();
+                let currentPage = `${pagingDto.currentPage - 1}`
+                if (keyword) {
+                    location.href = "/board/list?page=" + currentPage + "&keyword=" + keyword;
+                } else {
+                    location.href = "/board/list?page=" + currentPage;
+                }
+            }
+
+            function callNext() {
+                
+                let keyword = $("#checkKeyword").val();
+                let currentPage = `${pagingDto.currentPage + 1}`
+                if (keyword) {
+                    location.href = "/board/list?page=" + currentPage + "&keyword=" + keyword;
+                } else {
+                    location.href = "/board/list?page=" + currentPage;
+                }
+            }
 
             function selectBoxCheck() {
                 let check = $("#checkKeyword").val()
@@ -83,14 +109,7 @@
                 }
             }
 
-            selectBoxCheck()
-
-            function selectBoxChange(value) {
-                console.log(value);
-            }
-
             function mouseEnterImages(e) {
-                // console.log(e.getAttribute('id'))
                 let id = e.getAttribute('id');
                 $("#" + id).addClass("border border-primary");
             }
@@ -98,6 +117,9 @@
                 let id = e.getAttribute('id');
                 $("#" + id).removeClass("border border-primary");
             }
+
+
+            selectBoxCheck()
         </script>
 
         <%@ include file="../layout/footer.jsp" %>
