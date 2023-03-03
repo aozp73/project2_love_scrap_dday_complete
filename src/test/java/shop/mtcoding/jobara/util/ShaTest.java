@@ -8,11 +8,16 @@ public class ShaTest {
 
       @Test
       public void Sha_test() {
-            // String password = "1234";
-            // String encryption = Hash.sha256(password);
-            // System.out.println(encryption);
+            String password = "12345";
+            String encryption = null;
+            try {
+                  encryption = Hash.encode(password);
+            } catch (Exception e) {
+                  System.out.println("테스트 실패");
+            }
+            System.out.println(encryption);
 
-            // 1234 : 4b3bed8af7b7612e8c1e25f63ba24496f5b16b2df44efb2db7ce3cb24b7e96f7
-            // 12345 : af838d6547c4ca7f4c5247320d0910e4c04da5d21eaccdb831ab31169b9005a1
+            // 1234 : 03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4
+            // 12345 : 5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5
       }
 }
