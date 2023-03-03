@@ -133,7 +133,8 @@ public class BoardController {
     }
 
     @PostMapping("/board/save")
-    public String save(BoardInsertReqDto boardInsertReqDto, @RequestParam ArrayList<Integer> checkLang) {
+    public String save(BoardInsertReqDto boardInsertReqDto,
+            @RequestParam(required = false, defaultValue = "") ArrayList<Integer> checkLang) {
 
         UserVo principal = (UserVo) session.getAttribute("principal");
 
@@ -157,6 +158,10 @@ public class BoardController {
         }
         if (boardInsertReqDto.getJobTypeString().equals("근무형태")) {
             throw new CustomException("근무형태를 선택하세요");
+        }
+
+        if (checkLang.size() == 0) {
+            throw new CustomException("선호기술을 한 가지 이상 선택해주세요.");
         }
 
         int boardId = boardService.insertBoard(boardInsertReqDto, principal.getId());
