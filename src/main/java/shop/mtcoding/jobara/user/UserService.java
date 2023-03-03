@@ -1,9 +1,12 @@
 package shop.mtcoding.jobara.user;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
+import shop.mtcoding.jobara.common.ex.CustomException;
+import shop.mtcoding.jobara.common.util.Hash;
 import shop.mtcoding.jobara.common.util.Verify;
 import shop.mtcoding.jobara.user.dto.UserReq.UserLoginReqDto;
 import shop.mtcoding.jobara.user.model.User;
@@ -17,8 +20,15 @@ public class UserService {
 
     @Transactional(readOnly = true)
     public UserVo getUser(UserLoginReqDto userLoginReqDto) {
+        String hashPassword;
+        try {
+            String salt = userRepository.findByUsername(userLoginReqDto.getUsername()).getSalt();
+            hashPassword = Hash.encode(userLoginReqDto.getPassword()+ salt);
+        } catch (Exception e) {
+            throw new CustomException("서버 오류 : 복호화 실패", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
         UserVo userVoPS = userRepository.findByUsernameAndPassword(
-                new User(userLoginReqDto.getUsername(), userLoginReqDto.getPassword()));
+                new User(userLoginReqDto.getUsername(), hashPassword));
         Verify.validateObject(userVoPS, "유저네임이나 암호를 확인해주세요.");
         return userVoPS;
     }
