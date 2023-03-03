@@ -110,13 +110,13 @@
 	</select>
 
 
-    <select id="findAllWithCompany" resultType="shop.mtcoding.jobara.board.dto.BoardResp$BoardListRespDto">
+    <!-- <select id="findAllWithCompany" resultType="shop.mtcoding.jobara.board.dto.BoardResp$BoardListRespDto">
         SELECT bt.id, bt.title, ct.company_name, ut.id user_id, ut.profile FROM BOARD_TB bt
         inner join company_tb ct
         on bt.user_id = ct.user_id
         inner join user_tb ut
         on bt.user_id=ut.id
-    </select>
+    </select> -->
 
     <select id="findAllWithCompanyToMain" resultType="shop.mtcoding.jobara.board.dto.BoardResp$BoardMainRespDto">
         SELECT bt.id, bt.title, ct.company_name, ut.id user_id, ut.profile FROM BOARD_TB bt
