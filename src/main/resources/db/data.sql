@@ -1,10 +1,10 @@
-insert into user_tb(username, password, email, address, detail_address, tel, role, created_at) values('ssar', '1234', 'kimalss22@gmail.com', '부산시 야호구 야동','11길','01023452344', 'employee', now());
-insert into user_tb(username, password, email, address, detail_address, tel, role, created_at) values('love', '1234', 'love@nate.com', '부산시 야호구 상동','12길','01011111111', 'employee', now());
-insert into user_tb(username, password, email, address, detail_address, tel, role, created_at) values('google', '1234', 'google@nate.com', '부산시 야구 김동','13길','01012331233', 'employee', now());
-insert into user_tb(username, password, email, address, detail_address, tel, role, created_at) values('naver', '1234', 'naver@nate.com', '부산시 박박구 쿠동','14길','01034566666',  'employee', now());
-insert into user_tb(username, password, email, address, detail_address, tel, role, created_at) values('noew', '1234', 'noew@nate.com', '부산시 상상구 모동','15길','01066666666',  'employee', now());
-insert into user_tb(username, password, email, address, detail_address, tel, role, created_at) values('cos', '1234', 'cos@nate.com', '부산시 빡구 동동','71길','01012341234',  'company', now());
-insert into user_tb(username, password, email, address, detail_address, tel, role, created_at) values('kit', '1234', 'kit@nate.com', '부산시 봉구 원동','72길','01032113211',  'company', now());
+insert into user_tb(username, password, salt, email, address, detail_address, tel, role, created_at) values('ssar', '7c3fd9ebc3c42a298f6e1a9fc3437ac5994b829c6d5dffb44e22e25023f4049f', 'PlaqMgXB8zGtrsD2CfZEcg==', 'kimalss22@gmail.com', '부산시 야호구 야동','11길','01023452344', 'employee', now());
+insert into user_tb(username, password, salt, email, address, detail_address, tel, role, created_at) values('love', '7c3fd9ebc3c42a298f6e1a9fc3437ac5994b829c6d5dffb44e22e25023f4049f', 'PlaqMgXB8zGtrsD2CfZEcg==', 'love@nate.com', '부산시 야호구 상동','12길','01011111111', 'employee', now());
+insert into user_tb(username, password, salt, email, address, detail_address, tel, role, created_at) values('google', '7c3fd9ebc3c42a298f6e1a9fc3437ac5994b829c6d5dffb44e22e25023f4049f', 'PlaqMgXB8zGtrsD2CfZEcg==', 'google@nate.com', '부산시 야구 김동','13길','01012331233', 'employee', now());
+insert into user_tb(username, password, salt, email, address, detail_address, tel, role, created_at) values('naver', '7c3fd9ebc3c42a298f6e1a9fc3437ac5994b829c6d5dffb44e22e25023f4049f', 'PlaqMgXB8zGtrsD2CfZEcg==', 'naver@nate.com', '부산시 박박구 쿠동','14길','01034566666',  'employee', now());
+insert into user_tb(username, password, salt, email, address, detail_address, tel, role, created_at) values('noew', '7c3fd9ebc3c42a298f6e1a9fc3437ac5994b829c6d5dffb44e22e25023f4049f', 'PlaqMgXB8zGtrsD2CfZEcg==', 'noew@nate.com', '부산시 상상구 모동','15길','01066666666',  'employee', now());
+insert into user_tb(username, password, salt, email, address, detail_address, tel, role, created_at) values('cos', '7c3fd9ebc3c42a298f6e1a9fc3437ac5994b829c6d5dffb44e22e25023f4049f', 'PlaqMgXB8zGtrsD2CfZEcg==', 'cos@nate.com', '부산시 빡구 동동','71길','01012341234',  'company', now());
+insert into user_tb(username, password, salt, email, address, detail_address, tel, role, created_at) values('kit', '7c3fd9ebc3c42a298f6e1a9fc3437ac5994b829c6d5dffb44e22e25023f4049f', 'PlaqMgXB8zGtrsD2CfZEcg==', 'kit@nate.com', '부산시 봉구 원동','72길','01032113211',  'company', now());
 
 insert into employee_tb(user_id, real_name, career) values(1, '김살', 1);
 insert into employee_tb(user_id, real_name, career) values(2, '박사랑', 0);
