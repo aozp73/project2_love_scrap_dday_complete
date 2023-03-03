@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import lombok.RequiredArgsConstructor;
 import shop.mtcoding.jobara.common.ex.CustomException;
+import shop.mtcoding.jobara.common.util.Hash;
 import shop.mtcoding.jobara.common.util.PathUtil;
 import shop.mtcoding.jobara.employee.dto.EmployeeReq.EmployeeInsertSkillReqDto;
 import shop.mtcoding.jobara.employee.dto.EmployeeReq.EmployeeJoinReqDto;
@@ -71,8 +72,17 @@ public class EmployeeService {
         if (userRepository.findByUsername(employeeJoinReqDto.getUsername()) != null) {
             throw new CustomException("이미 존재하는 유저네임 입니다.");
         }
-        User user = new User(employeeJoinReqDto.getUsername(), employeeJoinReqDto.getPassword(),
+        String hashPassword = null;
+        String salt = null;
+        try {
+            salt = Hash.makeSalt();
+            hashPassword = Hash.encode(employeeJoinReqDto.getPassword() + salt);
+        } catch (Exception e) {
+            throw new CustomException("서버 오류 : 복호화 실패", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        User user = new User(employeeJoinReqDto.getUsername(), hashPassword,
                 employeeJoinReqDto.getEmail());
+        user.setSalt(salt);
         try {
             userRepository.insertForEmployee(user);
             employeeRepository.insert(user.getId());
