@@ -94,7 +94,7 @@
                             <br>
                         </div>
                     </div>
-                    <c:if test="" >
+                    <c:if test="${principal.role eq 'employee'}" >
                     <div class="d-flex justify-content-center mt-5">
                         <div><button type="submit" class="btn btn-primary my-button-color-default"
                                 data-bs-toggle="modal" data-bs-target="#portfolioModal1">지원하기</button></div>
@@ -137,13 +137,16 @@
                                             </thead>
                                             <tbody>
                                                 <!-- 반복문 -->
+                                                <c:forEach items="${resumeList}" var="resume" varStatus="status">
                                                 <tr>
-                                                    <td class="text-center">1</td>
-                                                    <td class="my-text-ellipsis">이력서제목</td>
+                                                    <td class="text-center">${status.count}</td>
+                                                    <td class="my-text-ellipsis">${resume.title}</td>
                                                     <td><button type="button"
-                                                            class="badge bg-success my-border-color-default">지원</span>
+                                                            class="badge bg-success my-border-color-default"
+                                                            onclick="apply(${board.id}, ${resume.id})">지원</span>
                                                     </td>
                                                 </tr>
+                                                </c:forEach>
                                             </tbody>
                                         </table>
                                     </table>
@@ -159,10 +162,10 @@
             </div>
         </div>
         <script>
-            function apply(boardId) {
-                let data {
-                    boardId = boardId,
-                    resumeId = resumeId,
+            function apply(boardId, resumeId) {
+                let data = {
+                    boardId : boardId,
+                    resumeId : resumeId,
                 }
                 $.ajax({
                     type: "post",

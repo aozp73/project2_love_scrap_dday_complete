@@ -27,7 +27,7 @@ create table employee_tb(
 );
 
 create table resume_tb(
-	id int,
+	id int auto_increment primary key,
 	user_id int not null,
     title varchar not null,
     content longtext
