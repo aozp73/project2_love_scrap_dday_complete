@@ -31,7 +31,8 @@ create table resume_tb(
 	id int auto_increment primary key,
 	user_id int not null,
     title varchar not null,
-    content longtext
+    content longtext,
+    created_at timestamp not null
 );
 
 create table board_tb(

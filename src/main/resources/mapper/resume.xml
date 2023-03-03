@@ -6,7 +6,7 @@
 <mapper namespace="shop.mtcoding.jobara.resume.model.ResumeRepository">
 
     <select id="findAll" resultType="shop.mtcoding.jobara.resume.model.Resume">
-        select * from 
+        select * from resume_tb
     </select>
 
     <select id="findById" resultType="shop.mtcoding.jobara.resume.model.Resume">
@@ -18,7 +18,7 @@
     </select>
 
     <insert id="insert">
-        insert into resume_tb (user_id, title, content) values(#{userId}, #{title}, #{content})
+        insert into resume_tb (user_id, title, content, created_at) values(#{userId}, #{title}, #{content}, now())
     </insert>
 
     <delete id="deleteById">
@@ -28,7 +28,8 @@
     <update id="updateById">
         update resume_tb 
            set title = #{title}, 
-               content = #{content}
+               content = #{content},
+               created_at = now()
         where id = #{id} 
     </update>
 

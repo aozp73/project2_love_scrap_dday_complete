@@ -12,11 +12,11 @@ insert into employee_tb(user_id, real_name, career) values(3, '제갈구글', 3)
 insert into employee_tb(user_id, real_name, career) values(4, '독고네이버', 5);
 insert into employee_tb(user_id, real_name, career) values(5, '상냥이', 6);
 
-insert into resume_tb(user_id, title, content) values(1,'이력제 제목1','이력서 내용1');
-insert into resume_tb(user_id, title, content) values(2,'이력제 제목2','이력서 내용2');
-insert into resume_tb(user_id, title, content) values(3,'이력제 제목3','이력서 내용3');
-insert into resume_tb(user_id, title, content) values(4,'이력제 제목4','이력서 내용4');
-insert into resume_tb(user_id, title, content) values(5,'이력제 제목5','이력서 내용5');
+insert into resume_tb(user_id, title, content, created_at) values(1,'이력제 제목1','이력서 내용1', now());
+insert into resume_tb(user_id, title, content, created_at) values(2,'이력제 제목2','이력서 내용2', now());
+insert into resume_tb(user_id, title, content, created_at) values(3,'이력제 제목3','이력서 내용3', now());
+insert into resume_tb(user_id, title, content, created_at) values(4,'이력제 제목4','이력서 내용4', now());
+insert into resume_tb(user_id, title, content, created_at) values(5,'이력제 제목5','이력서 내용5', now());
 
 insert into company_tb(user_id, company_name, company_scale, company_numb, company_field) values(6, '(주)미친회사', '대기업', 333322221111, 'IT업');
 insert into company_tb(user_id, company_name, company_scale, company_numb, company_field) values(7, '무식한형제들', '중견기업', 111122223333, 'IT업');
