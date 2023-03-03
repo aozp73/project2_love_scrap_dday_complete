@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import lombok.RequiredArgsConstructor;
 import shop.mtcoding.jobara.common.ex.CustomException;
+import shop.mtcoding.jobara.common.util.Hash;
 import shop.mtcoding.jobara.common.util.PathUtil;
 import shop.mtcoding.jobara.company.dto.CompanyReq.CompanyJoinReqDto;
 import shop.mtcoding.jobara.company.dto.CompanyReq.CompanyUpdateReqDto;
@@ -39,8 +40,17 @@ public class CompanyService {
         if (userRepository.findByUsername(companyJoinReqDto.getUsername()) != null) {
             throw new CustomException("이미 존재하는 유저네임 입니다.");
         }
-        User user = new User(companyJoinReqDto.getUsername(), companyJoinReqDto.getPassword(),
+        String hashPassword = null;
+        String salt = null;
+        try {
+            salt = Hash.makeSalt();
+            hashPassword = Hash.encode(companyJoinReqDto.getPassword() + salt);
+        } catch (Exception e) {
+            throw new CustomException("서버 오류 : 복호화 실패", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        User user = new User(companyJoinReqDto.getUsername(), hashPassword,
                 companyJoinReqDto.getEmail(), companyJoinReqDto.getAddress(), companyJoinReqDto.getDetailAddress());
+        user.setSalt(salt);
         try {
             userRepository.insertForCompany(user);
             Company company = new Company(user.getId(), companyJoinReqDto.getCompanyName(),
