@@ -20,7 +20,7 @@
                                                       <td><a href="/resume/${resume.id}">${resume.title}</a></td>
                                                       <td>${resume.content}</td>
                                                       <td>${resume.createdAtToString}</td>
-                                                      <td><button type="button" class="badge bg-danger my-border-color-warning" onclick="deleteResume()">삭제</span></td>
+                                                      <td><button type="button" class="badge bg-danger my-border-color-warning" onclick="deleteResume(${resume.id})">삭제</span></td>
                                                 </tr>
                                           </c:forEach>
                                     </tbody>
@@ -43,4 +43,17 @@
                   </div>
             </div>
 
+            <script>
+        function deleteResume(id) {
+            $.ajax({
+                type: "delete",
+                url: "/resume/"+id+"/delete"
+            }).done(res => {
+                alert(res.msg);
+            location.reload();
+            }).fail(err => {
+                alert(err.JSON)
+            });
+        }
+    </script>
             <%@ include file="../layout/footer.jsp" %>

@@ -41,6 +41,19 @@ public class ResumeService {
         }
     }
 
+    @Transactional
+    public void deleteResume(Integer resumeId, Integer principalId) {
+        Resume resume = resumeRepository.findById(resumeId);
+        if (resume.getUserId() != principalId) {
+            throw new CustomException("권한이 없습니다.", HttpStatus.FORBIDDEN);
+        }
+        try {
+            resumeRepository.deleteById(resumeId);
+        } catch (Exception e) {
+            throw new CustomException("서버 오류: 작성 실패 실패", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @Transactional(readOnly = true)
     public Resume findById(Integer principalId, Integer resumeId) {
         Resume resumePS = resumeRepository.findById(resumeId);

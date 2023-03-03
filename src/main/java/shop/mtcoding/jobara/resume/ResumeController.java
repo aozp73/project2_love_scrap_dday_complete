@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -91,5 +92,16 @@ public class ResumeController {
         }
         resumeService.saveResume(principal.getId(), resumeSaveReq);
         return new ResponseEntity<>(new ResponseDto<>(1, "작성 완료", null), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/resume/{id}/delete")
+    public ResponseEntity<?> deleteResume(@PathVariable int id) {
+        UserVo principal = (UserVo) session.getAttribute("principal");
+        Verify.validateObject(principal, "로그인이 필요합니다.");
+        if (!principal.getRole().equals("employee")) {
+            throw new CustomException("권한이 없습니다.", HttpStatus.FORBIDDEN);
+        }
+        resumeService.deleteResume(id, principal.getId());
+        return new ResponseEntity<>(new ResponseDto<>(1, "삭제 완료", null), HttpStatus.OK);
     }
 }
