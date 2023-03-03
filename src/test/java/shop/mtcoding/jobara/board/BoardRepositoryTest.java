@@ -79,7 +79,8 @@ public class BoardRepositoryTest {
         int userId = 1;
 
         // when
-        List<BoardListRespDto> boardListRespDto = boardRepository.findAllWithCompany(startNum, keyword, row, userId);
+        List<BoardListRespDto> boardListRespDto = boardRepository.findAllWithCompany(startNum, keyword, row,
+                userId);
         String responseBody = om.writeValueAsString(boardListRespDto);
         System.out.println("테스트 : " + responseBody);
 

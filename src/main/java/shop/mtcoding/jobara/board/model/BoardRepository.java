@@ -28,12 +28,14 @@ public interface BoardRepository {
 
     public List<MyBoardListRespDto> findAllByIdWithCompany(int userId);
 
-    public List<BoardListRespDto> findAllWithCompany(@Param("startNum") int startNum, @Param("keyword") String keyword,
-            @Param("row") int row, @Param("userId") int userId);
+    // 페이징 관련
+    public List<BoardListRespDto> findAllWithCompany(@Param("startNum") int startNum,
+            @Param("keyword") String keyword, @Param("row") int row, @Param("userId") int userId);
 
     public PagingDto paging(@Param("page") int page, @Param("keyword") String keyword, @Param("row") int row,
             @Param("userId") int userId);
 
+    // ~ 페이징 관련
     public BoardUpdateRespDto findByIdForUpdate(int id);
 
     public Board findById(int id);
