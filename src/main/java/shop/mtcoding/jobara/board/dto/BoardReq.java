@@ -40,6 +40,7 @@ public class BoardReq {
         private String educationString;
         private Integer jobType;
         private String jobTypeString;
+        private String date;
 
         private String favor;
         private Integer userId;

@@ -110,7 +110,7 @@
 
                                         <div>
                                             <div class="Deadline">
-                                                <input type="date"
+                                                <input type="date" name="date";
                                                     class="form-control text-primary my-border-color-default"
                                                     style="width:90%" id="Deadline">
                                             </div>
