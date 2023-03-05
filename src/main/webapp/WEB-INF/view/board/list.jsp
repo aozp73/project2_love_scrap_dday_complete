@@ -13,8 +13,8 @@
                 <div class="d-flex justify-content-end mb-2">
                     <select id="selectBox" class="form-select" style="width: 123px;"
                         onchange="if(this.value) location.href=(this.value);">
-                        <option value="/board/list">최근순</option>
-                        <option value="/board/list?keyword=deadline">마감순</option>
+                        <option value="/board/list">등록일순</option>
+                        <option value="/board/list?keyword=deadline">마감일순</option>
                         <option value="/board/list?keyword=lang">매칭공고</option>
                     </select>
                 </div>

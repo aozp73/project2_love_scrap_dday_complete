@@ -156,7 +156,8 @@ public class BoardService {
                 career,
                 jobType,
                 education,
-                boardUpdateReqDto.getFavor());
+                boardUpdateReqDto.getFavor(),
+                boardUpdateReqDto.getDeadline());
 
         try {
             boardRepository.updateById(board);
@@ -179,7 +180,7 @@ public class BoardService {
                 jobType,
                 education,
                 boardInsertReqDto.getFavor(),
-                boardInsertReqDto.getDate());
+                boardInsertReqDto.getDeadline());
 
         try {
             boardRepository.insert(board);

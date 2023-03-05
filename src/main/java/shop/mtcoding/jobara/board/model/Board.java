@@ -22,7 +22,7 @@ public class Board {
     private Timestamp createdAt;
 
     public Board(Integer id, Integer userId, String title, String content, Integer career, Integer jobType,
-            Integer education, String favor) {
+            Integer education, String favor, String deadline) {
         this.id = id;
         this.userId = userId;
         this.title = title;
@@ -31,6 +31,7 @@ public class Board {
         this.jobType = jobType;
         this.education = education;
         this.favor = favor;
+        this.deadline = deadline;
     }
 
     public Board(Integer userId, String title, String content, Integer career, Integer jobType, Integer education,

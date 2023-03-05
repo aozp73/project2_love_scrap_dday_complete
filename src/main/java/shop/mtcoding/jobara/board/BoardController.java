@@ -1,7 +1,5 @@
 package shop.mtcoding.jobara.board;
 
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -83,7 +81,6 @@ public class BoardController {
     @GetMapping("/board/list")
     public String list(Model model, Integer page, String keyword) {
         UserVo principal = (UserVo) session.getAttribute("principal");
-
         PagingDto pagingDto = boardService.getListWithPaging(page, keyword, principal);
         model.addAttribute("pagingDto", pagingDto);
 
@@ -122,7 +119,7 @@ public class BoardController {
         BoardUpdateRespDto boardDetailPS = boardService.getDetailForUpdate(id, principal.getId());
         model.addAttribute("boardDetail", boardDetailPS);
         model.addAttribute("boardSkill", boardSkill);
-
+        System.out.println("테스트 : " + boardDetailPS.getDeadline());
         return "board/updateForm";
     }
 
@@ -130,21 +127,28 @@ public class BoardController {
     public ResponseEntity<?> update(@PathVariable int id, @RequestBody BoardUpdateReqDto boardUpdateReqDto) {
         UserVo principal = (UserVo) session.getAttribute("principal");
         // 인증체크
-        Verify.validateObject(
-                principal, "로그인이 필요한 페이지입니다", HttpStatus.BAD_REQUEST,
-                "/loginForm");
+        Verify.validateApiObject(
+                principal, "로그인이 필요한 페이지입니다", HttpStatus.BAD_REQUEST);
         if (!principal.getRole().equals("company")) {
             throw new CustomApiException("기업회원으로 로그인 해주세요.");
         }
 
         // 유효성
+
+        Verify.validateApiString(boardUpdateReqDto.getDeadline(), "마감 날짜를 선택하세요");
+
+        ArrayList<Object> resDateParse = DateParse.Dday(boardUpdateReqDto.getDeadline());
+        if (!(0 < (Integer) resDateParse.get(0) && (Integer) resDateParse.get(0) < 100)) {
+            throw new CustomApiException("1일~100일 내의 마감날짜를 선택 해주세요. (~" + (String) resDateParse.get(1) + ")");
+        }
+
         if (boardUpdateReqDto.getCheckedValues().size() == 0) {
             throw new CustomApiException("선호기술을 한 가지 이상 선택해주세요.");
         }
 
-        Verify.validateString(boardUpdateReqDto.getTitle(), "제목을 입력하세요");
-        Verify.validateString(boardUpdateReqDto.getContent(), "내용을 입력하세요");
-        Verify.validateString(boardUpdateReqDto.getCareerString(), "경력을 입력하세요");
+        Verify.validateApiString(boardUpdateReqDto.getTitle(), "제목을 입력하세요");
+        Verify.validateApiString(boardUpdateReqDto.getContent(), "내용을 입력하세요");
+        Verify.validateApiString(boardUpdateReqDto.getCareerString(), "경력을 입력하세요");
 
         boardService.updateBoard(boardUpdateReqDto, principal.getId());
         boardService.updateTech(boardUpdateReqDto.getCheckedValues(), id);
@@ -180,9 +184,9 @@ public class BoardController {
             throw new CustomException("근무형태를 선택하세요");
         }
 
-        Verify.validateString(boardInsertReqDto.getDate(), "마감 날짜를 선택하세요");
+        Verify.validateString(boardInsertReqDto.getDeadline(), "마감 날짜를 선택하세요");
 
-        ArrayList<Object> resDateParse = DateParse.Dday(boardInsertReqDto.getDate());
+        ArrayList<Object> resDateParse = DateParse.Dday(boardInsertReqDto.getDeadline());
         if (!(0 < (Integer) resDateParse.get(0) && (Integer) resDateParse.get(0) < 100)) {
             throw new CustomException("1일~100일 내의 마감날짜를 선택 해주세요. (~" + (String) resDateParse.get(1) + ")");
         }
@@ -241,11 +245,10 @@ public class BoardController {
     public ResponseEntity<?> delete(@PathVariable int id) {
 
         UserVo principal = (UserVo) session.getAttribute("principal");
-        Verify.validateObject(
-                principal, "로그인이 필요한 페이지입니다", HttpStatus.BAD_REQUEST,
-                "/loginForm");
+        Verify.validateApiObject(
+                principal, "로그인이 필요한 페이지입니다", HttpStatus.BAD_REQUEST);
         if (!principal.getRole().equals("company")) {
-            throw new CustomException("기업회원으로 로그인 해주세요.");
+            throw new CustomApiException("기업회원으로 로그인 해주세요.");
         }
 
         boardService.deleteBoard(id, principal.getId());

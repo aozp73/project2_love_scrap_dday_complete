@@ -72,6 +72,7 @@ public class BoardResp {
         private String jobTypeString;
 
         private String favor;
+        private String deadline;
         private Integer userId;
     }
 
